@@ -11,9 +11,9 @@ const Adagrams = {
     return playerHand;
   },
   usesAvailableLetters(input, lettersInHand) {
-    let inputArray = input.toUpperCase().split('');
-
+    const inputArray = input.toUpperCase().split('');
     let checkAvail = {};
+
     for (const letter of lettersInHand) {
       if (checkAvail[letter] === undefined) {
         checkAvail[letter] = 1;
@@ -35,6 +35,9 @@ const Adagrams = {
     };
 
     return true;
+  },
+  scoreWord (word) {
+    
   }
 };
 
