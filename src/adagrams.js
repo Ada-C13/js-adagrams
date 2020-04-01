@@ -4,11 +4,37 @@ const Adagrams = {
     let playerHand = [];
 
     for (let i = 0; i < 10; i++) {
-      let randomNum = Math.floor(Math.random() * 100);
+      const randomNum = Math.floor(Math.random() * 100);
       playerHand.push(constLetterPool[randomNum]);
     };
 
     return playerHand;
+  },
+  usesAvailableLetters(input, lettersInHand) {
+    let inputArray = input.toUpperCase().split('');
+
+    let checkAvail = {};
+    for (const letter of lettersInHand) {
+      if (checkAvail[letter] === undefined) {
+        checkAvail[letter] = 1;
+      } else {
+        checkAvail[letter] += 1;
+      }
+    };
+
+    for (const letter of inputArray) {
+      if (checkAvail[letter] !== undefined) {
+        checkAvail[letter] -= 1;
+      } else {
+        checkAvail[letter] = 0;
+      }
+    };
+
+    for (const count of Object.values(checkAvail)) {
+      if (count <= 0) return false;
+    };
+
+    return true;
   }
 };
 
