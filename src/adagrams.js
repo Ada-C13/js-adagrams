@@ -29,8 +29,6 @@ class Adagrams {
     };   
 
     hand = this.sample(hand)
-    // hand = this.shuffle(hand)
-    // hand.splice(10);
 
     return hand;
   }
@@ -43,21 +41,28 @@ class Adagrams {
 
 
   // Helper funciton for wave 1
-  sample(array) {
-    const newHand = [];
+  // reference: https://stackoverflow.com/questions/6274339/how-can-i-shuffle-an-array
+  shuffle(array) {
+    for(let i = 0; i < 10; i++) { // 10 times
+      let j = this.randomIdx(array.length);
+      [array[i], array[j]] = [array[j], array[i]]
+    };
+    return array;
+  }
 
-    for(let i = 0; i < 10; i++) { // 10 times 
-      const randomIdx = this.randomIdx(array.length);
-      newHand.push(array[randomIdx]); 
-      newHand.slice(randomIdx, 1);  // same as .delete in ruby
-    }
-    return newHand;
+
+  // Helper funciton for wave 1
+  sample(array) {
+    const sample = this.shuffle(array) 
+    sample.splice(10); 
+
+    return sample
   }
 
 
   // wave 2
   usesAvailableLetters(input, lettersInHand) {
-    // edge case
+    // edge case (TODO: Do I need this?)
     if (input.length > 10 || input.length < 1) {
       return false;
     }
@@ -93,7 +98,7 @@ class Adagrams {
 
       for (const point in scoreChart) {
         if (scoreChart[point].includes(letter)) {
-          score += parseInt(point);
+          score += parseInt(point); // since point is a key, it was a string type
         };
       };
     };
