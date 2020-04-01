@@ -4,7 +4,7 @@ const Adagrams = {
     let playerHand = [];
 
     for (let i = 0; i < 10; i++) {
-      const randomNum = Math.floor(Math.random() * 100);
+      const randomNum = Math.floor(Math.random() * 99);
       playerHand.push(constLetterPool[randomNum]);
     };
 
@@ -26,12 +26,12 @@ const Adagrams = {
       if (checkAvail[letter] !== undefined) {
         checkAvail[letter] -= 1;
       } else {
-        checkAvail[letter] = 0;
+        checkAvail[letter] = -1;
       }
     };
 
     for (const count of Object.values(checkAvail)) {
-      if (count <= 0) return false;
+      if (count < 0) return false;
     };
 
     return true;
