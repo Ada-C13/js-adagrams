@@ -1,5 +1,5 @@
 const Adagrams = {
-      //ASSIGNMENT REQ: Our first job is to build a hand of 10 letters. To do so, add a function called drawLetters inside of the Adagrams object in src/adagrams.js. 
+      //WAVE ONE: Our first job is to build a hand of 10 letters. To do so, add a function called drawLetters inside of the Adagrams object in src/adagrams.js. 
   drawLetters() {
     const alphabet = {
       A: 9, B: 2, C:2, D:4, E:12, F:2, G:3, H:2, I:9, J:1, K:1, L:4, M:2, N:6, O:8, P:2, Q:1, R:6, S:4, T:6, U:4, V:2, W:2, X:1, Y:2, Z:1
@@ -28,8 +28,26 @@ const Adagrams = {
       }//close else if 
     }//close for loop used to make hand
     return hand;
-  }//close draw
-};
+  },//close drawLetters
+
+  //WAVE TWO: add a function called usesAvailableLetters
+  usesAvailableLetters(input, lettersInHand) {
+    input = input.split("")
+    // Creates a duplicate to maintain integrity of original letters in hand
+    comparison_check = lettersInHand
+
+    input.forEach(letter => {
+      if(comparison_check.includes(letter)) {
+        this.comparison_check.delete(letter);
+      }
+      else {
+        return false; 
+      }
+      return true;
+    })
+  }
+
+};//close Adagrams -- PUT EVERYTHING ABOVE HERE
 
 // Do not remove this line or your tests will break!
 export default Adagrams;
