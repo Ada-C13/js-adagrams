@@ -37,7 +37,28 @@ const Adagrams = {
     return true;
   },
   scoreWord (word) {
-    
+    const wordarray = word.toUpperCase().split('');
+    let total = 0;
+
+    const scoringTable = {
+      1: ['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T'],
+      2: ['D', 'G'],
+      3: ['B', 'C', 'M', 'P'],
+      4: ['F', 'H', 'V', 'W', 'Y'],
+      5: ['K'],
+      8: ['J', 'X'],
+      10: ['Q', 'Z']
+    };
+
+    for (const letter of wordArray) {
+      for (const scoreLetter of Object.keys(scoringTable)) {
+        if (scoringTable[scoreLetter].includes(letter)) {
+          total += scoreLetter;
+        };
+      };
+    };
+
+    return total;
   }
 };
 
