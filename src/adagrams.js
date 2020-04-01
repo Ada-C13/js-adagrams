@@ -56,6 +56,47 @@ const Adagrams = {
 
     return true;
   },
+
+  scoreWord(word) {
+    word = word.toUpperCase();
+    let extraPoints = 0;
+
+    if (word.length == 0) {
+      return 0;
+    } else if (word.length >= 7) {
+      extraPoints = 8;
+    };
+
+    let sum = 0;
+    for (let i = 0; i < word.length; i++) {
+      let char = word[i];
+      switch (char) {
+        case 'A': case 'E': case 'I': case 'O': case 'U': case 'L': case 'N': case 'R': case 'S': case 'T':
+          sum += 1;
+          break;
+        case 'D': case "G":
+          sum += 2;
+          break;
+        case 'B': case "C": case "M": case "P":
+          sum += 3;
+          break;
+        case 'F': case "H": case "V": case "W": case "Y":
+          sum += 4;
+          break;
+        case 'K':
+          sum += 5;
+          break;
+        case 'J': case "X":
+          sum += 8;
+          break;
+        case 'Q': case "Z":
+          sum += 10;
+          break;
+      };
+    };
+
+    return sum + extraPoints;
+  },
 };
 
 // Do not remove this line or your tests will break!
