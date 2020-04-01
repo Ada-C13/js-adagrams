@@ -34,18 +34,18 @@ const Adagrams = {
   usesAvailableLetters(input, lettersInHand) {
     input = input.split("")
     // Creates a duplicate to maintain integrity of original letters in hand
-    comparison_check = lettersInHand
+    const comparison_check = lettersInHand
 
-    input.forEach(letter => {
-      if(comparison_check.includes(letter)) {
-        this.comparison_check.delete(letter);
-      }
+    for(let i in input) {
+      if(lettersInHand.includes(i)) {
+        comparison_check.delete(i);
+      }//close if
       else {
-        return false; 
-      }
-      return true;
-    })
-  }
+        return false;
+      }//close else
+    return true;
+    }//close for..in
+  }//close usesAvailableLetters
 
 };//close Adagrams -- PUT EVERYTHING ABOVE HERE
 
