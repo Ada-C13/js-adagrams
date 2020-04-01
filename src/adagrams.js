@@ -45,6 +45,17 @@ const Adagrams = {
 
     return userHand
   },
+
+  usesAvailableLetters(input, lettersInHand) {
+    for(let i = 0; i < input.length; i++) {
+      let currentLetter = input[i];
+      if (input.split(currentLetter).length - 1 > lettersInHand.filter(x => x == currentLetter).length) {
+        return false;
+      };
+    };
+
+    return true;
+  },
 };
 
 // Do not remove this line or your tests will break!
