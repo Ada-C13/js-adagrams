@@ -35,6 +35,29 @@ const Adagrams = {
       [array[i], array[j]] = [array[j], array[i]]
     };
     return array;
+  },
+
+
+  // wave 2
+  usesAvailableLetters(input, lettersInHand) {
+    // edge case
+    if (input.length > 10 || input.length < 1) {
+      return false;
+    }
+    
+    const tempLettersInHand = lettersInHand.splice(0) // clone 
+
+    for(let i = 0; i < input.length; i++) {
+      if (!tempLettersInHand.includes(input[i])) {
+        return false;
+      }
+      
+      // if a letter is found, delete a letter from a temp array
+      const idx = tempLettersInHand.indexOf(input[i]);
+      tempLettersInHand.splice(idx, 1);
+    };
+
+    return true;
   }
 };
 
