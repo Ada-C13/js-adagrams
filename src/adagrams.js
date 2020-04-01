@@ -92,6 +92,56 @@ const Adagrams = {
     };
 
     return score;
+  },
+
+
+  // Wave 4
+  highestScoreFrom(words) {
+    
+    // Get highest score
+    words.sort((a, b) => this.scoreWord(a) - this.scoreWord(b));
+    const maxScore = this.scoreWord(words[words.length - 1])
+
+
+    const contestant = {
+      word: "", 
+      score: maxScore
+    }
+
+    // Get winning words
+    const winningWords = []
+    words.forEach(word => {
+      if (this.scoreWord(word) === maxScore) {
+        winningWords.push(word);
+      };
+    })
+
+    contestant.word = this.tieBreaking(winningWords);
+
+    return contestant;
+  },
+
+  // Helper function for wave 4
+  // reference: https://medium.com/coding-at-dawn/the-fastest-way-to-find-minimum-and-maximum-values-in-an-array-in-javascript-2511115f8621
+  tieBreaking(winningWords) {
+    return winningWords.reduce((a, b) => {
+
+      if (a.length === 10) {
+        return a; // cannot do contestant[word] => why?
+      }  
+
+      if (b.length === 10) {
+        return b;
+      }
+
+      
+      if (a.length > b.length) {
+        return b;
+      }
+
+      // When length is the same or a has a shorter length
+      return a;
+    })
   }
 };
 
