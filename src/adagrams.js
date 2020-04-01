@@ -28,8 +28,9 @@ class Adagrams {
       }
     };   
 
-    hand = this.shuffle(hand)
-    hand.splice(10);
+    hand = this.sample(hand)
+    // hand = this.shuffle(hand)
+    // hand.splice(10);
 
     return hand;
   }
@@ -40,14 +41,17 @@ class Adagrams {
     return Math.floor(Math.random() * Math.floor(max));
   }
 
+
   // Helper funciton for wave 1
-  // reference: https://stackoverflow.com/questions/6274339/how-can-i-shuffle-an-array
-  shuffle(array) {
-    for(let i = 0; i < 10; i++) { // 10 times
-      let j = this.randomIdx(array.length);
-      [array[i], array[j]] = [array[j], array[i]]
-    };
-    return array;
+  sample(array) {
+    const newHand = [];
+
+    for(let i = 0; i < 10; i++) { // 10 times 
+      const randomIdx = this.randomIdx(array.length);
+      newHand.push(array[randomIdx]); 
+      newHand.slice(randomIdx, 1);  // same as .delete in ruby
+    }
+    return newHand;
   }
 
 
