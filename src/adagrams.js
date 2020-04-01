@@ -126,23 +126,23 @@ class Adagrams {
 
   // Helper function for wave 4
   // reference: https://medium.com/coding-at-dawn/the-fastest-way-to-find-minimum-and-maximum-values-in-an-array-in-javascript-2511115f8621
+  // TODO: Can I come up with better variable names? (a, b)
   tieBreaking(winningWords) {
     return winningWords.reduce((a, b) => {
 
       if (a.length === 10) {
-        return a; // cannot do contestant[word] => why?
+        return a; 
       }  
 
       if (b.length === 10) {
         return b;
       }
-
       
       if (a.length > b.length) {
         return b;
       }
 
-      // When length is the same or a has a shorter length
+      // When length is the same or 'a' has a shorter length
       return a;
     })
   }
