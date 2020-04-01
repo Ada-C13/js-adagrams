@@ -5,6 +5,16 @@ const Adagrams = {
     A: 9, B: 2, C: 2, D: 4, E: 12, F: 2, G: 3, H: 2, I: 9, J: 1, K: 1, L: 4, M: 2, N: 6, O: 8, P: 2, Q: 1, R: 6, S: 4, T: 6, U: 4, V: 2, W: 2, X: 1, Y: 2, Z: 1
   },
 
+  scoreChart: {
+    1: ["A", "E", "I", "O", "U", "L", "N", "R", "S", "T"],
+    2: ["D", "G"],
+    3: ["B", "C", "M", "P"],
+    4: ["F", "H", "V", "W", "Y"],
+    5: ["K"],
+    8: ["J", "X"],
+    10: ["Q, Z"]
+  },
+
   drawLetters() {
     let hand = [];
      
@@ -58,6 +68,30 @@ const Adagrams = {
     };
 
     return true;
+  },
+
+  // wave 3 
+  scoreWord(word) {
+    let score = 0;
+
+    if (word.length >= 7 && word.length <= 10) {
+      score += 8;
+    }
+
+    const scoreChart = this.scoreChart;
+
+    for (let i = 0; i < word.length; i++) {
+      // TODO
+      const letter = word[i].toUpperCase();
+
+      for (const point in scoreChart) {
+        if (scoreChart[point].includes(letter)) {
+          score += parseInt(point);
+        };
+      };
+    };
+
+    return score;
   }
 };
 
