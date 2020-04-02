@@ -46,20 +46,22 @@ const Adagrams = {
   },
 
 //WAVE THREE: Make a function named scoreWord in the Adagrams object
+//ASSIGNMENT REQ: Has one parameter: word, which is a string of characters
 scoreWord(word) {
   let score = 0;
   word = word.toUpperCase().split("");
 
   const letter_scores = {A:1, B:3, C:3, D:2, E:1, F:4, G:2, H:4, I:1, J:8, K:5, L:1, M:3, N:1, O:1, P:3, Q:10, R:1, S:1, T:1, U:1, V:4, W:4, X:8, Y:4, Z:10};
-
+  //ASSIGNMENT REQ: Each letter within word has a point value. The number of points of each letter is summed up to represent the total score of word
   word.forEach(function(letter){
     score = score + letter_scores[letter];
   })//closes forEach
-  
+  //ASSIGNMENT REQ: If the length of the word is 7, 8, 9, or 10, then the word gets an additional 8 points
   if(word.length > 6){
     score += 8;
   }
 
+  //Returns an integer representing the number of points
   return score;
  }//closes scoreWord
 }//close Adagrams -- PUT EVERYTHING ABOVE HERE
