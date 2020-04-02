@@ -115,6 +115,23 @@ const Adagrams = {
     return totalScore;
   },
 
+  tieLogic(words, score) {
+    for (let word of words) {
+      if (word.length === 10) {
+        return {
+          word: word,
+          score: score
+        };
+      };
+    };
+
+    const winner = words.reduce((a, b) => a.length <= b.length ? a : b);
+    return {
+      word: winner,
+      score: score
+    };
+  },
+
   highestScoreFrom(words) {
     let highestScore = 0;
     let winningWords = [];
@@ -134,24 +151,8 @@ const Adagrams = {
         word: winningWords[0],
         score: highestScore
       };
-
     } else {
-
-      for (let word of winningWords) {
-        if (word.length === 10) {
-          return {
-            word: word,
-            score: highestScore
-          };
-        };
-      };
-
-      const winner = winningWords.reduce((a, b) => a.length <= b.length ? a : b);
-
-      return {
-        word: winner,
-        score: highestScore
-      };
+      return this.tieLogic(winningWords, highestScore);
     };
   }
 };
