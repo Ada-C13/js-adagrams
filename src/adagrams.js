@@ -32,22 +32,37 @@ const Adagrams = {
 
   //WAVE TWO: add a function called usesAvailableLetters
   usesAvailableLetters(input, lettersInHand) {
-    input = input.split("")
-    // Creates a duplicate to maintain integrity of original letters in hand
-    const comparison_check = lettersInHand
+    let result = true;
 
-    for(let i in input) {
-      if(lettersInHand.includes(i)) {
-        comparison_check.delete(i);
-      }//close if
-      else {
-        return false;
-      }//close else
-    return true;
-    }//close for..in
-  }//close usesAvailableLetters
+    input.split("").forEach((letter) => {
+      if (lettersInHand.includes(letter) && result != false) {
+        lettersInHand.splice(lettersInHand.indexOf(letter), 1);
+      } else {
+        result = false;
+      }
+    });
 
-};//close Adagrams -- PUT EVERYTHING ABOVE HERE
+    return result;
+  },
+
+//WAVE THREE: Make a function named scoreWord in the Adagrams object
+scoreWord(word) {
+  let score = 0;
+  word = word.toUpperCase().split("");
+
+  const letter_scores = {A:1, B:3, C:3, D:2, E:1, F:4, G:2, H:4, I:1, J:8, K:5, L:1, M:3, N:1, O:1, P:3, Q:10, R:1, S:1, T:1, U:1, V:4, W:4, X:8, Y:4, Z:10};
+
+  word.forEach(function(letter){
+    score = score + letter_scores[letter];
+  })//closes forEach
+  
+  if(word.length > 6){
+    score += 8;
+  }
+
+  return score;
+ }//closes scoreWord
+}//close Adagrams -- PUT EVERYTHING ABOVE HERE
 
 // Do not remove this line or your tests will break!
 export default Adagrams;
