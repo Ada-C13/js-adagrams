@@ -69,6 +69,24 @@ const Adagrams = {
 
     return score;
   },
+  highestScoreFrom (words) {
+    // Create empty object to track highest word
+    // Create loop off of array of words
+    // Within loop, call scoreWord on each of the words
+    // Compare score with what's currently high score
+    // If higher, replace what's in high score object with current
+    // If same, add new key/value to high score object
+
+    // Tie Breaker Rules
+    // Create empty object to track tie score
+    // If the final set of score has more than one pair use this logic
+    // Loop through all elements within the object
+    // If word has 10 letters, immediately return the result
+    // Else compare score with current tie score
+    // If length of of word is shorter, replace tie
+
+    // Return result as object (key is word, value i score)
+  },
 };
 
 // Do not remove this line or your tests will break!
