@@ -67,9 +67,36 @@ const Adagrams = {
 
     return lettersForUser;
   },
+  usesAvailableLetters(input,lettersInHand){
+    const inputUpper = input.toUpperCase();
+    const inputArray = inputUpper.split('');
+
+    const checkLetter = [];
+
+    inputArray.forEach((letter)=>{
+      const letterTrack = [];
+      for(let i in lettersInHand){
+        if(letter === lettersInHand[i]){
+          letterTrack.push(i);
+        }
+      }
+      if (letterTrack.length === 0){
+        return false;
+      }
+      else {
+        const toSplice = letterTrack[0];
+        checkLetter.push(lettersInHand.splice(toSplice,1));
+      }
+    });
+
+    return checkLetter.length === inputArray.length;
+
+  },
 
 
 };
+
+
 
 
 // Do not remove this line or your tests will break!
