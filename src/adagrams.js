@@ -68,24 +68,21 @@ scoreWord(word) {
  //WAVE FOUR: Add a function named highestScoreFrom
  //ASSIGNMENT REQ: Has one parameter: words, which is an array of strings
  highestScoreFrom(words) {
-//   Returns a single object that represents the data of a winning word and its score. The object should have the following keys:
+//ASSIGNMENT REQ: Returns a single object that represents the data of a winning word and its score. The object should have the following keys:
   let score = {}
   let winner = 0
 
-  // word, whose value is a string of a word
-  // score, whose value is the score of that word
-  words.forEach((word) => {
-    // if(word.length === 10) {
-    //   score['score'] = this.scoreWord(word);
-    //   score['word'] = word;
-    // }
-    
+  //ASSIGNMENT REQ: word, whose value is a string of a word
+  //ASSIGNMENT REQ: score, whose value is the score of that word
+  words.forEach((word) => {    
     if(this.scoreWord(word) > winner) {
       winner = this.scoreWord(word);
       score['score'] = this.scoreWord(word);
       score['word'] = word;
     }
+    //ASSIGNMENT REQ: In the case of tie in scores, use these tie-breaking rules:
     else if(this.scoreWord(word) === winner) {
+      // prefer the word that has 10 letters
       if(score['word'].length === 10){
         winner = winner;
       }
@@ -93,26 +90,18 @@ scoreWord(word) {
         score['score'] = this.scoreWord(word);
         score['word'] = word;
       }
+      //ASSIGNMENT REQ: prefer the word with the fewest letters...
       else if(score['word'].length > word.length) {
         score['score'] = this.scoreWord(word);
         score['word'] = word;
       }
+      //ASSIGNMENT REQ: If the there are multiple words that are the same score and the same length, pick the first one in the supplied list
       else if(score['word'].length == word.length) {
         winner = winner;
       }
     }
   });
-
-  // score.forEach((pair) => {
-  //   console.log(pair);
-  // })
-
   return score;
-
-// In the case of tie in scores, use these tie-breaking rules:
-// prefer the word with the fewest letters...
-// ...unless one word has 10 letters. If the top score is tied between multiple words and one is 10 letters long, choose the one with 10 letters over the one with fewer tiles
-// If the there are multiple words that are the same score and the same length, pick the first one in the supplied list
  },
 }//close Adagrams -- PUT EVERYTHING ABOVE HERE
 
