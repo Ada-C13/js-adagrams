@@ -75,10 +75,31 @@ scoreWord(word) {
   // word, whose value is a string of a word
   // score, whose value is the score of that word
   words.forEach((word) => {
+    // if(word.length === 10) {
+    //   score['score'] = this.scoreWord(word);
+    //   score['word'] = word;
+    // }
+    
     if(this.scoreWord(word) > winner) {
       winner = this.scoreWord(word);
       score['score'] = this.scoreWord(word);
       score['word'] = word;
+    }
+    else if(this.scoreWord(word) === winner) {
+      if(score['word'].length === 10){
+        winner = winner;
+      }
+      else if(word.length === 10) {
+        score['score'] = this.scoreWord(word);
+        score['word'] = word;
+      }
+      else if(score['word'].length > word.length) {
+        score['score'] = this.scoreWord(word);
+        score['word'] = word;
+      }
+      else if(score['word'].length == word.length) {
+        winner = winner;
+      }
     }
   });
 
