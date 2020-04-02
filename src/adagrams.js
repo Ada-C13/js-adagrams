@@ -93,6 +93,20 @@ const Adagrams = {
     }
     return totalScore;
   },
+  highestScoreFrom(words) {
+    let topWord = '';
+    let topScore = 0;
+    for (const currentWord of words) {
+      const currentScore = this.scoreWord(currentWord);
+      if (currentScore > topScore || (currentScore === topScore &&
+          (!(topWord.length === currentWord.length || topWord.length === 10) &&
+          (currentWord.length === 10 || currentWord.length < topWord.length)))) {
+        topWord = currentWord;
+        topScore = currentScore;
+      }
+    }
+    return {word: topWord, score: topScore};
+  },
 };
 
 // Do not remove this line or your tests will break!
