@@ -36,17 +36,17 @@ const Adagrams = {
   // convertArrayToObject (array) {
   //   return array.reduce((ac,a) => ({...ac,[a]:true}),{});
   // },
-  // usesAvailableLetters (input, lettersInHand) {
-  //   for (i = 0; i < input.length; i++) {
-  //     if (!lettersInHand.includes(input[i].toUpperCase())) {
-  //       return false
-  //     };
-  //     let index = lettersInHand.indexOf(input[i].toUpperCase());
-  //     lettersInHand.splice(index,1)
-  //   }
+  usesAvailableLetters (input, lettersInHand) {
+    for (let i = 0; i < input.length; i++) {
+      if (!lettersInHand.includes(input[i].toUpperCase())) {
+        return false
+      };
+      let index = lettersInHand.indexOf(input[i].toUpperCase());
+      lettersInHand.splice(index,1)
+    }
     
-  //   return true;
-  // },
+    return true;
+  },
 
 };
 
