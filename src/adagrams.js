@@ -30,8 +30,7 @@ let letterQuantities = {
 
 const Adagrams = {
   drawLetters() {
-    // Implement this method for wave 1
-    // for loop to create letter pool
+    // creating letterPool
     let letterPool = []
     for (let [letter, quantity] of Object.entries(letterQuantities)) {
       for(let i = 0; i < quantity; i++) {
@@ -49,12 +48,21 @@ const Adagrams = {
     }
 
     // draw letters
-    // draw 10 letters - should be an array
-    // console log the 10 letters
-
     let drawnLetters = letterPool.slice(0, 10);
     return drawnLetters
   },
+  
+  usesAvailableLetters() {
+
+  },
+
+  scoreWord() {
+
+  },
+
+  highestScoreFrom() {
+
+  }
 };
 
 
