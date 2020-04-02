@@ -40,7 +40,19 @@ const Adagrams = {
     }
     return hand;
   },
-
+  usesAvailableLetters(input, lettersInHand) {
+    const word = input.toUpperCase();
+    const match = lettersInHand
+    for(let i = 0; i < word.length; i++) {
+      if (match.includes(word[i])) {
+        const index = match.indexOf(word[i]);
+        match.splice(index, 1);
+      } else {
+        return false;
+      }
+    }
+    return true;
+  },
 };
 
 // Do not remove this line or your tests will break!
