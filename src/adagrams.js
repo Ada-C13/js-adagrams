@@ -4,12 +4,13 @@ const Adagrams = {
     let playerHand = [];
 
     for (let i = 0; i < 10; i++) {
-      const randomNum = Math.floor(Math.random() * 99);
+      const randomNum = Math.floor(Math.random() * (constLetterPool.length + 1));
       playerHand.push(constLetterPool[randomNum]);
     };
 
     return playerHand;
   },
+
   usesAvailableLetters(input, lettersInHand) {
     const inputArray = input.toUpperCase().split('');
     let checkAvail = {};
@@ -36,8 +37,9 @@ const Adagrams = {
 
     return true;
   },
+
   scoreWord (word) {
-    const wordarray = word.toUpperCase().split('');
+    const wordArray = word.toUpperCase().split('');
     let total = 0;
 
     const scoringTable = {
@@ -52,12 +54,11 @@ const Adagrams = {
 
     for (const letter of wordArray) {
       for (const scoreLetter of Object.keys(scoringTable)) {
-        if (scoringTable[scoreLetter].includes(letter)) {
-          total += scoreLetter;
-        };
+        if (scoringTable[scoreLetter].includes(letter)) total += Number(scoreLetter);
       };
     };
 
+    if ([7, 8, 9, 10].includes(wordArray.length)) total += 8;
     return total;
   }
 };
