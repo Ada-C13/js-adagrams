@@ -60,6 +60,26 @@ const Adagrams = {
 
     if ([7, 8, 9, 10].includes(wordArray.length)) total += 8;
     return total;
+  },
+
+  highestScoreFrom (words) {
+    let scoredWords = {};
+    for (const word of words) {
+      const score = Adagrams.scoreWord(word);
+      
+      if (scoredWords[score] !== undefined) {
+        scoredWords[score].push(word);
+      } else {
+        scoredWords[score] = [word];
+      } 
+    };
+    const highestScore = Number( Object.keys(scoredWords)[ (Object.keys(scoredWords).length - 1) ] );
+    
+    if (scoredWords[highestScore].length === 1) {
+      return {"score": highestScore, "word": scoredWords[highestScore][0]};
+    } else {
+      tiebreaker();
+    };
   }
 };
 
