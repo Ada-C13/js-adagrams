@@ -88,14 +88,51 @@ const Adagrams = {
         checkLetter.push(lettersInHand.splice(toSplice,1));
       }
     });
-
     return checkLetter.length === inputArray.length;
-
   },
+  scoreWord(word){
+    const wordArray = word.toUpperCase().split('');
+    const score = {};
+    // assign score rules
+    ['A','E','I','O','U','L','N','R','S','T'].forEach((char)=>{
+      score[char] = 1;
+    });
 
+    ['D','G'].forEach((char)=>{
+      score[char] = 2;
+    });
 
+    ['B','C','M','P'].forEach((char)=>{
+      score[char] = 3;
+    });
+
+    ['F','H','V','W','Y'].forEach((char)=>{
+      score[char] = 4;
+    });
+
+    ['J','X'].forEach((char)=>{
+      score[char] = 8;
+    });
+
+    ['Q','Z'].forEach((char)=>{
+      score[char] = 10;
+    });
+
+    score['K'] = 5;
+    let totalScore = 0;
+    for(let eachWord of wordArray){
+      for(let [key,value] of Object.entries(score)){
+        if(eachWord === key){
+          totalScore += value;
+        }
+      }
+    }
+    if(wordArray.length >= 7){
+      totalScore +=8;
+    }
+    return totalScore;
+  },
 };
-
 
 
 
