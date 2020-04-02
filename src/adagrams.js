@@ -61,9 +61,13 @@ const Adagrams = {
 
     for (let i = 0; i < word.length; i++) {
       score += scoreSystem[word[i].toUpperCase()]
-    }
+    };
 
-    return score
+    if (word.length >= 7) {
+      score += 8
+    };
+
+    return score;
   },
 };
 
