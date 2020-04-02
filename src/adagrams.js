@@ -113,6 +113,46 @@ const Adagrams = {
     };
 
     return totalScore;
+  },
+
+  highestScoreFrom(words) {
+    let highestScore = 0;
+    let winningWords = [];
+
+    words.forEach((word) => {
+      if (this.scoreWord(word) > highestScore) {
+        highestScore = this.scoreWord(word);
+        winningWords = [];
+        winningWords.push(word);
+      } else if (this.scoreWord(word) === highestScore) {
+        winningWords.push(word);
+      };
+    });
+
+    if (winningWords.length === 1) {
+      return {
+        word: winningWords[0],
+        score: highestScore
+      };
+
+    } else {
+
+      for (let word of winningWords) {
+        if (word.length === 10) {
+          return {
+            word: word,
+            score: highestScore
+          };
+        };
+      };
+
+      const winner = winningWords.reduce((a, b) => a.length <= b.length ? a : b);
+
+      return {
+        word: winner,
+        score: highestScore
+      };
+    };
   }
 };
 
