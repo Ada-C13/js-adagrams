@@ -51,9 +51,15 @@ const Adagrams = {
     let drawnLetters = letterPool.slice(0, 10);
     return drawnLetters
   },
-  
-  usesAvailableLetters() {
 
+  usesAvailableLetters(input, lettersInHand) {
+    // make input in all caps
+    // make copy of letters
+
+    // if letter of input = letter in drawn letters, remove letter in drawn letters
+    // continue to compare rest of letters to drawn letters
+    // timesTrue array used to determine if word is valid
+    const lettersInHandClone = [...lettersInHand];
   },
 
   scoreWord() {
