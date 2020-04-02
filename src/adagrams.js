@@ -7,15 +7,16 @@ const Adagrams = {
   },
 
   drawLetters() {
+    const lettersPool = this.alphabet;
     const tenLetters = [];
     let randomLetter = '';
-    const letters = Object.keys(this.alphabet);
+    const letters = Object.keys(lettersPool);
     for (let i = 0; i < 10; i++) {
       randomLetter = letters[Math.floor(Math.random() * letters.length)];
-      if (this.alphabet[randomLetter] > 0) {
-        this.alphabet[randomLetter] -= 1;
+      if (lettersPool[randomLetter] > 0) {
+        lettersPool[randomLetter] -= 1;
         tenLetters.push(randomLetter);
-      } else if (this.alphabet[randomLetter] === 0) {
+      } else if (lettersPool[randomLetter] === 0) {
         i -= 1;
       };
     };
