@@ -38,7 +38,7 @@ const Adagrams = {
     return true;
   },
 
-  scoreWord (word) {
+  scoreWord(word) {
     const wordArray = word.toUpperCase().split('');
     let total = 0;
 
@@ -62,7 +62,7 @@ const Adagrams = {
     return total;
   },
 
-  highestScoreFrom (words) {
+  highestScoreFrom(words) {
     let scoredWords = {};
     for (const word of words) {
       const score = Adagrams.scoreWord(word);
@@ -78,8 +78,12 @@ const Adagrams = {
     if (scoredWords[highestScore].length === 1) {
       return {"score": highestScore, "word": scoredWords[highestScore][0]};
     } else {
-      tiebreaker();
+      self.tiebreaker(highestScore, scoredWords[highestScore]);
     };
+  },
+
+  tiebreaker(highestScore, words) {
+
   }
 };
 
