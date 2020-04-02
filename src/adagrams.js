@@ -63,7 +63,12 @@ scoreWord(word) {
 
   //Returns an integer representing the number of points
   return score;
- }//closes scoreWord
+ },//closes scoreWord
+ //WAVE FOUR: Add a function named highestScoreFrom
+ //ASSIGNMENT REQ: Has one parameter: words, which is an array of strings
+ highestScoreFrom(words) {
+
+ }
 }//close Adagrams -- PUT EVERYTHING ABOVE HERE
 
 // Do not remove this line or your tests will break!
