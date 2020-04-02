@@ -54,7 +54,28 @@ const Adagrams = {
   },
   random(letterPool) {
     return Math.floor(Math.random() * (letterPool.length+1));
+  },
+  usesAvailableLetters(input, lettersInHand) {
+    input = input.split('');
+    let result = true;
+
+    input.forEach(letter => {      
+      if(lettersInHand.includes(letter)) {
+        let index = lettersInHand.findIndex(element => element === letter);        
+        lettersInHand.splice(index, 1);
+      } else {
+        result = false;
+        return;
+      }
+    })
+
+    return result;
   }
+
+  // Next, we need a way to check if an input word (a word a player submits) only uses characters that are contained within a collection (or hand) of drawn letters. Essentially, we need a way to check if the word is, indeed, an anagram of some or all of the given letters in the hand.
+
+  // Returns true if every letter in the input word is available (in the right quantities) in the lettersInHand
+  // Returns false if not; if there is a letter in input that is not present in the lettersInHand or has too much of compared to the lettersInHand
 }
 
 // Do not remove this line or your tests will break!
