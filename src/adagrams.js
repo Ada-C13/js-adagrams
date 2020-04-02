@@ -88,39 +88,37 @@ const Adagrams = {
 
     return highScoreWord
   },
+  scoringRulesTie (item) {
+    let shortestWord = item[0];
+    for (let i = 0; i < item.length; i++) {
+      if (item[i].length === 10) {
+        return shortestWord = item[i]
+      }
+      else if (shortestWord.length > item[i].length) {
+        shortestWord = item[i]
+      }
+    };
+
+    return shortestWord;
+  },
   highestScoreFrom (words) {
-    // Create variables to track highest word/score
-    // let highScoreWord = []
-    // let highScore = 0 
 
     // GENERAL RULES //
     // Create loop off of array of words
-    let highScoreWord = this.scoringRulesGeneral(words)[0];
-    let highScore = this.scoreWord(highScoreWord)
-
-    let finalScore = {word: highScoreWord, score: highScore}
-
-    return finalScore
-
-    // // Within loop, call scoreWord on each of the words
-    // function testFunction (item, index) {
-
-    //   // If higher, replace what's in high score object with current
-    //   if (this.scoreWord(item) > highScore) {
-    //     highScoreWord = [item];
-    //     highscore = this.scoreWord(item);
-    //   }
-
-    //   // Else if same, append word to highScoreWord array
-    //   else if (this.scoreWord(item) === highScore) {
-    //     highScoreWord.push(item);
-    //   };
-    // }
+    let highWordList = this.scoringRulesGeneral(words);
+    let highScoreWord = null;
 
     // TIE BREAKER RULES //
-    // if (this.scoreWord(item) === 10) {
-    //   let finalScore = {word: item, score: this.scoreWord(item)}
-    // }
+    if (highWordList.length === 1) {
+      highScoreWord = highWordList[0]
+    }
+    else {
+      highScoreWord = this.scoringRulesTie(highWordList)
+    };
+
+    let highScore = this.scoreWord(highScoreWord);
+    let finalScore = {word: highScoreWord, score: highScore}
+    return finalScore
 
     // Tie Breaker Rules
     // Create empty object to track tie score
@@ -131,6 +129,8 @@ const Adagrams = {
     // If length of of word is shorter, replace tie
 
     // Return result as object (key is word, value i score)
+
+    
   },
 };
 
