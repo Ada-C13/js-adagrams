@@ -69,13 +69,58 @@ const Adagrams = {
 
     return score;
   },
+  scoringRulesGeneral (item) {
+    // Create variables to track highest word/score
+    let highScoreWord = [];
+    let highScore = 0;
+
+    for (let i = 0; i < item.length; i++) {
+      if (this.scoreWord(item[i]) > highScore) {
+        highScoreWord = [item[i]];
+        highScore = this.scoreWord(item[i]);
+      }
+  
+      // Else if same, append word to highScoreWord array
+      else if (this.scoreWord(item[i]) === highScore) {
+        highScoreWord.push(item[i]);
+      };
+    };
+
+    return highScoreWord
+  },
   highestScoreFrom (words) {
-    // Create empty object to track highest word
+    // Create variables to track highest word/score
+    // let highScoreWord = []
+    // let highScore = 0 
+
+    // GENERAL RULES //
     // Create loop off of array of words
-    // Within loop, call scoreWord on each of the words
-    // Compare score with what's currently high score
-    // If higher, replace what's in high score object with current
-    // If same, add new key/value to high score object
+    let highScoreWord = this.scoringRulesGeneral(words)[0];
+    let highScore = this.scoreWord(highScoreWord)
+
+    let finalScore = {word: highScoreWord, score: highScore}
+
+    return finalScore
+
+    // // Within loop, call scoreWord on each of the words
+    // function testFunction (item, index) {
+
+    //   // If higher, replace what's in high score object with current
+    //   if (this.scoreWord(item) > highScore) {
+    //     highScoreWord = [item];
+    //     highscore = this.scoreWord(item);
+    //   }
+
+    //   // Else if same, append word to highScoreWord array
+    //   else if (this.scoreWord(item) === highScore) {
+    //     highScoreWord.push(item);
+    //   };
+    // }
+
+    // TIE BREAKER RULES //
+    // if (this.scoreWord(item) === 10) {
+    //   let finalScore = {word: item, score: this.scoreWord(item)}
+    // }
 
     // Tie Breaker Rules
     // Create empty object to track tie score
