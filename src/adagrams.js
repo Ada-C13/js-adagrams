@@ -40,7 +40,7 @@ const Adagrams = {
 
   drawLetters() {
     // Implement this method for wave 1
-    let letterPool = this.makeLetterPool();
+    let letterPool = this.makeLetterPool(); //let?
 
     // Fisher-Yates Algorithm: https://medium.com/@nitinpatel_20236/how-to-shuffle-correctly-shuffle-an-array-in-javascript-15ea3f84bfb
     for (let i = letterPool.length - 1; i > 0; i--) {
@@ -52,6 +52,28 @@ const Adagrams = {
     
     return letterPool.slice(0, 10);
   },
+
+  mapLetters(letters) {
+    const hand = {};
+    letters.forEach((letter) => hand[letter] ? hand[letter] += 1 : hand[letter] = 1 )
+    return hand;
+  },
+
+  usesAvailableLetters(input, lettersInHand) {
+    const hand = this.mapLetters(lettersInHand);
+
+    for (let letter of input.split("")) {
+      if (!hand[letter] || hand[letter] === 0) {
+        return false;
+      } else {
+        hand[letter] -= 1;
+      };
+    };
+
+    return true;
+  },
+
+  
 };
 
 // Do not remove this line or your tests will break!
