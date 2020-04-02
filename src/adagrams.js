@@ -32,7 +32,7 @@ const Adagrams = {
   drawLetters() {
     // Implement this method for wave 1
     // for loop to create letter pool
-    letterPool = []
+    let letterPool = []
     for (let [letter, quantity] of Object.entries(letterQuantities)) {
       for(let i = 0; i < quantity; i++) {
             letterPool.push(letter)
@@ -41,16 +41,23 @@ const Adagrams = {
 
     // shuffle letters
     // Fisher-Yates Algorithm - https://medium.com/@nitinpatel_20236/how-to-shuffle-correctly-shuffle-an-array-in-javascript-15ea3f84bfb
-
+    for(let i = (letterPool.length) - 1; i > 0; i--){
+      const j = Math.floor(Math.random() * i)
+      const temp = letterPool[i]
+      letterPool[i] = letterPool[j]
+      letterPool[j] = temp
+    }
 
     // draw letters
     // draw 10 letters - should be an array
     // console log the 10 letters
+
+    let drawnLetters = letterPool.slice(0, 10);
+    return drawnLetters
   },
 };
 
 
-
 // Do not remove this line or your tests will break!
-// export default Adagrams;
+export default Adagrams;
 
