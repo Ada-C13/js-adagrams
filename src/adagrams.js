@@ -7,8 +7,18 @@ const Adagrams = {
       for (let i = 0; i < quantity; i++) {
           poolLetters.push(letter)
       } 
-
     }
+    //randomize the pool of letters
+    const theHand = []
+    for (let i = 0; i < 10; i++) {
+      let index = Math.random() * poolLetters.length; //'ll give us numbers from 0- length
+      let letter = poolLetters[index]; 
+      theHand.push(letter)
+    }
+    return theHand
+  }
+
+  },
       
     
 // Do not remove this line or your tests will break!
