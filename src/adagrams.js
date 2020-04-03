@@ -1,44 +1,41 @@
 const Adagrams = {
+  letterDistribution: {
+    A : 9,
+    N : 6,
+    B : 2,
+    O : 8,
+    C : 2,	
+    P : 2,
+    D : 4,	
+    Q : 1,
+    E : 12,
+    R : 6,
+    F : 2,	
+    S : 4,
+    G : 3,	
+    T : 6,
+    H : 2,	
+    U : 4,
+    I : 9,	
+    V : 2,
+    J : 1,	
+    W : 2,
+    K : 1,	
+    X : 1,
+    L : 4,	
+    Y : 2,
+    M : 2,	
+    Z : 1
+  },
   drawLetters() {
-    const hand = [];
-    const letterDistribution = {
-      A : 9,
-      N : 6,
-      B : 2,
-      O : 8,
-      C : 2,	
-      P : 2,
-      D : 4,	
-      Q : 1,
-      E : 12,
-      R : 6,
-      F : 2,	
-      S : 4,
-      G : 3,	
-      T : 6,
-      H : 2,	
-      U : 4,
-      I : 9,	
-      V : 2,
-      J : 1,	
-      W : 2,
-      K : 1,	
-      X : 1,
-      L : 4,	
-      Y : 2,
-      M : 2,	
-      Z : 1
-    };
-
     const letterPool = [];
-
-    for(const letter in letterDistribution) {      
-      for(let i = 0; i < letterDistribution[letter]; i++) {        
+    for(const letter in this.letterDistribution) {      
+      for(let i = 0; i < this.letterDistribution[letter]; i++) {        
         letterPool.push(letter);
       }
     };
 
-    // make hand
+    const hand = [];
     for(let i = 0; i < 10; i++) {
       const randomNum = this.random(letterPool);
       hand.push(letterPool[randomNum]);
@@ -62,20 +59,62 @@ const Adagrams = {
     input.forEach(letter => {      
       if(lettersInHand.includes(letter)) {
         let index = lettersInHand.findIndex(element => element === letter);        
-        lettersInHand.splice(index, 1);
+        lettersInHand.splice(index, 1);        
       } else {
-        result = false;
+        result = false;        
         return;
       }
     })
 
     return result;
+  },
+  scoreWord(word) {
+    if (word === '') {
+      return 0;
+    }
+
+    const scoring = {
+      A: 1,
+      E: 1,
+      I: 1,
+      O: 1,
+      U: 1,
+      L: 1,
+      N: 1,
+      R: 1,
+      S: 1,
+      T: 1,
+      D: 2,
+      G: 2,
+      B: 3,
+      C: 3,
+      M: 3,
+      P: 3,
+      F: 4,
+      H: 4,
+      V: 4,
+      W: 4,
+      Y: 4,
+      K: 5,
+      J: 8,
+      X: 8,
+      Q: 10,
+      Z: 10
+    };    
+    word = word.toUpperCase().split('');
+    let points = 0;
+
+    word.forEach(element => {
+      points += scoring[element];
+    });
+
+    if(word.length >= 7) {
+      points += 8;
+    };
+
+    return points;
   }
-
-  // Next, we need a way to check if an input word (a word a player submits) only uses characters that are contained within a collection (or hand) of drawn letters. Essentially, we need a way to check if the word is, indeed, an anagram of some or all of the given letters in the hand.
-
-  // Returns true if every letter in the input word is available (in the right quantities) in the lettersInHand
-  // Returns false if not; if there is a letter in input that is not present in the lettersInHand or has too much of compared to the lettersInHand
+  // If the length of the word is 7, 8, 9, or 10, then the word gets an additional 8 points
 }
 
 // Do not remove this line or your tests will break!
