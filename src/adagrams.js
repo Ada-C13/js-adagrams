@@ -58,8 +58,6 @@ const Adagrams = {
       }
     });
 
-    console.log(lettersAppear)
-
     //make another loop that will go through the object and decrement if it exists 
     for (let i in inputLetters ){
 
@@ -111,11 +109,45 @@ const Adagrams = {
 
   },
 
+  highestScoreFrom (words) {
+    //maybe refactor this to use a forEach loop instead 
+    let wordAndScore = {};
+    for (let i = 0; i < words.length; i++){
+      let word = words[i]
+      wordAndScore[word] = this.scoreWord(word);
+    };
+    // console.log(wordAndScore)
+    let highestScore = 0 
+    let wordHighestScore = undefined
+    //find the highest scoring word in the object 
+    for (let [key, value] of Object.entries(wordAndScore)) { 
+      if (value > highestScore){
+        highestScore = value;
+        wordHighestScore = key;
+      };
+
+      if (highestScore === value){
+        if (wordHighestScore.length < 10 && key.length < 10 && wordHighestScore.length > key.length) {
+          wordHighestScore = key;
+        }
+        else if ((wordHighestScore.length >= 10 || key.length >= 10) && key.length > wordHighestScore.length ){
+          wordHighestScore = key;
+        }
+      };
+    };
+
+    let highestScoreWord = {};
+    highestScoreWord["word"] = wordHighestScore
+    highestScoreWord["score"] = highestScore
+    
+    return highestScoreWord
+  },
+
 
 
 };
 
-// Adagrams.usesAvailableLetters('hello', ['h', 'l', 'l', 'o', 'i'])
+// Adagrams.highestScoreFrom(['hello', 'apple', 'mair'])
 
 
 // Do not remove this line or your tests will break!
