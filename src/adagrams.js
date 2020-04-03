@@ -64,6 +64,7 @@ const Adagrams = {
 
   highestScoreFrom(words) {
     let scoredWords = {};
+
     for (const word of words) {
       const score = Adagrams.scoreWord(word);
       
@@ -73,17 +74,29 @@ const Adagrams = {
         scoredWords[score] = [word];
       } 
     };
+
     const highestScore = Number( Object.keys(scoredWords)[ (Object.keys(scoredWords).length - 1) ] );
     
     if (scoredWords[highestScore].length === 1) {
       return {"score": highestScore, "word": scoredWords[highestScore][0]};
     } else {
-      self.tiebreaker(highestScore, scoredWords[highestScore]);
+      let foundWinner = Adagrams.tiebreaker(scoredWords[highestScore]);
+      return {"score": highestScore, "word": foundWinner};
     };
   },
 
-  tiebreaker(highestScore, words) {
+  tiebreaker(words) {
+    let highestWord = words[0];
+    
+    for(const word of words) {
+      if (word.length === 10 && highestWord.length !== 10) {
+        highestWord = word;
+      } else if ((word.length < highestWord.length) && highestWord.length !== 10) {
+        highestWord = word;
+      };
+    };
 
+    return highestWord;
   }
 };
 
