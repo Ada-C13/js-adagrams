@@ -11,9 +11,8 @@ const Adagrams = {
     
     //ASSIGNMENT REQ: The letters should be randomly drawn from a pool of letters
     //Randomization adapted from from w3resource explanation of random approaches in JS: https://www.w3resource.com/javascript-exercises/javascript-array-exercise-35.php
-    const randomItem = (items) => {   
-      return items[Math.floor(Math.random()*items.length)];    
-    }//close random_item
+    const randomItem = items => items[Math.floor(Math.random()*items.length)];    
+    //close random_item
     let tile = undefined;
     //ASSIGNMENT REQ: Each string should contain exactly one letter
     while (hand.length < 10) {
@@ -80,7 +79,7 @@ scoreWord(word) {
     else if(this.scoreWord(word) === winner) {
       // prefer the word that has 10 letters
       if(score['word'].length === 10){
-        winner = winner;
+        winner;
       }
       else if(word.length === 10) {
         score['score'] = this.scoreWord(word);
@@ -93,7 +92,7 @@ scoreWord(word) {
       }
       //ASSIGNMENT REQ: If the there are multiple words that are the same score and the same length, pick the first one in the supplied list
       else if(score['word'].length == word.length) {
-        winner = winner;
+        winner;
       }
     }
   });
