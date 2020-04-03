@@ -41,7 +41,7 @@ const Adagrams = {
     while (numOfWords < 10) {
       let num = min + Math.floor(Math.random() * range);
       let letter = String.fromCharCode(num);
-      if ( chosen[letter] >= 1 ) {
+      if ( chosen[letter] ) {
         if (chosen[letter] < this.letters[letter]){
         chosen[letter] += 1;
         drawn.push(letter);
