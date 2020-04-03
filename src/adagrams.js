@@ -16,12 +16,10 @@ const Adagrams = {
       };
 
       // if the letter is available, it is added to the hand and the number available in the pool is decremented 
-      while (LETTERS[letter] >= 1) {
-        drawn[i] = letter;
-        LETTERS[letter] -= 1;
-      };
-    }
-    
+      drawn[i] = letter;
+      LETTERS[letter] -= 1;
+    };
+
     return drawn;
   },
 };
