@@ -7,7 +7,7 @@ const Adagrams = {
     // this ensures a more weighted distribution
     const lettersArr = [];
     for (const key in LETTERS) {
-      for (let i=0; i<=LETTERS[key]; i++) {
+      for (let i=0; i<LETTERS[key]; i++) {
         lettersArr.push(key);
       };
     };
