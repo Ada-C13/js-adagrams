@@ -90,8 +90,21 @@ const Adagrams = {
     return is_valid
   },
 
-  scoreWord() {
+  scoreWord(word) {
+    // uppercase word and make into array
 
+    // scoring
+    // if word is empty, scoreWord = 0
+
+    // switch statement to score the word
+    // store each letter score into array, scoreWord
+
+    // calculate the total score, totalScore
+    // sum method
+
+    // account for > 7 letter word bonus
+
+    // return totalScore
   },
 
   highestScoreFrom() {
