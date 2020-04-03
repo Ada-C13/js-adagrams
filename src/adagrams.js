@@ -62,6 +62,41 @@ const Adagrams = {
       score += 8;
     }
     return score;
+  },
+
+  highestScoreFrom(words) {
+    const allWords = {};
+    const winnerWord = {};
+    let highestScore = 0;
+
+    // Get all words with their scores
+    words.map(word => {
+      allWords[word] = this.scoreWord(word)
+    });
+    console.log(allWords)
+
+    for (let [word, score] of Object.entries(allWords)) {
+      if (word.length === 10) {
+        // selects the word with 10 letters
+        winnerWord['word'] = word;
+        winnerWord['score'] = score;
+        break;
+        // selects the word with highest score
+      } else if (score > highestScore) {
+        highestScore = score;
+        winnerWord['word'] = word;
+        winnerWord['score'] = score;   
+        // selects the word with fewer letters when neither are 10 letters    
+      } else if (word.length < winnerWord.word.length && score === highestScore) {
+        winnerWord['word'] = word;
+        winnerWord['score'] = score; 
+        // selects the first word when both have same length      
+      } else if (word.length === winnerWord.word.length && score === highestScore) {
+        winnerWord['word'] = winnerWord.word;
+        winnerWord['score'] = winnerWord.score;       
+      };
+    };
+    return winnerWord
   }
 };
 
