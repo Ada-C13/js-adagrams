@@ -19,7 +19,7 @@ class Adagrams {
 
   // Implement this method for wave 1
   drawLetters() {
-    let hand = [];
+    const hand = [];
     const letters_pool = this.letters_pool;
  
     for (const letter in letters_pool) {
@@ -60,28 +60,25 @@ class Adagrams {
       const randomIdx = this.randomIdx(letters.length);
       sample.push(letters[randomIdx]);
 
-      letters.slice(randomIdx, 1);
+      letters.splice(randomIdx, 1); // delete
     }  
     return sample
   }
 
 
   // wave 2
-  usesAvailableLetters(input, lettersInHand) {
-    // edge case (TODO: Do I need this?)
-    if (input.length > 10 || input.length < 1) {
-      return false;
-    }
-    
+  usesAvailableLetters(input, lettersInHand) {    
     const tempLettersInHand = lettersInHand.splice(0) // clone 
 
-    for(let i = 0; i < input.length; i++) {
-      if (!tempLettersInHand.includes(input[i])) {
+    input = input.toUpperCase();
+
+    for(const char of input) {
+      if (!tempLettersInHand.includes(char)) {
         return false;
       }
       
       // if a letter is found, delete a letter from a temp array
-      const idx = tempLettersInHand.indexOf(input[i]);
+      const idx = tempLettersInHand.indexOf(char);
       tempLettersInHand.splice(idx, 1);
     };
 
@@ -98,9 +95,9 @@ class Adagrams {
 
     const scoreChart = this.scoreChart;
 
-    for (let i = 0; i < word.length; i++) {
+    for (const char of word) {
       // TODO
-      const letter = word[i].toUpperCase();
+      const letter = char.toUpperCase();
 
       for (const point in scoreChart) {
         if (scoreChart[point].includes(letter)) {
