@@ -117,15 +117,12 @@ const Adagrams = {
 
   // find the highest scoring word. This function looks at the array of words and calculates which of these words has the highest score, applies any tie-breaking logic, and returns the winning word in a special data structure.
 
-  // Objective
-  // Add a function named highestScoreFrom in the Adagrams object in src/adagrams.js. This method should have the following properties:
   highestScoreFrom(words) {
-    const winningWord = {/* word: score */};
-
-    // add an instance variable to Adagrams to keep track of words and scores
+    const winningWord = {/* word: score */};    
     
-    // find highest score
-    // add words with highest score to an object
+    // find highest score by scoring each word
+    // score words again
+      // add words with highest score to an array
     // if array.length === 1
     //   return that word
     // else continue to tie breaker
