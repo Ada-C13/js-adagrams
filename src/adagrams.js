@@ -142,8 +142,6 @@ const Adagrams = {
   },
   usesAvailableLetters(input, lettersInHand) {
     input = input.split("");
-    console.log(input);
-    console.log(lettersInHand);
     for(let i = 0; i < input.length; i++){
       if (lettersInHand.includes(input[i])){
         let lettersInHandIndexValue = lettersInHand.indexOf(input[i]);
@@ -152,8 +150,6 @@ const Adagrams = {
         i--;
       }
     }
-    // console.log(input);
-    // console.log(lettersInHand);
     if(input.length === 0){
       return true
     } else{
@@ -162,31 +158,6 @@ const Adagrams = {
   }
 };
 
-Adagrams.usesAvailableLetters('hill', ['h', 'j', 'k', 'z', 'i'])
-
-
-
-
-      // prev method takes input and compares lettersInHand, if item matches, deletes from input 
-      // then deletes from lettersInHand
-      // if input then === empty, return true 
-
-// def uses_available_letters?(input, letter_in_hand)
-//   input = input.chars //turns input into array 
-//   hand = letter_in_hand.clone //duplicates hand to circumvent test
-//   input.each_with_index { |input_value, input_index|
-//     hand.each_with_index { |hand_value, hand_index|
-//       if (input_value == hand_index)
-//         input[input_index] = nil
-//         hand.delete_at(hand_index)
-//       end
-//     }
-//   }
-//   input.reject!{ |item| item.nil? }
-//   return input.empty?
-// end
-
-// console.log(Adagrams.drawLetters())
 
 // Do not remove this line or your tests will break!
 export default Adagrams;
