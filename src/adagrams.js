@@ -45,7 +45,6 @@ class Adagrams {
       const j = this.randomIdx(array.length);
       [array[i], array[j]] = [array[j], array[i]]
     };
-
     return array;
   }
 
@@ -68,7 +67,7 @@ class Adagrams {
 
   // wave 2
   usesAvailableLetters(input, lettersInHand) {    
-    const tempLettersInHand = lettersInHand.splice(0) // clone 
+    const tempLettersInHand = lettersInHand.slice(0) // clone 
 
     input = input.toUpperCase();
 
@@ -95,12 +94,11 @@ class Adagrams {
 
     const scoreChart = this.scoreChart;
 
-    for (const char of word) {
-      // TODO
-      const letter = char.toUpperCase();
+    word = word.toUpperCase();
 
+    for (const char of word) {
       for (const point in scoreChart) {
-        if (scoreChart[point].includes(letter)) {
+        if (scoreChart[point].includes(char)) {
           score += parseInt(point); // since point is a key, it was a string type
         };
       };
