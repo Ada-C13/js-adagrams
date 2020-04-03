@@ -21,8 +21,32 @@ const Adagrams = {
       };
     };
     return tenLetters;
-    }
+  },
+
+  usesAvailableLetters(input, lettersInHand) {
+    // Create an object out of available letters
+    const availableLetters = {};
+    for (let letter of lettersInHand) {
+      if (availableLetters[letter]) {
+        availableLetters[letter] += 1;
+      } else {
+        availableLetters[letter] = 1;
+      };
+    };
+
+    // Check if input word consists of available letters
+    for (let char of input) {
+      if (availableLetters[char] > 0) {
+        availableLetters[char] -= 1;
+      } else {
+        return false;
+      };
+    };
+    return true;
+  }
 };
+
+
 
 // Do not remove this line or your tests will break!
 export default Adagrams;
