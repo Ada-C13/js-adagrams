@@ -57,7 +57,6 @@ const Adagrams = {
     }
   
     const randomTenArray =  getRandomTen();
-    console.log(randomTenArray);
 
     // loop Array to assign alphabet
     const lettersForUser = [];
@@ -132,6 +131,7 @@ const Adagrams = {
     }
     return totalScore;
   },
+
   highestScoreFrom(words){
     const winnersScore = [];
     words.forEach((wordInput)=>{
@@ -151,10 +151,31 @@ const Adagrams = {
       return answer;
     }
     else {
-      
+
+      const ArrayTenLength = maxArray.filter(obj => obj.wordLength === 10);
+
+      if(ArrayTenLength.length >= 1){
+        const answer = ArrayTenLength[0];
+        delete answer.wordLength;
+        return answer;
+      }
+
+      else {
+        let min = 10;
+        maxArray.forEach((wordObj)=>{
+          if(wordObj.wordLength < min){
+            min = wordObj.wordLength;
+          }
+        })
+        const minArray = maxArray.filter(obj => obj.wordLength === min);
+        const answer = minArray[0];
+        delete answer.wordLength;
+        return answer;
+      }
+
     }
     
-    // console.log(maxArray);
+
   },
 
 };
