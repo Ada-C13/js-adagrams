@@ -11,6 +11,10 @@ class Controller {
 
   start() {
     this.view.start();
+    // console.log(this.view);
+    // console.log(this);
+    
+    
   }
 
   play(players, rounds = 3, time = 60) {

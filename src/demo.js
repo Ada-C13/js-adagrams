@@ -5,3 +5,5 @@ import Controller from 'demo/controller';
 // Initialize the controller I guess
 const game = new Controller(Model, View);
 game.start();
+
+// Controller.start();
