@@ -16,6 +16,8 @@ describe('Adagrams', () => {
         expect(l).toMatch(/^[A-Z]$/);
       });
     });
+
+    // Test idea: Invoking this function should not change the pool of letters
   });
 
   describe.skip('usesAvailableLetters', () => {
