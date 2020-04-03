@@ -121,10 +121,22 @@ const Adagrams = {
     const winningWord = {/* word: score */};    
     
     // find highest score by scoring each word
-    // score words again
-      // add words with highest score to an array
-    // if array.length === 1
-    //   return that word
+    const scores = words.map(word => this.scoreWord(word));
+    const highestScore = Math.max(...scores);
+    const highestScoringWords = [];
+    
+    // find highest scoring words
+    words.forEach ((word, i) => {
+      if (scores[i] === highestScore) {
+        // add words with highest score to an array
+        highestScoringWords.push(word);
+      }
+    });
+
+    if (highestScoringWords.length === 1) {
+      winningWord['word'] = highestScoringWords[0];
+      winningWord['score'] = highestScore;
+    };
     // else continue to tie breaker
 
     // if tie
