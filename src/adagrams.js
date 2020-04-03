@@ -1,95 +1,85 @@
-const randomItems = function(items) {
-  return items[Math.floor(Math.random()*items.length)];
+const randomItemsIndex = function(items) {
+  return Math.floor(Math.random()*items.length);
 };
 
 const Adagrams = {
   drawLetters() {
     // Implement this method for wave 1
-    const letterDist = [9, 2, 2, 4, 12, 2, 3, 2, 9, 1, 1, 4, 2, 6, 8, 2, 1, 6, 4, 6, 4, 2, 2, 1, 2, 1];
-    const handSize = 10;
-    // letter A character code= 65;
-    const allLetters = letterDist.map((dist, index) => { 
-      return String.fromCharCode(index + 65).repeat(dist)
-    }); 
-    const letterPool = allLetters.join('').split('');
+    const letterDist = { 
+      A: 9, B: 2, C: 2, D: 4, E: 12, 
+      F: 2, G: 3, H: 2, I: 9, J: 1, 
+      K: 1, L: 4, M: 2, N: 6, O: 8, 
+      P: 2, Q: 1, R: 6, S: 4, T: 6, 
+      U: 4, V: 2, W: 2, X: 1, Y: 2, 
+      Z: 1 
+    };
+    const letterDistArr = Object.entries(letterDist) // returns [["A", 9], ["B", 2] ...]
+    const allLetters = letterDistArr.map(letter => letter[0].repeat(letter[1])); 
+    let letterPool = allLetters.join('').split('');
     let hand = [];
+    const handSize = 10;
     for (let i = 0; i < handSize; i += 1) {
-      const rand = randomItems(letterPool)
-      hand.push(rand);
+      const randIndex = randomItemsIndex(letterPool)
+      hand.push(letterPool[randIndex]);
+      letterPool.splice(randIndex, 1);
     };
     return hand;
   },
 
   usesAvailableLetters(input, lettersInHand) {
     let handCopy = lettersInHand.slice();
-    // console.log(handCopy)
-    input.toUpperCase().split('').forEach(letter => {
-      if (handCopy.includes(letter)) {
-        handCopy.splice(letter);
+    // instance variable
+    let letterNotInHand = false;
+    input.toUpperCase().split('').forEach((letter) => {
+      const index = handCopy.indexOf(letter);
+      if (index !== -1) {
+        handCopy.splice(index, 1);
       } else {
-        return false;
-      }
+        letterNotInHand = true;
+      };
     });
-    return true;
+    return !letterNotInHand;
   },
 
   scoreWord(word) {
-    let letterValues = word.toUpperCase().split('').map(letter => {
-      switch(letter) {
-        case "A":
-        case "E":
-        case "I":
-        case "O":
-        case "U":
-        case "L":
-        case "N":
-        case "R":
-        case "S":
-        case "T":
-          1;
-          break;
-        case "D":
-        case "G":
-          2;
-          break;
-        case "B":
-        case "C":
-        case "M":
-        case "P":
-          3;
-          break;
-        case "F":
-        case "H":
-        case "V":
-        case "W":
-        case "Y":
-          4;
-          break;
-        case "K":
-          5;
-          break;
-        case "J":
-        case "X":
-          8;
-          break;
-        case "Q":
-        case "Z":
-          10;
-          break;
-      };   
-    });
+    const values = {
+      A: 1, B: 3, C: 3, D: 2, E: 1,
+      F: 4, G: 2, H: 4, I: 1, J: 8,
+      K: 5, L: 1, M: 3, N: 1, O: 1,
+      P: 3, Q: 10, R: 1, S: 1, T: 1,
+      U: 1, V: 4, W: 4, X: 8, Y: 4,
+      Z: 10
+    };
+    let letterValues = word.toUpperCase().split('').map(letter => values[letter]);
 
-    
     if (word.length >= 7 && word.length <= 10) {
       letterValues.push(8);
     };
-    
-    const arrSum = arr => arr.reduce((a,b) => a + b, 0)
-    return arrSum(letterValues);
+
+    return letterValues.reduce((acc,curr) => acc + curr, 0)
   },
 
   highestScoreFrom(words) {
+    const maximumScore = Math.max(...words.map(word => this.scoreWord(word)));
+    const highest = words.filter(word => this.scoreWord(word) === maximumScore);
+    let winningWord = "";
+    if (highest.length === 1) {
+      winningWord = highest[0];
+    } else {
+      const wordLengths = highest.map(w => w.length);
+      if (wordLengths.includes(10)) {
+        const indexOf10 = wordLengths.indexOf(10);
+        winningWord = highest[indexOf10];
+      } else {
+        winningWord = highest[wordLengths.indexOf(Math.min(...wordLengths))];
+      }
+    };
 
+    let result = {};
+    result['score'] = maximumScore;
+    result['word'] = winningWord;
+
+    return result;
   },
 
 };
