@@ -51,6 +51,30 @@ const Adagrams = {
     this.lettersDistribution[letter] -= 1;
     return letter;
   },
+
+  usesAvailableLetters(input, lettersInHand) {
+    const lettersArray = input.toUpperCase().split('');
+    let clone = [...lettersInHand];
+    let result = true;
+  
+    lettersArray.forEach( (letter) => {
+      if (!clone.includes(letter)) {
+        result = false;
+      } 
+      this.removeElement(letter, clone);
+    });
+    return result;
+  },
+  
+  removeElement(element, array) {
+    // remove a specific element from the array: solution from stackoverflow https://stackoverflow.com/questions/5767325/how-can-i-remove-a-specific-item-from-an-array
+    const index = array.indexOf(element);
+    if (index > -1) {
+      // only remove that particular element (dupicates will stay)
+      array.splice(index, 1);
+    };
+    return array;
+  },
 };
 
 // Do not remove this line or your tests will break!
