@@ -124,7 +124,66 @@ const Adagrams = {
     return totalScore;
   },
 
+
+  highestScoreFrom(words) {
+    let wordsScoresList = this.wordsScores(words);
+    // this will return a data structure as below 
+    // [
+    //   { word: 'apple', score: 9 },
+    //   { word: 'pig', score: 6 },
+    //   { word: 'milk', score: 10 },
+    //   { word: 'umbrella', score: 20 }
+    // ]
+
+    // loop through the wordsScoresList and find the highest score (and maybe the index too?)
+
+    // in the case of tie
+      // 1. prefer the word with the fewest letters
+      // 2. unless one owrd has 10 letter.
+      // 3. same score same length, pick the first one.
+
+    let winner = wordsScoresList[0];
+    wordsScoresList.forEach( (obj, i) => {
+      if (obj.score > winner.score) {
+        winner = obj;
+      } else if (obj.score === winner.score) {
+        // in case of tied score and same length words, prefers the first word
+        if ( obj.word.length === winner.word.length) {
+          return winner;
+        } else if (obj.word.length === 10) {
+          winner = obj;
+          // picks the shortest word if there no word that equal to 10 letters long
+        } else if (obj.word.length < winner.word.length && winner.word.length != 10) {
+          winner = obj;
+        }
+      }
+    })
+    return winner;
+  },
+  
+  wordsScores(words) {
+    let wordsScoresList = [];
+    words.forEach( (word) => {
+      let score = this.scoreWord(word);
+      const obj = {
+        word: word,
+        score: score
+      }
+      wordsScoresList.push(obj);
+    })
+    return wordsScoresList;
+  },
 };
+
+// console.log(Adagrams.highestScoreFrom(['apple', 'AAAAAAAAAA','EEEEEEEEEE','pig', 'milk']));
+// console.log(Adagrams.usesAvailableLetters('doP', ['D', 'O', 'G', 'X', 'X', 'X', 'X', 'X', 'X', 'X']));
+// console.log(Adagrams.drawLetters());
+// const a = Adagrams.drawLetters();
+// console.log(a)
+
+// const highestScoreWord = wordsScoresList.reduce((maxScore, item) => {
+    //   return item.score > maxScore ? item.score : maxScore, wordsScoresList[0].score;
+    // })
 
 // Do not remove this line or your tests will break!
 export default Adagrams;
