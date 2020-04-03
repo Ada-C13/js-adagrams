@@ -26,11 +26,7 @@ const Adagrams = {
         return false;
       }
     }
-    // for (let key in tenLetters) {
-    //   if (tenLetters[key] < 0) {
-    //     return false;
-    //   }
-    // }
+ 
     return true;
   },
 
@@ -150,7 +146,6 @@ const Adagrams = {
     }
     return newObject;
   },
-
 };
 
 // Do not remove this line or your tests will break!
