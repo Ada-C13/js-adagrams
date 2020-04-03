@@ -45,7 +45,20 @@ const Adagrams = {
     return handLetters;
   },
 
-  
+   //WAVE 2
+   usesAvailableLetters(input, lettersInHand) {
+    const letterBank = lettersInHand.map((x) => x);
+    const letters = input.toUpperCase().split('')
+
+  for(let i = 0; i < letters.length; i++) {
+    if (letterBank.includes(letters[i])) {
+      letterBank.splice(letterBank.indexOf(letters[i]), 1);
+    } else {
+      return false 
+    } 
+  };
+    return true; 
+  }, 
 
 // Do not remove this line or your tests will break!
 export default Adagrams;
