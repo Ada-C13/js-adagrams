@@ -20,7 +20,7 @@ const Adagrams = {
         checkAvail[letter] = 1;
       } else {
         checkAvail[letter] += 1;
-      }
+      };
     };
 
     for (const letter of inputArray) {
@@ -28,7 +28,7 @@ const Adagrams = {
         checkAvail[letter] -= 1;
       } else {
         checkAvail[letter] = -1;
-      }
+      };
     };
 
     for (const count of Object.values(checkAvail)) {
@@ -91,7 +91,7 @@ const Adagrams = {
     for(const word of words) {
       if (word.length === 10 && highestWord.length !== 10) {
         highestWord = word;
-      } else if ((word.length < highestWord.length) && highestWord.length !== 10) {
+      } else if (word.length < highestWord.length && highestWord.length !== 10) {
         highestWord = word;
       };
     };
