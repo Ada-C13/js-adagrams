@@ -132,6 +132,31 @@ const Adagrams = {
     }
     return totalScore;
   },
+  highestScoreFrom(words){
+    const winnersScore = [];
+    words.forEach((wordInput)=>{
+      let tempScore = this.scoreWord(wordInput);
+      winnersScore.push({word:wordInput, score:tempScore, wordLength: wordInput.length});
+    })
+    let max = 0; 
+    winnersScore.forEach((wordObj)=>{
+      if(wordObj.score > max){
+        max = wordObj.score;
+      }
+    })
+    const maxArray = winnersScore.filter(obj => obj.score === max);
+    if(maxArray.length === 1){
+      const answer = maxArray[0];
+      delete answer.wordLength;
+      return answer;
+    }
+    else {
+      
+    }
+    
+    // console.log(maxArray);
+  },
+
 };
 
 
