@@ -41,7 +41,6 @@ const Adagrams = {
     return handLetters;
   },
   usesAvailableLetters (input, lettersInHand) {
-    // try to do this without making a copy AND not mess with input
     const handLetters = lettersInHand.slice();
 
     for (let i = 0; i < input.length; i++) {
@@ -72,17 +71,6 @@ const Adagrams = {
     // Create variables to track highest word/score
     let highScoreWord = [];
     let highScore = 0;
-
-    // item.forEach(word => {
-    //   const score = this.scoreWord(word);
-
-    //   if (score > highScore) {
-    //     highScoreWord = [word];
-    //     highScore = score;
-    //   } else if (score === highScore) {
-    //     highScoreWord.push(word);
-    //   }
-    // });
 
     for (const word of item) {
       const score = this.scoreWord(word);
