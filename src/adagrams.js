@@ -22,6 +22,26 @@ const Adagrams = {
     letterArray = letterArray.slice(0, 10);
     return letterArray;
   },
+  
+  // Check if input word to only use random letter drawn
+  usesAvailableLetters(input, drawnLetters) {
+    const word = input.toUpperCase().split('');
+    const hand = drawnLetters;
+
+    console.log(hand);
+    console.log(word);
+
+    for (let letter in word) {
+      const index = hand.indexOf(word[letter]);
+      if (index < 0) {
+        return false;
+      } else {
+        delete hand[index];
+      }
+      console.log(hand);
+    }
+    return true;
+  },
 };
 
 // Do not remove this line or your tests will break!
