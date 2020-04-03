@@ -59,6 +59,36 @@ const Adagrams = {
   };
     return true; 
   }, 
+//WAVE 3 
+scoreWord(word) {
+  const scorePool = {
+    1: ['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T'],
+    2: ['D', 'G'],
+    3: ['B', 'C', 'M', 'P'],
+    4: ['F', 'H', 'V', 'W', 'Y'],
+    5: ['K'],
+    8: ['J','X'],
+    10: ['Q', 'Z']
+  }
+  const scorePoolMapped = {}; //each key is a letter with the score as value. 
 
+  Object.keys(scorePool).forEach((key) => {
+    scorePool[key].forEach((letter) => {
+      scorePoolMapped[letter] = parseInt(key);
+    })
+  });
+  
+  let score = 0;
+  const letters = word.toUpperCase().split(''); //array with each letter to check points
+  for (let i = 0; i < letters.length; i++) {
+    score += scorePoolMapped[letters[i]];   
+  }
+
+  
+  if (word.length >= 7 && word.length <= 10) {
+    score += 8;
+  }
+  return score;
+},
 // Do not remove this line or your tests will break!
 export default Adagrams;
