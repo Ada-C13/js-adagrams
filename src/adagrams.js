@@ -11,6 +11,7 @@ const Adagrams = {
         'S', 'T', 'T', 'T', 'T', 'T', 'T', 'U', 'U', 'U',
         'U', 'V', 'V', 'W', 'W', 'X', 'Y', 'Y', 'Z'
   ],
+
   shufflePool() {
     let poolCopy = this.pool.slice(0, this.pool.length);
     let newPosition = null;
@@ -29,7 +30,6 @@ const Adagrams = {
 
   drawLetters() {
     // Implement this method for wave 1
-    let hand = null;
     let shuffledPool = Adagrams.shufflePool();
 
     let drawn = shuffledPool.slice(0, 10);
@@ -37,11 +37,45 @@ const Adagrams = {
     return drawn;
   },
 
+  usesAvailableLetters(input, lettersInHand) { 
+    let lettersCount = {};
+
+    lettersInHand.forEach((letter) => {
+      if (!lettersCount[letter]) {
+        lettersCount[letter] = 1; 
+      } else {
+        lettersCount[letter] += 1;
+      }
+    });
+
+    // console.log(lettersCount);
+
+    // console.log(input.toUpperCase().split(''));
+
+    let wordArray = input.toUpperCase().split('');
+
+    for(let i = 0; i < wordArray.length; i++) {
+      const letter = wordArray[i];
+      if(lettersCount[letter] === undefined || lettersCount[letter] === 0) {
+        return false;
+      } else {
+        lettersCount[letter] -= 1;
+      }
+    };
+
+    // console.log(lettersCount);
+
+    return true;
+  },
+
 };
 
 // console.log(Adagrams.shufflePool());
 // console.log(Adagrams.pool);
-// console.log(Adagrams.drawLetters());
+// let drawn = Adagrams.drawLetters();
+// let drawn = ['K', 'A', 'T', 'T', 'E'];
+// console.log(drawn);
+// console.log(Adagrams.usesAvailableLetters('katt', drawn));
 
 // Do not remove this line or your tests will break!
 export default Adagrams;
