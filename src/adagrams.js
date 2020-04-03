@@ -49,6 +49,28 @@ const Adagrams = {
     return score;
   },
 
+  highestScoreFrom(words) {
+    let highest = {word: "", score: 0};
+    
+    for (let word of words) {
+      const currentScore = this.scoreWord(word);
+      if (currentScore > highest.score) {
+        highest.word = word;
+        highest.score = currentScore;
+      } else if (currentScore === highest.score) {
+        if (word.length === 10 && highest.word.length !== 10) {
+          highest.word = word;
+          highest.score = currentScore;
+        } else if (word.length < highest.word.length && highest.word.length !== 10) {
+          highest.word = word;
+          highest.score = currentScore;
+        }
+      }
+    }
+
+    return highest;
+  },
+
   letterQuantities: {
     'A': 9,
     'B': 2,
