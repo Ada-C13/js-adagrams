@@ -53,13 +53,41 @@ const Adagrams = {
   },
 
   usesAvailableLetters(input, lettersInHand) {
+    // can refactor later and use hashtable to make it more efficient...
     // make input in all caps
-    // make copy of letters
+    input = input.toUpperCase().split('')
 
-    // if letter of input = letter in drawn letters, remove letter in drawn letters
-    // continue to compare rest of letters to drawn letters
-    // timesTrue array used to determine if word is valid
-    const lettersInHandClone = [...lettersInHand];
+    // make copy of letters
+    const lettersInHandClone = [...lettersInHand]
+
+    let timesTrue = []
+
+    input.forEach((letter, index) => {
+      if (lettersInHandClone.includes(letter) == true) {
+        lettersInHandClone.splice(lettersInHandClone.indexOf(letter), 1)
+        timesTrue.push(true)
+      } else {
+        timesTrue.push(false)
+      }
+    });
+
+    let trueCount = 0
+    
+    for (let i = 0; i < timesTrue.length; i++) {
+      if (timesTrue[i] === true) {
+          trueCount++;
+      }
+    };
+
+    let is_valid = true
+    
+    if (trueCount === input.length) {
+      is_valid = true
+    } else {
+      is_valid = false
+    };
+
+    return is_valid
   },
 
   scoreWord() {
@@ -70,7 +98,6 @@ const Adagrams = {
 
   }
 };
-
 
 // Do not remove this line or your tests will break!
 export default Adagrams;
