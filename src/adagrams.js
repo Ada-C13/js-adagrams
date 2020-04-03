@@ -22,7 +22,7 @@ const Adagrams = {
     letterArray = letterArray.slice(0, 10);
     return letterArray;
   },
-  
+
   // Check if input word to only use random letter drawn
   usesAvailableLetters(input, drawnLetters) {
     const word = input.toUpperCase().split('');
@@ -42,6 +42,14 @@ const Adagrams = {
     }
     return true;
   },
+  /* TODO
+  Wave 3- function that returns the score of a given word as defined by the Adagrams game
+  function named scoreWord in the Adagrams object - Has one parameter: word
+  Returns an integer representing the number of points
+  Create letter's point value 
+  The number of points of each letter is summed up to represent the total score of word
+  If the length of the word is 7 -> 10, additional 8 points
+  */
 };
 
 // Do not remove this line or your tests will break!
