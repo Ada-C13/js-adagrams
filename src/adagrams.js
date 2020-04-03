@@ -23,7 +23,22 @@ const Adagrams = {
     return lettersInHand;
   },
 
-
+  usesAvailableLetters(input, lettersInHand) {
+    const lettersInHandCopy = lettersInHand.map((letter) => letter);
+  
+    const splitInput = input.split('');
+        
+    for (let i = 0; i < splitInput.length; i++) {
+      if (lettersInHandCopy.includes(splitInput[i])) {
+        const index = lettersInHandCopy.indexOf(splitInput[i]);
+        lettersInHandCopy.splice(index, 1);
+      } else {
+        return false;
+      };
+  
+    };
+    return true;
+  },
 
   
 
