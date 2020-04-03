@@ -38,6 +38,7 @@ let shuffle = function(array) {
 
 const Adagrams = {
   
+  // Wave 1
   drawLetters() {
     let pool = [];
     for (let i in letters) {
@@ -48,9 +49,28 @@ const Adagrams = {
   
     shuffle(pool);
 
-    //discards extra tiles so only 10 remain
+    //discards extra tiles so only 10 remain in pool array
     return pool.splice(88);
-  }
+  },
+
+  // Wave 2
+  usesAvailableLetters(input, drawn) {
+    for (let i = 0; i < input.length; i++) {
+      let currentLetter = input.charAt(i);
+      if (!drawn.includes(currentLetter)) {
+        return false;
+      } else {
+        //find the index where letter IS found 
+        // have var outside of false check and have it equal index of current letter, then use splice at that index
+        let letterIndex = drawn.indexOf(currentLetter);
+        // splice letter at that index from drawn
+        drawn.splice(letterIndex, 1);
+      }
+    }
+    return true;
+  },
+
+  // Wave 3
 
 };
 
