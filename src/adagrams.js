@@ -16,10 +16,29 @@ const Adagrams = {
       theHand.push(letter)
     }
     return theHand
-  }
-
   },
-      
-    
+  
+   // wave 2
+   usesAvailableLetters(input, lettersInHand) {
+    let givenLetters = input.split('');
+    let selectedLetters = lettersInHand.slice();
+    for (let letter in givenLetters) {
+      if (selectedLetters.includes(letter)){
+        let letterToFind = selectedLetters.indexOf(letter);
+        selectedLetters.splice(letterToFind, 1);
+      } 
+      else {
+        return false;
+      }
+    }
+      return true;  
+  },
+  // wave 3
+  scoreWord(word) {
+  let score = []
+  }
+};
+
+        
 // Do not remove this line or your tests will break!
 export default Adagrams;
