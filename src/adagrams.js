@@ -113,8 +113,42 @@ const Adagrams = {
     };
 
     return points;
+  },
+
+  // find the highest scoring word. This function looks at the array of words and calculates which of these words has the highest score, applies any tie-breaking logic, and returns the winning word in a special data structure.
+
+  // Objective
+  // Add a function named highestScoreFrom in the Adagrams object in src/adagrams.js. This method should have the following properties:
+  highestScoreFrom(words) {
+    const winningWord = {/* word: score */};
+
+    // add an instance variable to Adagrams to keep track of words and scores
+    
+    // find highest score
+    // add words with highest score to an object
+    // if array.length === 1
+    //   return that word
+    // else continue to tie breaker
+
+    // if tie
+    //   if any word has .length === 10
+    //     winningWord = that word;
+    //   else 
+    //     shortest word should win
+    //     set a variable to length of first word
+    //     loop through the array and check the length of each word
+    //       if the length is shorter than the previous shortest length,
+    //       change shortest length to that length
+    //       continue
+    //     end
+    //     set winningWord to first word that matches the shortest length
+    //     find score of that word again
+    //     set word & score to winningWord
+    //   end
+    // end
+
+    return winningWord;
   }
-  // If the length of the word is 7, 8, 9, or 10, then the word gets an additional 8 points
 }
 
 // Do not remove this line or your tests will break!
