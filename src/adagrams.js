@@ -9,8 +9,8 @@ const Adagrams = {
       U: 4, V: 2, W: 2, X: 1, Y: 2, Z: 1
     }
 
+    // Array to store the letters from the hash table
     let letterArray = []
-
     for (let letter in allLetters) {
       for (let char = 0; char < allLetters[letter]; char++) {
         letterArray.push(letter);
@@ -18,7 +18,7 @@ const Adagrams = {
     }
     
     // Get 10 random single-string letters
-    letterArray.sort(() => Math.random());
+    letterArray.sort(() => Math.random() - Math.random());
     letterArray = letterArray.slice(0, 10);
     return letterArray;
   },
