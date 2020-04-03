@@ -135,15 +135,58 @@ let arrayShuffle = function(arr){
 const Adagrams = {
   drawLetters() {
     let hand = [];
-    for(let i = 0; i < 9; i++){
+    for(let i = 0; i < 10; i++){
       hand.push(arrayShuffle(deck)[i]);
     }
     return hand
   },
+  usesAvailableLetters(input, lettersInHand) {
+    input = input.split("");
+    console.log(input);
+    console.log(lettersInHand);
+    for(let i = 0; i < input.length; i++){
+      if (lettersInHand.includes(input[i])){
+        let lettersInHandIndexValue = lettersInHand.indexOf(input[i]);
+        input.splice(i, 1);
+        lettersInHand.splice(lettersInHandIndexValue, 1);
+        i--;
+      }
+    }
+    // console.log(input);
+    // console.log(lettersInHand);
+    if(input.length === 0){
+      return true
+    } else{
+      return false
+    };
+  }
 };
 
+Adagrams.usesAvailableLetters('hill', ['h', 'j', 'k', 'z', 'i'])
 
-console.log(Adagrams.drawLetters())
+
+
+
+      // prev method takes input and compares lettersInHand, if item matches, deletes from input 
+      // then deletes from lettersInHand
+      // if input then === empty, return true 
+
+// def uses_available_letters?(input, letter_in_hand)
+//   input = input.chars //turns input into array 
+//   hand = letter_in_hand.clone //duplicates hand to circumvent test
+//   input.each_with_index { |input_value, input_index|
+//     hand.each_with_index { |hand_value, hand_index|
+//       if (input_value == hand_index)
+//         input[input_index] = nil
+//         hand.delete_at(hand_index)
+//       end
+//     }
+//   }
+//   input.reject!{ |item| item.nil? }
+//   return input.empty?
+// end
+
+// console.log(Adagrams.drawLetters())
 
 // Do not remove this line or your tests will break!
-// export default Adagrams;
+export default Adagrams;
