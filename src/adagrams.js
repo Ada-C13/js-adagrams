@@ -127,6 +127,7 @@ const Adagrams = {
 
     //  calculate total score
     let totalScore = scoreWord.reduce((a,b) => a + b, 0)
+
     //  > 7 letter bonus
     if (word.length >= 7) {
       totalScore = totalScore + 8
@@ -135,8 +136,13 @@ const Adagrams = {
     return totalScore
   },
 
-  highestScoreFrom() {
-
+  highestScoreFrom(words) {
+    // object with all words and scores
+    
+    // highest score calculation
+    // define variables, highestScore, highestWord stored in bestWord object
+    // forEach loop to do tie rules and determine highest score
+    // switch statement
   }
 };
 
