@@ -92,19 +92,47 @@ const Adagrams = {
 
   scoreWord(word) {
     // uppercase word and make into array
+    word = word.toUpperCase().split('');
 
-    // scoring
-    // if word is empty, scoreWord = 0
+    let scoring = {
+      A: 1,
+      B: 3,
+      C: 3,
+      D: 2,
+      E: 1,
+      F: 4,
+      G: 2,
+      H: 4,
+      I: 1,
+      J: 8,
+      K: 5,
+      L: 1,
+      M: 3,
+      N: 1,
+      O: 1,
+      P: 3,
+      Q: 10,
+      R: 1,
+      S: 1,
+      T: 1,
+      U: 1,
+      V: 4,
+      W: 4,
+      X: 8,
+      Y: 4,
+      Z: 10
+    };
 
-    // switch statement to score the word
-    // store each letter score into array, scoreWord
+    let scoreWord = word.map(letter => scoring[letter]);
 
-    // calculate the total score, totalScore
-    // sum method
+    //  calculate total score
+    let totalScore = scoreWord.reduce((a,b) => a + b, 0)
+    //  > 7 letter bonus
+    if (word.length >= 7) {
+      totalScore = totalScore + 8
+    }
 
-    // account for > 7 letter word bonus
-
-    // return totalScore
+    return totalScore
   },
 
   highestScoreFrom() {
