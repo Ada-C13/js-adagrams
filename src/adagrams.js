@@ -42,9 +42,80 @@ const Adagrams = {
     };
     return lettersAtHand  
   },
+
+  usesAvailableLetters (input, lettersInHand){
+    const inputLetters = Array.from(input);
+
+    //make an object that hold all the letters in the lettersInHand and how many times they appear
+    const lettersAppear = {}
+
+    lettersInHand.forEach(letter => {
+      if (letter in lettersAppear) {
+        lettersAppear[letter] += 1;
+      }
+      else {
+        lettersAppear[letter] = 1;
+      }
+    });
+
+    console.log(lettersAppear)
+
+    //make another loop that will go through the object and decrement if it exists 
+    for (let i in inputLetters ){
+
+      let letter = inputLetters[i]
+
+      if ((lettersAppear[letter] !== undefined) && (lettersAppear[letter] > 0 )) {
+        lettersAppear[letter] -= 1;
+        console.log(letter)
+      } else{
+        console.log(letter)
+
+        return false; 
+      }
+    };
+    return true; 
+  },
+
+  scoreWord (word) {
+
+  const lettersInWord = Array.from(word.toUpperCase())
+   let score = 0
+    for (let i = 0; i < lettersInWord.length; i++){
+      if ('AEIOULNRST'.includes(lettersInWord[i])){
+        score += 1;
+      }
+      if ('DG'.includes(lettersInWord[i])){
+        score += 2;
+      }
+      if ('BCMP'.includes(lettersInWord[i])){
+        score += 3;
+      }
+      if ('FHVWY'.includes(lettersInWord[i])){
+        score += 4;
+      }
+      if ('K'.includes(lettersInWord[i])){
+        score += 5;
+      }
+      if ('JX'.includes(lettersInWord[i])){
+        score += 8;
+      }
+      if ('QZ'.includes(lettersInWord[i])){
+        score += 10;
+      }
+    };
+    if (lettersInWord.length >= 7 && lettersInWord.length <= 10){
+      score += 8;
+    };
+    return score 
+
+  },
+
+
+
 };
 
-// Adagrams.drawLetters()
+// Adagrams.usesAvailableLetters('hello', ['h', 'l', 'l', 'o', 'i'])
 
 
 // Do not remove this line or your tests will break!
