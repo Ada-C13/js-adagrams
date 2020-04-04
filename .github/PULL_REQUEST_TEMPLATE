@@ -6,9 +6,9 @@ Congratulations! You're submitting your assignment. Please reflect on the assign
 
 Prompt | Response
 --- | ---
-What patterns were you able to use from your Ruby knowledge to apply to JavaScript? | 
-Did you need to use different strategies to find information online about JavaScript than you would for Ruby? | 
-What was something you needed to do independent research on for this project? What did you learn? | 
-What was a challenge you were able to overcome on this assignment? | 
-What has been interesting and positive about learning a new programming language? | 
-What is something to focus on your learnings in JavaScript in the next week? | 
+What patterns were you able to use from your Ruby knowledge to apply to JavaScript? | The way to iterate over the arrays and how to iterate over the objects(hashes). 
+Did you need to use different strategies to find information online about JavaScript than you would for Ruby? | Yes, I used google a lot, to find how to use some methods and the syntax. Also to find things like `...` spread syntax and static functions that are used within my class. 
+What was something you needed to do independent research on for this project? What did you learn? | I learn how to create a `class`, how to define class functions using static functions that are not instances of the class. I learned about ()...) spread syntax to convert a string into an array and also to pass values into a `max` function. Also I learn a new way to iterate over objects `Object.entries`. 
+What was a challenge you were able to overcome on this assignment? | The biggest challenge for me was to create the last function `highestScoreFrom`. 
+What has been interesting and positive about learning a new programming language? | Many things and feel that we have been learning how to learn, feel that the basic concepts make sense even if the syntax is different. I really want to continue learning about JavaScript and improve the way my code looks. 
+What is something to focus on your learnings in JavaScript in the next week? | I would love to learn more about: `classes` best practices, `APIs` and also learn about `prototype` and understand how objects inherit features from one another.
