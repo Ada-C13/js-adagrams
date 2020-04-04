@@ -138,11 +138,61 @@ const Adagrams = {
 
   highestScoreFrom(words) {
     // object with all words and scores
+    let allWordsScore = words.map(word => {
+      let scoreOfWord = this.scoreWord(word);
+      return {
+        word: word,
+        score: scoreOfWord
+      };
+    })
     
+    console.log(allWordsScore)
     // highest score calculation
     // define variables, highestScore, highestWord stored in bestWord object
     // forEach loop to do tie rules and determine highest score
     // switch statement
+
+    let highestScore = 0
+    let highestWord = ""
+    let bestWord = {}
+
+    allWordsScore.forEach(word => {
+      console.log(word.score);
+      switch(true) {
+        // nominal
+        case word.score > highestScore:
+          highestScore = word.score
+          highestWord = word.word
+          break;
+        // tied score and same length words, prefers the first word
+        case (word.score === highestScore) && ((word.word).length === highestWord.length):
+          highestScore = highestScore
+          highestWord = highestWord
+          break;
+        // tied score, prefers most the word with 10 letters regardless of order
+        case (word.score == highestScore) && ((word.word).length === 10):
+          highestScore = word.score
+          highestWord = word.word
+          break;
+        case (word.score === highestScore) && (highestWord.length === 10):
+          highestScore = highestScore
+          highestWord = highestWord
+          break;
+        // tied score, prefers the word with fewer letters regardless of order
+        case (word.score === highestScore) && ((word.word).length < highestWord.length):
+          highestScore = word.score
+          highestWord = word.word
+          break;
+        case (word.score === highestScore) && ((word.word).length > highestWord.length):
+          highestScore = highestScore
+          highestWord = highestWord
+          break;
+      };
+    })
+  
+    bestWord['word'] = `${highestWord}`;
+    bestWord['score'] = highestScore;
+    return bestWord;
   }
 };
 
