@@ -18,13 +18,13 @@ const Adagrams = {
     },
     usesAvailableLetters(str,arr){
     let wordArr = str.split("");
-    console.log(wordArr);
-    console.log(arr);
+    // console.log(wordArr);
+    // console.log(arr);
     let count= 0;
     for (let i=0; i<wordArr.length; i++){
       arr.includes(wordArr[i])? arr.splice(arr.indexOf(wordArr[i]),1): count +=1 ;
     }
-    console.log(arr);
+    // console.log(arr);
     if (arr.length + wordArr.length ===10 && count === 0){
     return true;
     } else {
@@ -58,11 +58,57 @@ const Adagrams = {
     }else {
       return score;
     }
-  }
-  
+  },
+  highestScoreFrom(words){
+    let scores = [];
+    words.forEach(element => {
+      scores.push(this.scoreWord(element.toUpperCase()));
+    });
+    let highestScore = Math.max(...scores);
+    let highestScoreArr = [];
+    scores.forEach(element => {
+      highestScoreArr.push((element === highestScore)? element: undefined);
+    });
+    let arr = highestScoreArr.filter(score => score != undefined);
+    if (arr.length === 1){
+      return {
+        word: words[highestScoreArr.indexOf(highestScore)],
+        score: highestScore
+       }
+      }
+      let winWordArr = [];
+      for (let i=0; i<highestScoreArr.length; i++){
+        if (highestScoreArr[i] != undefined){
+            winWordArr.push(words[i]);
+        }
+      } 
+      if ((Math.max(...(winWordArr.map(el => el.length)))) === 10){
+        for (let i=0; i<winWordArr.length; i++){
+          if (winWordArr[i].length === 10 ){
+            return {
+              word: winWordArr[i],
+              score: highestScore
+            }
+          }
+        }
+      } else {
+        let longest = 10;
+        let winWord = '';
+        for (let i = 0; i<winWordArr.length;i++){
+          if (winWordArr[i].length < longest){
+           longest = winWordArr[i].length;
+           winWord = winWordArr[i];
+          }
+        }
+        return {
+          word: winWord,
+          score: highestScore
+        }
+      }
+    }
 };
 
-console.log(Adagrams.drawLetters());
+// console.log(Adagrams.drawLetters());
 
 // Do not remove this line or your tests will break!
 export default Adagrams;
