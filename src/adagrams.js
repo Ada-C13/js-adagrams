@@ -1,4 +1,11 @@
-const Adagrams = {
+import { tsConstructorType } from "@babel/types";
+
+class Adagrams {
+
+  // constructor() {
+
+  // }
+
   drawLetters() {
     const constLetterPool = ['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'B', 'B', 'C', 'C', 'D', 'D', 'D', 'D', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'F', 'F', 'G', 'G', 'G', 'H', 'H', 'I', 'I', 'I', 'I', 'I', 'I', 'I', 'I', 'I', 'J', 'K', 'L', 'L', 'L', 'L', 'M', 'M', 'N', 'N', 'N', 'N', 'N', 'N', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'P', 'P', 'Q', 'R', 'R', 'R', 'R', 'R', 'R', 'S', 'S', 'S', 'S', 'T', 'T', 'T', 'T', 'T', 'T', 'U', 'U', 'U', 'U', 'V', 'V', 'W', 'W', 'X', 'Y', 'Y', 'Z'];
     let playerHand = [];
@@ -9,7 +16,7 @@ const Adagrams = {
     };
 
     return playerHand;
-  },
+  }
 
   usesAvailableLetters(input, lettersInHand) {
     const inputArray = input.toUpperCase().split('');
@@ -36,7 +43,7 @@ const Adagrams = {
     };
 
     return true;
-  },
+  }
 
   scoreWord(word) {
     const wordArray = word.toUpperCase().split('');
@@ -60,13 +67,13 @@ const Adagrams = {
 
     if ([7, 8, 9, 10].includes(wordArray.length)) total += 8;
     return total;
-  },
+  }
 
   highestScoreFrom(words) {
     let scoredWords = {};
 
     for (const word of words) {
-      const score = Adagrams.scoreWord(word);
+      const score = this.scoreWord(word);
       
       if (scoredWords[score] !== undefined) {
         scoredWords[score].push(word);
@@ -80,10 +87,10 @@ const Adagrams = {
     if (scoredWords[highestScore].length === 1) {
       return {"score": highestScore, "word": scoredWords[highestScore][0]};
     } else {
-      let foundWinner = Adagrams.tiebreaker(scoredWords[highestScore]);
+      let foundWinner = this.tiebreaker(scoredWords[highestScore]);
       return {"score": highestScore, "word": foundWinner};
     };
-  },
+  }
 
   tiebreaker(words) {
     let highestWord = words[0];
@@ -98,7 +105,7 @@ const Adagrams = {
 
     return highestWord;
   }
-};
+}
 
 // Do not remove this line or your tests will break!
 export default Adagrams;
