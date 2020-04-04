@@ -13,7 +13,6 @@ const Adagrams = {
     for (let i = 0; i < handSize; i++) {
       let randIndex  = Math.floor(Math.random() * letterPool.length);
       let randLetter = letterPool.slice(randIndex, randIndex + 1);
-      // console.log(i, randIndex, randLetter);
       hand.push(randLetter);
     }
     return hand;
@@ -48,35 +47,54 @@ const Adagrams = {
     return score;
   },
 
-  
+// Method that looks at the array of words and calculates which of these words has the highest score
+  highestScoreFrom(words) {
+    let maximumScore = Math.max(...words.map(word => this.scoreWord(word))); // find the maximum score from all the words
+    let highestWords = words.filter(word => this.scoreWord(word) === maximumScore); // find the words that has the maximum score
 
+    if (highestWords.length === 1) {
+      return {word: highestWords[0], score: maximumScore};
+    }
+
+    let minimumLength = Math.min(...highestWords.map(word => word.length == 10 ? 0 : word.length)); // 
+    let shortestWords = highestWords.filter(word => (word.length == 10 ? 0 : word.length) === minimumLength); // find the words that has the minimum length
+    return {word: shortestWords[0], score: maximumScore};
+  }
 }
 
 // Do not remove this line or your tests will break!
 export default Adagrams;
  
-/* # A method that looks at the array of words and calculates which of these words has the highest score.
-def highest_score_from(words)
-  maximum_score = words.map { |word| score_word(word) }.max
-  highest = words.select { |word| score_word(word) == maximum_score }
-  if highest.length == 1  
-    winning_word = highest.first
-  else
-    highest_lengths = highest.map {|i| i.length}
-    if highest_lengths.any? { |x| x == 10 }
-      index_of_length_10 = highest_lengths.find_index(10)
-      winning_word  = highest[index_of_length_10]
-    else
-      winning_word = highest[highest_lengths.find_index(highest_lengths.min)]
-    end   
-  end
 
-  results = {:score => maximum_score, :word => winning_word}
 
-  return results
-end
 
-def is_in_english_dict?(input)
-  return $dictionary.include?(input)
-end
-*/
+
+
+
+
+
+// # Function to get word with highest score and handles ties (solution A)
+// def highest_score_from(words)
+ 
+//   maximum_score = words.map { |word| score_word(word) }.max # turns array of words into array of word scores, then takes the max
+//   highest       = words.select { |word| score_word(word) == maximum_score } # returns an array with words with maximum score
+ 
+//   if highest.length == 1
+//     winning_word = highest.first # no ties for winning, get the only word winner
+//   else
+// # finds length of the shortest word. Words with 10 letters are accounted as length 0, so they become the “shortest” of them all.
+//     min_length = highest.map { |word| word.length == 10 ? 0 : word.length }.min
+
+// # gets all words with the shortest length. There’s at least one, but there still could be ties.
+//     shortest = highest.select { |word| min_length == (word.length == 10 ? 0 : word.length) }
+// # if there’s only one “shortest” word, that’s the winning word
+//     winning_word = shortest.first
+//   end
+ 
+//   results = {}
+//   results[:word]  = winning_word
+//   results[:score] = maximum_score
+//   return results
+ 
+// end
+
