@@ -91,7 +91,5 @@ class Adagrams {
     return winnerWord;
   }
 }
-const adagrams = new Adagrams;
-console.log(adagrams.highestScoreFrom(['AAAAAAAAAA', 'EEEEEEEEEE']));
 
 export default Adagrams;
