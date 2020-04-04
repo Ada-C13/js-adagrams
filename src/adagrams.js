@@ -1,7 +1,9 @@
 
-const Adagrams = {
+class Adagrams  {
+  // drawLetters(); returns an array with 10 letters from the pool. Depends of how many of them are within it. 
+  static drawLetters() {
 
-  lettersPool : {
+   const lettersPool = {
     A : 9, N : 6,
     B : 2, O : 8,
     C : 2, P : 2,
@@ -15,29 +17,26 @@ const Adagrams = {
     K : 1, X : 1,
     L : 4, Y : 2,
     M : 2, Z : 1,
-  },
-
-  // drawLetters(); returns an array with 10 letters from the pool. Depends of how many of them are within it. 
-  drawLetters() {
+  }
     // Implement this method for wave 1
    const handLetters = [];
   
     for (let i = 0; handLetters.length < 10; i++) {
-      let keys = Object.keys(this.lettersPool);
+      let keys = Object.keys(lettersPool);
       // It selects a random key from the pool. 
       let letter = keys[ keys.length * Math.random() << 0];
       handLetters.push(letter);
-      this.lettersPool[letter] -= 1;
+      lettersPool[letter] -= 1;
       
-      if (this.lettersPool[letter] == 0) {
-        delete this.lettersPool[letter];
+      if (lettersPool[letter] == 0) {
+        delete lettersPool[letter];
       }
     }
     return handLetters;
-  },
+  }
 
   // Returns an object that has an element as a key and as a value the number of times that element appears.
-  countLetters(objectToCount) {
+  static countLetters(objectToCount) {
     const object = {};
 
     for (const element of objectToCount) {
@@ -49,11 +48,11 @@ const Adagrams = {
       }
     }
     return object;
-  },
+  }
 
   // usesAvailableLetters checks input word only uses characters 
   // that are contained within a collection (lettersInHand array). 
-  usesAvailableLetters(input, lettersInHand) {
+  static usesAvailableLetters(input, lettersInHand) {
 
     const lettersInHandCount = this.countLetters(lettersInHand);
     const inputUpCase = input.toUpperCase();
@@ -69,26 +68,27 @@ const Adagrams = {
       }
     }
     return true;
-  },
-
-  scoreChart : {
-    A: 1, E: 1, 
-    I: 1, O: 1,
-    U: 1, L: 1,
-    N: 1, R:1,
-    S: 1, T: 1,
-    D: 2, G:2,
-    B: 3, C: 3,
-    M: 3, P: 3,
-    F: 4, H: 4, 
-    V: 4, W:4, 
-    Y: 4, K: 5,
-    J: 8, X: 8,
-    Q: 10, Z:10
-  },
+  }
 
   // scoreWord returns the score of a given word base on the score chart (Object)
-  scoreWord(word) {
+  static scoreWord(word) {
+
+    const scoreChart = {
+      A: 1, E: 1, 
+      I: 1, O: 1,
+      U: 1, L: 1,
+      N: 1, R:1,
+      S: 1, T: 1,
+      D: 2, G:2,
+      B: 3, C: 3,
+      M: 3, P: 3,
+      F: 4, H: 4, 
+      V: 4, W:4, 
+      Y: 4, K: 5,
+      J: 8, X: 8,
+      Q: 10, Z:10
+    }
+
     let score = 0;
     const wordLength = word.length;
     const wordUpCase = word.toUpperCase();
@@ -97,8 +97,8 @@ const Adagrams = {
     
     for (const letter of wordArray) {
       // find the value within the scoreChar Object.
-      if (this.scoreChart[letter] !== undefined) {
-        score += this.scoreChart[letter];
+      if (scoreChart[letter] !== undefined) {
+        score += scoreChart[letter];
       }
     }
 
@@ -107,10 +107,10 @@ const Adagrams = {
     }
 
    return score;
-  },
+  }
 
   // highestScoreFrom finds the highest scoring word. This function looks at the array of words and calculates which of these words has the highest score.
-  highestScoreFrom(words) {
+  static highestScoreFrom(words) {
     const wordsObj = {};
     
     for (const word of words) {
@@ -158,7 +158,12 @@ const Adagrams = {
       }
     }
   }
-};
+}
 
 // Do not remove this line or your tests will break!
+
+//  console.log(Adagrams.drawLetters());
+//  console.log(Adagrams.usesAvailableLetters('DOG',['D', 'O', 'G', 'X', 'X', 'X', 'X', 'X', 'X', 'X']));
+//  console.log(Adagrams.scoreWord('DOG'));
+
 export default Adagrams;
