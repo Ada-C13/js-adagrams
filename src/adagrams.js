@@ -39,19 +39,7 @@ class Adagrams {
 
 
   // Helper funciton for wave 1
-  // reference: https://stackoverflow.com/questions/6274339/how-can-i-shuffle-an-array
-  shuffle(array) {
-    for(let i = 0; i < array.length; i++) { 
-      const j = this.randomIdx(array.length);
-      [array[i], array[j]] = [array[j], array[i]]
-    };
-    return array;
-  }
-
-
-  // Helper funciton for wave 1
-  sample(array) {
-    const letters = this.shuffle(array) 
+  sample(letters) {
     const sample = []
 
     // Get 10 random letter
