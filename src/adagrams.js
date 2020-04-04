@@ -11,11 +11,61 @@
 
 
 const Adagrams = {
+  const handSize = 10,
 
+  const letterCounts = {
+    'A': 9,
+    'B': 2,
+    'C': 2,
+    'D': 4,
+    'E': 12,
+    'F': 2,
+    'G': 3,
+    'H': 2,
+    'I': 9,
+    'J': 1,
+    'K': 1,
+    'L': 4,
+    'M': 2,
+    'N': 6,
+    'O': 8,
+    'P': 2,
+    'Q': 1,
+    'R': 6,
+    'S': 4,
+    'T': 6,
+    'U': 4,
+    'V': 2,
+    'W': 2,
+    'X': 1,
+    'Y': 2,
+    'Z': 1
+  }
   
+  let letterPool = [],
+
+  for (const letter in letterCounts) {
+    for (let x = 0; x <= letterCounts[letter]; x++) {
+      letterPool.push(letter)
+    }
+  }
+
+
+//   const object = {a: 1, b: 2, c: 3};
+
+// for (const property in object) {
+//   console.log(`${property}: ${object[property]}`);
+// }
+
+// expected output:
+// "a: 1"
+// "b: 2"
+// "c: 3"
+
+
   drawLetters() {
     // Implement this method for wave 1
-  },
+  };
 };
 
 // Do not remove this line or your tests will break!
