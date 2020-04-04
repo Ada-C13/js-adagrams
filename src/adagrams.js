@@ -19,17 +19,13 @@ const Adagrams = {
     
     // Get 10 random single-string letters
     letterArray.sort(() => Math.random() - Math.random());
-    letterArray = letterArray.slice(0, 10);
-    return letterArray;
+    return letterArray.slice(0, 10);
   },
 
   // Check if input word to only use random letter drawn
   usesAvailableLetters(input, drawnLetters) {
     const word = input.toUpperCase().split('');
     const hand = drawnLetters;
-
-    console.log(hand);
-    console.log(word);
 
     for (let letter in word) {
       const index = hand.indexOf(word[letter]);
@@ -38,18 +34,53 @@ const Adagrams = {
       } else {
         delete hand[index];
       }
-      console.log(hand);
     }
     return true;
   },
-  /* TODO
-  Wave 3- function that returns the score of a given word as defined by the Adagrams game
-  function named scoreWord in the Adagrams object - Has one parameter: word
-  Returns an integer representing the number of points
-  Create letter's point value 
-  The number of points of each letter is summed up to represent the total score of word
-  If the length of the word is 7 -> 10, additional 8 points
-  */
+  
+  // Points per letter
+  letterScore: {
+    A: 1, E: 1, I: 1, O: 1, U: 1, L: 1, N: 1, R: 1, S: 1, T: 1,
+    D: 2, G: 2, B: 3, C: 3, M: 3, P: 3, F: 4, H: 4, V: 4, W: 4, Y: 4,
+    K: 5, J: 8, X: 8, Q: 10, Z: 10
+  },
+
+  // Calculate score per word
+  scoreWord(word) {
+    let wordScore = 0
+    word.toUpperCase().split('').forEach(letter => {
+      wordScore  += this.letterScore[letter]
+    });
+
+    //Award extra points if condition is met
+    if (word.length > 6) {
+      wordScore  += 8
+    }
+    return wordScore 
+  },
+
+  // Find  the highest scoring word
+  highestScoreFrom(words) {
+    let bestWord = { word: '', score: 0 }
+    
+    words.forEach(word => {
+      const score = this.scoreWord(word)
+      
+      if (score > bestWord['score']) {
+        bestWord['word'] = word
+        bestWord['score'] = score
+      }
+      else if (score === bestWord['score']) {
+        const wordLength = word.length
+        const longestWord = bestWord['word'].length
+        if ((wordLength < longestWord || wordLength === 10) && longestWord < 10) {
+          bestWord['word'] = word
+          bestWord['score'] = score
+        }
+      }
+    });
+    return bestWord
+  }
 };
 
 // Do not remove this line or your tests will break!
