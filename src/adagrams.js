@@ -1,4 +1,4 @@
-const Adagrams = {
+class Adagrams {
   //WAVE 1
   drawLetters() {
     const allLetters = {
@@ -43,7 +43,7 @@ const Adagrams = {
       );
     }
     return handLetters;
-  },
+  }
 
   //WAVE 2
   usesAvailableLetters(input, lettersInHand) {
@@ -58,7 +58,7 @@ const Adagrams = {
       }
     }
     return true;
-  },
+  }
   //WAVE 3
   scoreWord(word) {
     const scorePool = {
@@ -88,16 +88,14 @@ const Adagrams = {
       score += 8;
     }
     return score;
-  },
+  }
 
   //WAVE 4
-  highestScoreFrom(words) {
-    
+  highestScoreFrom(words, customScoreMethod) {
     let result = [];
     let highestScore = 0;
-
     words.forEach(word => {
-      let score = this.scoreWord(word);  
+      let score = this.scoreWord(word);
       if (score > highestScore) {
         highestScore = score;
         result = [word];
@@ -106,21 +104,21 @@ const Adagrams = {
       }
     });
 
-    if (result.length === 1)  {
+    if (result.length === 1) {
       return { word: result[0], score: highestScore };
-    } 
+    }
 
-    let winningWord = result[0]
+    let winningWord = result[0];
     for (let i = 0; i < result.length; i++) {
       const currentWord = result[i];
-      if(currentWord.length === 10) {
-        return { word: currentWord, score: highestScore }
+      if (currentWord.length === 10) {
+        return { word: currentWord, score: highestScore };
       } else if (currentWord.length < winningWord.length) {
-         winningWord = currentWord;
+        winningWord = currentWord;
       }
     }
     return { word: winningWord, score: highestScore };
   }
 }
 
-export default Adagrams;
+export default new Adagrams();
