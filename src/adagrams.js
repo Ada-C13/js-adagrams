@@ -22,6 +22,7 @@ const Adagrams = {
   },
 
   usesAvailableLetters(input, lettersInHand){
+    input = input.toUpperCase();
     const splitWord = input.split('');
     const lettersHash = {};
 
@@ -43,6 +44,59 @@ const Adagrams = {
       return false;
     };
     
+  },
+
+  scoreWord(word){
+    word = word.toUpperCase()
+    const splitWord = word.split('');
+    let wordScore = 0;
+
+    splitWord.forEach((char) => {
+      switch(char) {
+        case "A":
+        case "E":
+        case "I":
+        case "O":
+        case "U":
+        case "L":
+        case "N":
+        case "R":
+        case "S":
+        case "T":
+          wordScore += 1;
+          break;
+        case "D":
+        case "G":
+          wordScore += 2;
+          break;
+        case "B": 
+        case "C": 
+        case "M": 
+        case "P":
+          wordScore += 3;
+          break;
+        case "F": 
+        case "H": 
+        case "V": 
+        case "W": 
+        case "Y":
+          wordScore += 4;
+          break;
+        case "K":
+          wordScore += 5;
+          break;
+        case "J": 
+        case "X":
+          wordScore += 8;
+          break;
+        case "Q": 
+        case "Z":
+          wordScore += 10;
+          break;
+      };
+    });
+    word.length > 6 ? wordScore += 8 : wordScore;
+    return wordScore;
   },
 };
 
