@@ -64,7 +64,6 @@ const Adagrams = {
       letterCount[char] = 1;
     } })
     
-    console.log(letterCount);
 
     let result = true
     input.toUpperCase().split('').forEach((check_char) => {
@@ -129,8 +128,8 @@ const Adagrams = {
       if (this.scoreWord(word) > highestScore["score"]) {
         highestScore["score"] = this.scoreWord(word);
         highestScore["word"] = word;
-      } else if (this.scoreWord(word) === highestScore["score"]) {
-          if ( word.length < highestScore["word"].length || word.length === 10) {
+      } else if (this.scoreWord(word) === highestScore["score"] &&  highestScore['word'].length !== 10) {
+          if (( word.length < highestScore["word"].length) ||( word.length === 10 && highestScore['word'].length !== 10)) {
             highestScore["score"]= this.scoreWord(word);
             highestScore["word"] = word;
           } ;
@@ -145,12 +144,12 @@ const Adagrams = {
 //console.log(Adagrams.usesAvailableLetters("Helllllo", ['H', 'E','L', 'L', 'O']));
 //console.log(Adagrams.scoreWord("hello"));
 //console.log(Adagrams.scoreWord("dog"));
-console.log(Adagrams.highestScoreFrom(['hello','abcdefedst','bye','a']));
+console.log(Adagrams.highestScoreFrom(['AAAAAAAAAA', 'BBBBBB']));
 
 
 
 // Do not remove this line or your tests will break!
-//export default Adagrams;
+export default Adagrams;
 
 
 
