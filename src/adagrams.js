@@ -123,16 +123,34 @@ const Adagrams = {
     return score;
   },
 
-
+   highestScoreFrom(words) {
+    let highestScore = { word: "", score: 0};
+    words.forEach((word) => {
+      if (this.scoreWord(word) > highestScore["score"]) {
+        highestScore["score"] = this.scoreWord(word);
+        highestScore["word"] = word;
+      } else if (this.scoreWord(word) === highestScore["score"]) {
+          if ( word.length < highestScore["word"].length || word.length === 10) {
+            highestScore["score"]= this.scoreWord(word);
+            highestScore["word"] = word;
+          } ;
+      };
+    })
+    return highestScore;
+  },
  
 }
 
 //console.log(Adagrams.drawLetters());
 //console.log(Adagrams.usesAvailableLetters("Helllllo", ['H', 'E','L', 'L', 'O']));
 //console.log(Adagrams.scoreWord("hello"));
-console.log(Adagrams.scoreWord("dog"));
+//console.log(Adagrams.scoreWord("dog"));
+console.log(Adagrams.highestScoreFrom(['hello','abcdefedst','bye','a']));
+
+
+
 // Do not remove this line or your tests will break!
-export default Adagrams;
+//export default Adagrams;
 
 
 
