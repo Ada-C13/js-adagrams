@@ -6,25 +6,34 @@ const Adagrams = {
     U:4, V:2, W:2, X:1, Y:2, Z:1
   },
 
+  lettersScores: {
+    A:1, B:3, C:3, D:2, E:1, F:4, 
+    G:2, H:4, I:1, J:8, K:5, L:1, M:3, 
+    N:1, O:1, P:3, Q:10, R:1, S:1, 
+    T:1, U:1, V:4, W:4, X:8, Y:4, Z:10
+  },
+
   drawLetters() {
-    const lettersPool = this.alphabet;
+    // Shallow copy of an alphabet will ensure that the program does not change the original object
+    const cloneAlphabet = Object.assign({}, this.alphabet);
     const tenLetters = [];
-    let randomLetter = '';
-    const letters = Object.keys(lettersPool);
-    for (let i = 0; i < 10; i++) {
+    let randomLetter;
+    const lettersCount = 10;
+    const letters = Object.keys(cloneAlphabet);
+    
+    // Build the user letter pool making sure that letters do not exceed predefined distribution numbers
+    while (tenLetters.length < lettersCount) {
       randomLetter = letters[Math.floor(Math.random() * letters.length)];
-      if (lettersPool[randomLetter] > 0) {
-        lettersPool[randomLetter] -= 1;
+      if (cloneAlphabet[randomLetter] > 0) {
+        cloneAlphabet[randomLetter] -= 1;
         tenLetters.push(randomLetter);
-      } else if (lettersPool[randomLetter] === 0) {
-        i -= 1;
       };
     };
     return tenLetters;
   },
 
   usesAvailableLetters(input, lettersInHand) {
-    // Create an object out of available letters
+    // Create an object from available letters
     const availableLetters = {};
     for (let letter of lettersInHand) {
       if (availableLetters[letter]) {
@@ -36,6 +45,7 @@ const Adagrams = {
 
     // Check if input word consists of available letters
     for (let char of input) {
+      char = char.toUpperCase()
       if (availableLetters[char] > 0) {
         availableLetters[char] -= 1;
       } else {
@@ -45,18 +55,11 @@ const Adagrams = {
     return true;
   },
 
-
   scoreWord(word) {
-    const lettersScores = {
-      A:1, B:3, C:3, D:2, E:1, F:4, 
-      G:2, H:4, I:1, J:8, K:5, L:1, M:3, 
-      N:1, O:1, P:3, Q:10, R:1, S:1, 
-      T:1, U:1, V:4, W:4, X:8, Y:4, Z:10};
-
     let score = 0;
     let string = word.toUpperCase()
     for (let character of string) {
-      score += lettersScores[character];
+      score += this.lettersScores[character];
     };
     if (string.length >= 7) {
       score += 8;
@@ -65,42 +68,28 @@ const Adagrams = {
   },
 
   highestScoreFrom(words) {
-    const allWords = {};
-    const winnerWord = {};
+    let winnerWord;
     let highestScore = 0;
 
-    // Get all words with their scores
-    words.map(word => {
-      allWords[word] = this.scoreWord(word)
-    });
-    console.log(allWords)
-
-    for (let [word, score] of Object.entries(allWords)) {
+    // the program naturally selects the first word when both have same length      
+    for (let word of words) {
+      let score = this.scoreWord(word);
       if (word.length === 10) {
         // selects the word with 10 letters
-        winnerWord['word'] = word;
-        winnerWord['score'] = score;
+        winnerWord = {word: word, score: score};
         break;
         // selects the word with highest score
       } else if (score > highestScore) {
         highestScore = score;
-        winnerWord['word'] = word;
-        winnerWord['score'] = score;   
+        winnerWord = {word: word, score: score};
         // selects the word with fewer letters when neither are 10 letters    
       } else if (word.length < winnerWord.word.length && score === highestScore) {
-        winnerWord['word'] = word;
-        winnerWord['score'] = score; 
-        // selects the first word when both have same length      
-      } else if (word.length === winnerWord.word.length && score === highestScore) {
-        winnerWord['word'] = winnerWord.word;
-        winnerWord['score'] = winnerWord.score;       
+        winnerWord = {word: word, score: score};
       };
     };
-    return winnerWord
+    return winnerWord;
   }
 };
-
-
 
 // Do not remove this line or your tests will break!
 export default Adagrams;
