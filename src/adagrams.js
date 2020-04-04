@@ -53,7 +53,7 @@ const Adagrams = {
         numOfWords += 1;
       }
     }
-      return(drawn);
+      return drawn;
     },
   
   usesAvailableLetters(input, lettersInhand) {
@@ -77,13 +77,60 @@ const Adagrams = {
     } ); 
     
     return result;
-  }
+  },
+
+  scoreWord(word) {
+    let score = 0;
+    const wordArray = word.toUpperCase().split('');
+    wordArray.forEach((charScore) => {
+      switch (charScore) {
+        case "Q":
+        case "Z":
+          score += 10;
+          break;
+        case "J":
+        case "X":
+          score += 8;
+          break;
+        case "K":
+          score += 5;
+          break;
+        case "F":
+        case "H":
+        case "V":
+        case "W":
+        case "Y":
+          score += 4 ;
+          break;
+        case "B":
+        case "C":
+        case "M":
+        case "P":
+          score += 3;
+          break;
+        case "D":
+        case "G":
+          score += 2
+          break;
+        default:
+          score += 1;
+      }
+    }
+    )
+    if(wordArray.length >= 7){
+      score += 8;
+    };
+    return score;
+  },
+
 
  
 }
 
-console.log(Adagrams.drawLetters());
-console.log(Adagrams.usesAvailableLetters("Helllllo", ['H', 'E','L', 'L', 'O']));
+//console.log(Adagrams.drawLetters());
+//console.log(Adagrams.usesAvailableLetters("Helllllo", ['H', 'E','L', 'L', 'O']));
+//console.log(Adagrams.scoreWord("hello"));
+console.log(Adagrams.scoreWord("dog"));
 // Do not remove this line or your tests will break!
 export default Adagrams;
 
