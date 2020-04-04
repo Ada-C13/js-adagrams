@@ -98,6 +98,31 @@ const Adagrams = {
     word.length > 6 ? wordScore += 8 : wordScore;
     return wordScore;
   },
+
+  highestScoreFrom(words) {
+    const wordScoreHash = {};
+    words.forEach((word) => {
+      wordScoreHash[word] = this.scoreWord(word);
+    });
+    const scores = Object.values(wordScoreHash);
+    const wordKeys= Object.keys(wordScoreHash)
+    let highestScore = Math.max.apply(Math, scores);
+    const index = scores.findIndex(score => score === highestScore);
+    let winningWord = wordKeys[index];
+
+    for(let word in wordScoreHash) {
+      if(wordScoreHash[word] === highestScore) {
+        if(winningWord.length < 10 && winningWord.length > word.length){
+          winningWord = word;
+        } else if (winningWord.length < 10 && word.length === 10) {
+          winningWord = word;
+        } else if (winningWord.length === 10 && word.length === 10){
+          winningWord = wordKeys[index];
+        } ;
+      };
+    };
+    return {'word': winningWord, 'score': highestScore};
+  }
 };
 
 // Do not remove this line or your tests will break!
