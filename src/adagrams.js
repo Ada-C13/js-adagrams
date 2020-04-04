@@ -10,13 +10,18 @@ const Adagrams = {
   // this is a function inside of an object
   // it's the same as writing ==> drawLetters: function() {...}
   drawLetters() {
-    const letters = ['a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'b', 'b', 'c', 'c', 'd', 'd', 'd', 'd', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'f', 'f', 'g', 'g', 'g', 'h', 'h', 'i', 'i', 'i', 'i', 'i', 'i', 'i', 'i', 'i', 'j', 'k', 'l', 'l', 'l', 'l', 'm', 'm', 'n', 'n', 'n','n', 'n', 'n', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'p', 'p', 'q', 'r', 'r', 'r', 'r', 'r', 'r', 's', 's', 's', 's', 't', 't', 't', 't', 't', 't', 'u', 'u', 'u', 'u', 'v', 'v', 'w', 'w', 'x', 'y', 'y', 'z'];
+    let letters = ['a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'b', 'b', 'c', 'c', 'd', 'd', 'd', 'd', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'f', 'f', 'g', 'g', 'g', 'h', 'h', 'i', 'i', 'i', 'i', 'i', 'i', 'i', 'i', 'i', 'j', 'k', 'l', 'l', 'l', 'l', 'm', 'm', 'n', 'n', 'n','n', 'n', 'n', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'p', 'p', 'q', 'r', 'r', 'r', 'r', 'r', 'r', 's', 's', 's', 's', 't', 't', 't', 't', 't', 't', 'u', 'u', 'u', 'u', 'v', 'v', 'w', 'w', 'x', 'y', 'y', 'z'];
 
     const lettersInHand = [];
-    // Fisher-Yates (aka Knuth) Shuffle Method discovered on Stack Overflow here: https://stackoverflow.com/questions/5915096/get-random-item-from-javascript-array
+    // Method discovered on Stack Overflow here: https://stackoverflow.com/questions/5915096/get-random-item-from-javascript-array
+    // Here is what I think it's doing:  Math.random returns a floating point between 0-1, multiplies that by the length of the array, and Math.floor rounds that down to determine a 'random' index - is it really random?  According to some people, no.  But we'll take it for our first go at a randomizer. 
     for(let i = 0; i < 10; i++) {
-      let letter = letters[Math.floor(Math.random()*letters.length)];
+      const randomIndex = Math.floor(Math.random()*letters.length); // should this be let?  or will it reset after each loop?
+      let letter = letters[randomIndex];
       
+      //delete letter from letters (use splice)
+      letters.splice(randomIndex, 1);
+
       lettersInHand.push(letter.toUpperCase());
     };
 
@@ -96,7 +101,43 @@ const Adagrams = {
     };
     return score;
   },
+
+  //takes in words and stores in an object
+  //returns a hash of words and scores
+  wordScores(words) {
+    const wordsAndScores = {};
+
+    for (const word in words) {
+      wordsAndScores.word = scoreWord(word);
+    };
+
+    return wordsAndScores;
+  },
+
+  //tie breaking method
+  tieBreaker(words) {
+    const tenLetterWords = [];
+    const tieScoreWords = [];
+    const winnerObj = {};
+
+    const scores = wordScores(words)
+
+  },
+
+  //returns a hash that contains the word and score of best word in an array
+  highestScoreFrom(words) {
+    const highestScore = {}
+
+  
+  },
 };
+
+// > Object.entries({a: 1, b: 2})
+// [ [ 'a', 1 ], [ 'b', 2 ] ]
+// > Object.keys({a: 1, b: 2})
+// [ 'a', 'b' ]
+// > Object.values({a: 1, b: 2})
+// [ 1, 2 ]
 
 // Do not remove this line or your tests will break!
 export default Adagrams;
@@ -130,3 +171,4 @@ export default Adagrams;
 //   y: 2,
 //   z: 1,
 // };
+
