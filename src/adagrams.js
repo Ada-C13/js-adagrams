@@ -11,8 +11,8 @@ const Adagrams = {
     //randomize the pool of letters
     const theHand = []
     for (let i = 0; i < 10; i++) {
-      let index = Math.random() * poolLetters.length; //'ll give us numbers from 0- length
-      let letter = poolLetters[index]; 
+      let index = Math.random() * (poolLetters.length -1); //'ll give us numbers from 0- length
+      let letter = poolLetters[Math.round(index)]; 
       theHand.push(letter)
     }
     return theHand
@@ -22,10 +22,11 @@ const Adagrams = {
    usesAvailableLetters(input, lettersInHand) {
     let givenLetters = input.split('');
     let selectedLetters = lettersInHand.slice();
-    for (let letter in givenLetters) {
+    for (let letter of givenLetters) {
       if (selectedLetters.includes(letter)){
         let letterToFind = selectedLetters.indexOf(letter);
-        selectedLetters.splice(letterToFind, 1);
+        selectedLetters.splice(letterToFind, 1); 
+        console.log(selectedLetters)
       } 
       else {
         return false;
@@ -42,3 +43,5 @@ const Adagrams = {
         
 // Do not remove this line or your tests will break!
 export default Adagrams;
+
+
