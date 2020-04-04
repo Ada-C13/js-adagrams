@@ -20,7 +20,7 @@ describe('Adagrams', () => {
     // Test idea: Invoking this function should not change the pool of letters
   });
 
-  describe.skip('usesAvailableLetters', () => {
+  describe('usesAvailableLetters', () => {
     it('returns true if the submitted letters are valid against the drawn letters', () => {
       const drawn = ['D', 'O', 'G', 'X', 'X', 'X', 'X', 'X', 'X', 'X'];
       const word = 'DOG';

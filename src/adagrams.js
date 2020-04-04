@@ -28,6 +28,11 @@ const Adagrams = {
 
     return drawn;
   },
+  usesAvailableLetters(input, lettersInHand) {
+    // returns true if input is included in lettersInHand
+    // otherwise, returns false
+    // returns false when input contains letters repeated more than in lettersInHand
+  }
 };
 
 // Do not remove this line or your tests will break!
