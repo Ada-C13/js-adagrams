@@ -66,7 +66,6 @@ let shuffle = function(array) {
 };
 
 const Adagrams = {
-
   // Wave 1
   drawLetters() {
     let pool = [];
@@ -117,8 +116,49 @@ const Adagrams = {
   },
 
   // Wave 4
+  highestScoreFrom(words) {
+    let allWords = [];
+    let maxScore = 0;
+  
+    for (const word in words) {
+      const wordObj = {};
+      wordObj.word = words[word];
+      wordObj.score = Adagrams.scoreWord(words[word]);
+      allWords.push(wordObj);
+    }
+  
+    let tieScore = [];
+    for (let i = 0; i < allWords.length; i++) {
+      const currentScore = allWords[i].score;
+      if (currentScore > maxScore) {
+        maxScore = currentScore;
+        tieScore = [allWords[i]];
+      } else if (currentScore === maxScore) {
+        tieScore.push(allWords[i]);
+      }
+    }
+  
+    let smallest = 11;
+    let shortestWords = [];
+  
+    if (tieScore.length === 1) {
+      return tieScore[0];
+    }
+  
+    for (const tie in tieScore) {
+      const currentTie = tieScore[tie];
+      if (currentTie.word.length === 10) {
+        return currentTie;
+      } else if (currentTie.word.length < smallest) {
+        smallest = currentTie.word.length;
+        shortestWords = [currentTie];
+      } else if (currentTie.word.length === smallest) {
+        shortestWords.push(currentTie);
+      }
+    }
+  
+    return shortestWords[0];
+  }
+}
 
-};
-
-// Do not remove this line or your tests will break!
 export default Adagrams;
