@@ -2,28 +2,26 @@ const Adagrams = {
   drawLetters() {
     const poolLetters = [];
 
-    for (let [letter,quant] of Object.entries(this.letterQuantities)) {
+    for (const [letter,quant] of Object.entries(this.letterQuantities)) {
       for (let i = 0; i < quant; i++) {
         poolLetters.push(letter);
       }
     }
+    
+    const lettersInHand = this.getSample(10, poolLetters);
 
-    let indexArray = Array.from(poolLetters.keys());
-    const sampleIndex = this.getSample(10, indexArray);
-    const lettersInHand = [];
-    sampleIndex.forEach(index => lettersInHand.push(poolLetters[index]));
     return lettersInHand;
   },
 
   usesAvailableLetters(input, lettersInHand) {
     const splitInput = input.toUpperCase().split('')
-    let tenLetters = this.arrayToObject(lettersInHand)
+    const tenLetters = this.arrayToObject(lettersInHand)
     
     for (let char of splitInput) {
       if (tenLetters[char]) {
         tenLetters[char] -= 1;
-      } else {
-        return false;
+      } else {       //if tenLetters[char] === 0 or char not found in tenLetters object
+        return false;  
       }
     }
  
@@ -65,6 +63,29 @@ const Adagrams = {
     }
 
     return highest;
+  },
+
+  getSample(total, paramsArray) {
+    let inputArray = paramsArray.slice();  //clone a new array to manipulate
+    const sampleArray = [];
+    for (let i = 0; i < total; i++) {
+      const randomIndex = Math.floor(Math.random() * (inputArray.length - i)); //source: similar to Fisher-Yates shuffle logic
+      sampleArray.push(inputArray[randomIndex]);
+      inputArray[randomIndex] = inputArray[inputArray.length - 1 - i];  //replace chosen element with last element
+    }
+    return sampleArray;
+  },
+
+  arrayToObject(array) {
+    const newObject = {}
+    for (let element of array) {
+      if (newObject[element]) {
+        newObject[element] += 1;
+      } else {
+        newObject[element] = 1;
+      }
+    }
+    return newObject;
   },
 
   letterQuantities: {
@@ -125,27 +146,17 @@ const Adagrams = {
     'Z': 10
   },
 
-  getSample(total, inputArray) {
-    const sampleArray = [];
-    for (let i = 1; i <= total; i++) {
-      const randomIndex = Math.floor(Math.random() * (inputArray.length - i));
-      sampleArray.push(inputArray[randomIndex]);
-      inputArray[randomIndex] = inputArray[inputArray.length - i];
-    }
-    return sampleArray;
-  },
+  // getSample(total, paramsArray) {
+  //   let inputArray = Array.from(paramsArray.keys());
+  //   const sampleArray = [];
+  //   for (let i = 1; i <= total; i++) {
+  //     const randomIndex = Math.floor(Math.random() * (inputArray.length - i));
+  //     sampleArray.push(inputArray[randomIndex]);
+  //     inputArray[randomIndex] = inputArray[inputArray.length - i];
+  //   }
+  //   return sampleArray;
+  // },
 
-  arrayToObject(array) {
-    const newObject = {}
-    for (let element of array) {
-      if (newObject[element]) {
-        newObject[element] += 1;
-      } else {
-        newObject[element] = 1;
-      }
-    }
-    return newObject;
-  },
 };
 
 // Do not remove this line or your tests will break!
