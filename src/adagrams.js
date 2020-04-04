@@ -20,6 +20,30 @@ const Adagrams = {
     };
     return userHand;
   },
+
+  usesAvailableLetters(input, lettersInHand){
+    const splitWord = input.split('');
+    const lettersHash = {};
+
+    lettersInHand.forEach(letter => lettersHash[letter]? lettersHash[letter] = lettersHash[letter] += 1 : lettersHash[letter] = 1);
+    
+    let containLetter = true;
+    splitWord.forEach((char) => {
+      if(lettersHash[char]) {
+        lettersHash[char] -= 1;
+      }else {
+        containLetter = false;
+      };
+    });
+
+    if(containLetter === true) {
+      const letterCount = Object.values(lettersHash);
+    return letterCount.min < 0? false : true;
+    }else{
+      return false;
+    };
+    
+  },
 };
 
 // Do not remove this line or your tests will break!
