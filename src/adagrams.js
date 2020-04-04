@@ -29,10 +29,20 @@ const Adagrams = {
     return drawn;
   },
   usesAvailableLetters(input, lettersInHand) {
+    // convert input string to object, use hashmap function to lookup if input is included in lettersInHand
+    inputLetterCount = {};
+    for (let i=0; i<input.length; i++) {
+      if (inputLetterCount[input[i]]) {
+        inputLetterCount[input[i]] += 1;
+      } else {
+        inputLetterCount[input[i]] = 1;
+      };
+    };
+    
     // returns true if input is included in lettersInHand
     // otherwise, returns false
     // returns false when input contains letters repeated more than in lettersInHand
-  }
+  },
 };
 
 // Do not remove this line or your tests will break!
