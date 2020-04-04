@@ -72,7 +72,7 @@ const Adagrams = {
         scoredWords[score].push(word);
       } else {
         scoredWords[score] = [word];
-      } 
+      };
     };
 
     const highestScore = Number( Object.keys(scoredWords)[ (Object.keys(scoredWords).length - 1) ] );
