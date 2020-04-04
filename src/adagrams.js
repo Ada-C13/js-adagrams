@@ -2,10 +2,7 @@ import { tsConstructorType } from "@babel/types";
 
 class Adagrams {
 
-  // constructor() {
-
-  // }
-
+  // Draw letters for a game of Adagrams.
   drawLetters() {
     const constLetterPool = ['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'B', 'B', 'C', 'C', 'D', 'D', 'D', 'D', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'F', 'F', 'G', 'G', 'G', 'H', 'H', 'I', 'I', 'I', 'I', 'I', 'I', 'I', 'I', 'I', 'J', 'K', 'L', 'L', 'L', 'L', 'M', 'M', 'N', 'N', 'N', 'N', 'N', 'N', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'P', 'P', 'Q', 'R', 'R', 'R', 'R', 'R', 'R', 'S', 'S', 'S', 'S', 'T', 'T', 'T', 'T', 'T', 'T', 'U', 'U', 'U', 'U', 'V', 'V', 'W', 'W', 'X', 'Y', 'Y', 'Z'];
     let playerHand = [];
@@ -18,6 +15,7 @@ class Adagrams {
     return playerHand;
   }
 
+  // Check that the inputted word can be made from the letters in hand.
   usesAvailableLetters(input, lettersInHand) {
     const inputArray = input.toUpperCase().split('');
     let checkAvail = {};
@@ -45,6 +43,7 @@ class Adagrams {
     return true;
   }
 
+  // Score the word.
   scoreWord(word) {
     const wordArray = word.toUpperCase().split('');
     let total = 0;
@@ -69,6 +68,7 @@ class Adagrams {
     return total;
   }
 
+  // Find the winner.
   highestScoreFrom(words) {
     let scoredWords = {};
 
@@ -92,6 +92,7 @@ class Adagrams {
     };
   }
 
+  // If multiple words are tied, there is logic to choose a winner.
   tiebreaker(words) {
     let highestWord = words[0];
     
