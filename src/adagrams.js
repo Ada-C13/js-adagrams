@@ -90,7 +90,6 @@ const Adagrams = {
         lettersCount[letter] -= 1;
       }
     };
-
     // console.log(lettersCount);
 
     return true;
@@ -109,14 +108,88 @@ const Adagrams = {
     return score;
   },
 
+  scoreWords(words) {
+    const scoreOfWords = {};
+
+    words.forEach((word) => scoreOfWords[word] = Adagrams.scoreWord(word));
+
+    return scoreOfWords;
+  },
+
+  highestScoreFrom(words) {
+    const scoredWords = Adagrams.scoreWords(words);
+
+    console.log(scoredWords);
+
+    console.log(Object.keys(scoredWords));
+
+    let max = 0;
+    for(const w of Object.keys(scoredWords)) {
+      const value = scoredWords[w];
+      if (value > max) {
+        max = value;
+      }
+    }
+
+    let maxScoredWords = [];
+    for(const w in scoredWords) {
+      if(scoredWords[w] === max) {
+        maxScoredWords.push(w);
+      }
+    }
+
+    console.log(maxScoredWords);
+    
+    if (maxScoredWords.length === 1) {
+      let word = maxScoredWords[0]
+      return { score: max, word: word };
+    } else {
+      return Adagrams.tieBreakingLogic(maxScoredWords, max);
+    }
+  },
+
+  tieBreakingLogic(maxScoredWords, maxScore) {
+    console.log(maxScore);
+
+    let minLength = maxScoredWords[0].length;
+
+    for(let i = 0; i < maxScoredWords.length; i++) {
+      const word = maxScoredWords[i];
+
+      if (word.length === 10) {
+        return { score: maxScore, word: word };
+      } 
+
+      if(word.length < minLength) {
+        minLength = word.length;
+      }
+    }
+
+    console.log(minLength);
+
+    for (let i = 0; i < maxScoredWords.length; i++) {
+      const w = maxScoredWords[i];
+      console.log(`w = ${w}`);
+
+      if (w.length === minLength) {
+        console.log(w);
+        console.log(maxScore);
+        console.log({[w]: maxScore});
+        return { score: maxScore, word: w};
+      }
+    }
+  },
 };
 
-// console.log(Adagrams.shufflePool());
-// console.log(Adagrams.pool);
-// let drawn = Adagrams.drawLetters();
+
 // let drawn = ['K', 'A', 'T', 'T', 'E'];
 // console.log(drawn);
 // console.log(Adagrams.usesAvailableLetters('katt', drawn));
+
+// let words = ['kate', 'j'];
+// let returned = Adagrams.highestScoreFrom(words);
+
+// console.log(JSON.stringify(returned));
 
 // Do not remove this line or your tests will break!
 export default Adagrams;
