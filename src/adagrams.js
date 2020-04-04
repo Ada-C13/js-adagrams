@@ -57,7 +57,7 @@ const Adagrams = {
     },
 
     highestScoreFrom(words, score){
-      scoreResults = {}
+      let scoreResults = {}
       //putting all words into an object 
       for(let i = 0; i < words.length; i++){
         scoreResults[words[i]] = this.scoreWord(words[i].toUpperCase());
@@ -97,9 +97,9 @@ const Adagrams = {
       }
       
       const tieBreaker = Object.keys(tiedHighestWords);
-      const tieWinner = tieBreaker[0];
+      let tieWinner = tieBreaker[0];
+      let tieLength = 0;
 
-    
       for(let i = 0; i < tieBreaker.length; i++){
         if(tieBreaker[i].length === 10){
           tieWinner = tieBreaker[i];
@@ -107,18 +107,18 @@ const Adagrams = {
           winner.score = tiedHighestWords[tieBreaker[i]];
           return winner;
         }else if (tieBreaker[i].length < tieWinner.length){
-          winner.word = tieBreaker[i];
-          winner.score = tiedHighestWords[tieBreaker[i]];
-        }
 
+          tieWinner = tieBreaker[i];
+          tieLength = tiedHighestWords[tieBreaker[i]];
+        }
       }
+      winner.word = tieWinner;
+      winner.score = tieLength;
       return winner;
     }
 };
 
-Adagrams.drawLetters();
 
-Adagrams.highestScoreFrom(['h', 'hi', 'gc']);
-//, 'kk', 'q', 'ggggg'
+
 // Do not remove this line or your tests will break!
-//export default Adagrams;
+export default Adagrams;
