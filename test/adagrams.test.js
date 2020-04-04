@@ -1,5 +1,6 @@
 import Adagrams from 'adagrams';
 
+// Wave 1
 describe('Adagrams', () => {
   describe('drawLetters', () => {
     it('draws ten letters from the letter pool', () => {
@@ -18,6 +19,7 @@ describe('Adagrams', () => {
     });
   });
 
+  // Wave 2
   describe('usesAvailableLetters', () => {
     it('returns true if the submitted letters are valid against the drawn letters', () => {
       const drawn = ['D', 'O', 'G', 'X', 'X', 'X', 'X', 'X', 'X', 'X'];
@@ -45,6 +47,7 @@ describe('Adagrams', () => {
     });
   });
 
+  // Wave 3
   describe('scoreWord', () => {
     const expectScores = (wordScores) => {
       Object.entries(wordScores).forEach(([word, score]) => {
