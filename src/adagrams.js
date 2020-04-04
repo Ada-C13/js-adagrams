@@ -33,15 +33,15 @@ const Adagrams = {
     let chosen = {};
     let drawn = [];
     //ASCII for A-Z
-    let min = 65;
-    let max = 90;
-    let range = max - min + 1;
+    const min = 65;
+    const max = 90;
+    const range = max - min + 1;
     let numOfWords = 0;
     
     while (numOfWords < 10) {
       let num = min + Math.floor(Math.random() * range);
       let letter = String.fromCharCode(num);
-      if ( chosen[letter] ) {
+      if (chosen[letter]) {
         if (chosen[letter] < this.letters[letter]){
         chosen[letter] += 1;
         drawn.push(letter);
@@ -54,7 +54,41 @@ const Adagrams = {
       }
     }
       return(drawn);
-    }
+    },
+  
+  usesAvailableLetters(input, lettersInhand) {
+    let letterCount = {};
+    lettersInhand.forEach((char) => { if (letterCount[char]){
+      letterCount[char] += 1 ;
+    } else {
+      letterCount[char] = 1;
+    } })
+    
+    console.log(letterCount);
+
+    let result = true
+    input.toUpperCase().split('').forEach((check_char) => {
+      if (letterCount[check_char] >= 1 ){
+        letterCount[check_char] -= 1;
+        console.log(letterCount[check_char]);
+      } else {
+        result = false ;
+      }
+    } ); 
+    
+    return result;
+  }
+
+ 
+}
+
+console.log(Adagrams.drawLetters());
+console.log(Adagrams.usesAvailableLetters("Helllllo", ['H', 'E','L', 'L', 'O']));
+// Do not remove this line or your tests will break!
+export default Adagrams;
+
+
+
     /* 
     // working draw letters function - but time complexity is too high?
     let letterArray = [];    
@@ -73,12 +107,3 @@ const Adagrams = {
     return(chosenLetter); 
   }, 
   */
-
-}
-
-
-
-console.log(Adagrams.drawLetters());
-
-// Do not remove this line or your tests will break!
-//export default Adagrams;
