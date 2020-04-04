@@ -45,7 +45,7 @@ const Adagrams = {
   let letterPool = [],
 
   for (const letter in letterCounts) {
-    for (let x = 0; x <= letterCounts[letter]; x++) {
+    for (let x = 1; x < letterCounts[letter]; x++) {
       letterPool.push(letter)
     }
   }
