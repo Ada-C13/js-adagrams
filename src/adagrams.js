@@ -1,5 +1,5 @@
-const Adagrams = {
-  letterQuantities: {
+class Adagrams {
+  static letterQuantities = {
     A: 9,
     B: 2,
     C: 2,
@@ -26,9 +26,9 @@ const Adagrams = {
     X: 1,
     Y: 2,
     Z: 1
-  },
+  };
 
-  letterValues: {
+  static letterValues = {
     A: 1,
     B: 3,
     C: 3,
@@ -55,9 +55,9 @@ const Adagrams = {
     X: 8,
     Y: 4,
     Z: 10
-  },
+  };
 
-  makeLetterPool() {
+  static makeLetterPool = function() {
     let letterPool = []; // let?
     for (let letter in this.letterQuantities) {
       for (let i = 0; i < this.letterQuantities[letter]; i++) {
@@ -65,11 +65,11 @@ const Adagrams = {
       };
     };
     return letterPool;
-  },
+  }
 
-  drawLetters() {
+  static drawLetters = function() {
     // Implement this method for wave 1
-    let letterPool = this.makeLetterPool(); //let?
+    let letterPool = this.makeLetterPool(); // doesn't work? :(
 
     // Fisher-Yates Algorithm: https://medium.com/@nitinpatel_20236/how-to-shuffle-correctly-shuffle-an-array-in-javascript-15ea3f84bfb
     for (let i = letterPool.length - 1; i > 0; i--) {
@@ -80,15 +80,15 @@ const Adagrams = {
     };
     
     return letterPool.slice(0, 10);
-  },
+  }
 
-  mapLetters(letters) {
+  static mapLetters = function(letters) {
     const hand = {};
     letters.forEach((letter) => hand[letter] ? hand[letter] += 1 : hand[letter] = 1 )
     return hand;
-  },
+  }
 
-  usesAvailableLetters(input, lettersInHand) {
+  static usesAvailableLetters = function(input, lettersInHand) {
     const hand = this.mapLetters(lettersInHand);
 
     for (let letter of input.split("")) {
@@ -100,9 +100,9 @@ const Adagrams = {
     };
 
     return true;
-  },
+  }
 
-  scoreWord(word) {
+  static scoreWord = function(word) {
     let totalScore = 0;
     word.toUpperCase().split("").forEach((letter) => {
       totalScore += this.letterValues[letter];
@@ -113,9 +113,9 @@ const Adagrams = {
     };
 
     return totalScore;
-  },
+  }
 
-  tieLogic(words, score) {
+  static tieLogic = function(words, score) {
     for (let word of words) {
       if (word.length === 10) {
         return {
@@ -130,9 +130,9 @@ const Adagrams = {
       word: winner,
       score: score
     };
-  },
+  }
 
-  highestScoreFrom(words) {
+  static highestScoreFrom = function(words) {
     let highestScore = 0;
     let winningWords = [];
 
