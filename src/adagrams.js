@@ -52,14 +52,14 @@ const Adagrams = {
       wordScore  += this.letterScore[letter]
     });
 
-    //Award extra points if condition is met
+    // Award extra points if condition is met
     if (word.length > 6) {
       wordScore  += 8
     }
     return wordScore 
   },
 
-  // Find  the highest scoring word
+  // Find the highest scoring word
   highestScoreFrom(words) {
     let bestWord = { word: '', score: 0 }
     
