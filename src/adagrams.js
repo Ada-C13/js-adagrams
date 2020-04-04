@@ -1,6 +1,9 @@
 
 class Adagrams  {
+
   // drawLetters(); returns an array with 10 letters from the pool. Depends of how many of them are within it. 
+
+  // Static method calls are made directly on the class and are not callable on instances of the class. 
   static drawLetters() {
 
    const lettersPool = {
