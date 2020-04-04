@@ -1,5 +1,6 @@
-const Adagrams = {
-  drawLetters() {
+class Adagrams {
+
+  static drawLetters = function() {
     const bigPoolOfLetters = {
       A : 9,
       B : 2,
@@ -48,8 +49,9 @@ const Adagrams = {
     };
     
     return userLetters;
-  },
-  usesAvailableLetters(input, lettersInHand){
+  };
+
+  static usesAvailableLetters = function(input, lettersInHand){
 
     const inputUpCase = input.toUpperCase();
 
@@ -64,11 +66,12 @@ const Adagrams = {
       };
     };
     return true;
-  },
-  scoreWord(word){
+  };
+
+  static scoreWord = function(word){
     const wordUpCase = word.toUpperCase();
     
-    let extraPoints = 0
+    let extraPoints = 0;
 
     if (wordUpCase.length === 0){
       return 0;
@@ -76,7 +79,7 @@ const Adagrams = {
       extraPoints = 8;
     }else{
       extraPoints = 0;
-    }
+    };
 
     const splitWord = wordUpCase.split('');
 
@@ -96,13 +99,14 @@ const Adagrams = {
           return 8;
         case "Q": case "Z":
           return 10;
-      }
+      };
     });
 
     const total = points.reduce(function(a, b){ return a + b;}, 0) + extraPoints;
-    return total
-  },
-  highestScoreFrom(words){
+    return total;
+  };
+
+  static highestScoreFrom = function(words){
    
     let maxScore = 0;
     let maxScoreWord = "";
@@ -110,7 +114,7 @@ const Adagrams = {
     let i = 0;
     while(i < words.length){
       //called the function to get the score for the each word from the array
-      const scoreOfword = this.scoreWord(words[i])
+      const scoreOfword = this.scoreWord(words[i]);
   
       if (scoreOfword > maxScore){
         maxScore = scoreOfword;
@@ -118,17 +122,18 @@ const Adagrams = {
       }else if (scoreOfword === maxScore){
         //selects the first word when both have same length
         if(words[i].length === maxScoreWord.length){
-        return {word: maxScoreWord, score: maxScore}
+        return {word: maxScoreWord, score: maxScore};
         }else if (words[i].length === 10){
           maxScoreWord = words[i]
         //selects the word with fewer letters when neither are 10 letters
-        }else if (words[i].length < maxScoreWord.length && maxScoreWord.length !== 10)
-        maxScoreWord = words[i]
-      }
+        }else if (words[i].length < maxScoreWord.length && maxScoreWord.length !== 10){
+          maxScoreWord = words[i];
+        };
+      };
       i++
     };
-    return {word: maxScoreWord, score: maxScore}
-  }, 
+    return {word: maxScoreWord, score: maxScore};
+  };
 };
 
 // // Do not remove this line or your tests will break!
