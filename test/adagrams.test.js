@@ -56,6 +56,7 @@ describe('Adagrams', () => {
       expectScores({
         A: 1,
         DOG: 5,
+        KZ: 15,  //added for coverage
         WHIMSY: 17
       });
     });

@@ -48,9 +48,6 @@ const Adagrams = {
       i++;
     }
 
-    console.log(randArray)
-    console.log(tilesArray.length)
-
     const hand = [];
     randArray.forEach(num => hand.push(tilesArray[num]))
 
@@ -89,14 +86,17 @@ const Adagrams = {
       case 'S':
       case 'T':
         wordScore += 1;
+        break;
       case 'G':
       case 'D':
         wordScore += 2;
+        break;
       case 'B':
       case 'C':
       case 'M':
       case 'P':
         wordScore += 3;
+        break;
       case 'F':
       case 'H':
       case 'V':
@@ -106,18 +106,23 @@ const Adagrams = {
         break;
       case 'K':
         wordScore += 5;
+        break;
       case 'J':
       case 'X':
         wordScore += 8;
+        break;
       case 'Q':
       case 'Z':
         wordScore += 10;
+        break;
       }
     });
     
   if (wordArray.length > 6) {
     wordScore += 8;
   }
+
+  //console.log("Word = " + word + " --- Score = " + wordScore);
 
   return (wordScore);
   }
