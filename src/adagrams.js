@@ -92,7 +92,8 @@ const Adagrams = {
     let score = 0;
     const wordLength = word.length;
     const wordUpCase = word.toUpperCase();
-    const wordArray = wordUpCase.split('');
+    // ()...) spread syntax to convert a string into an array.
+    const wordArray = [...wordUpCase];
     
     for (const letter of wordArray) {
       // find the value within the scoreChar Object.
@@ -100,7 +101,7 @@ const Adagrams = {
         score += this.scoreChart[letter];
       }
     }
-    
+
     if (wordLength > 6) {
       score += 8;
     }
@@ -108,12 +109,56 @@ const Adagrams = {
    return score;
   },
 
-};
+  // highestScoreFrom finds the highest scoring word. This function looks at the array of words and calculates which of these words has the highest score.
+  highestScoreFrom(words) {
+    const wordsObj = {};
+    
+    for (const word of words) {
+      wordsObj[word] = this.scoreWord(word);
+    }
 
-// const a = Adagrams.drawLetters();
-// console.log(a);
-// console.log(Adagrams.usesAvailableLetters("dog",['D', 'O', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X']));
-// console.log(Adagrams.scoreWord('DOGDOGDOG'));
+    let valuesArray = Object.values(wordsObj);
+
+    // The spread syntax expands the values array elements and inputs each element
+    // in the array individually into the Math.max() method.
+    const highestScore = Math.max(...valuesArray);
+
+    // To store the word with the same highest score.
+    const winnerWords = {};
+    
+    Object.keys(wordsObj).forEach(function (item) {
+      if (wordsObj[item] === highestScore){
+        winnerWords[item] = wordsObj[item]
+      }
+    });
+
+    // set up the length up to 15 to have an inicial value greater than a possible word lenght.
+    let minLength = 15;
+    const winner = {};
+    // It returns the length of the shortest word. 
+    for (let [key] of Object.entries(winnerWords)) {
+      if (key.length < minLength) {
+        minLength = key.length
+      }
+    }
+    // It retuns the winner if the word length is 10. 
+    for (let [key,value] of Object.entries(winnerWords)) {
+      if (key.length == 10) {
+        winner['word'] = key,
+        winner['score'] = value
+        return winner;
+      }
+    }
+    // It return the shortest word with the higthest score.
+    for (let [key,value] of Object.entries(winnerWords)) {
+      if (key.length == minLength) {
+        winner['word'] = key,
+        winner['score'] = value
+        return winner;
+      }
+    }
+  }
+};
 
 // Do not remove this line or your tests will break!
 export default Adagrams;
