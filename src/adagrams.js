@@ -1,10 +1,4 @@
 
-const deck = ['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'B', 'B', 'C', 'C', 'D', 'D', 'D', 'D', 
-'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'F', 'F', 'G', 'G', 'G', 'H', 'H', 'I',
-'J', 'K', 'L', 'L', 'L', 'L', 'M', 'M', 'N', 'N', 'N', 'N', 'N', 'N', 'O', 'O', 'O', 'O', 'O', 'O', 
-'O', 'O', 'P', 'P', 'Q', 'R', 'R', 'R', 'R', 'R', 'R', 'S', 'S', 'S', 'S', 'T', 'T', 'T', 'T', 'T', 
-'T', 'U', 'U', 'U', 'U', 'V', 'V', 'W', 'W', 'X', 'Y', 'Y', 'Z'];
-
 const letters = {
   'A' : {
     count: 9,
@@ -112,34 +106,38 @@ const letters = {
   }
 }
 
-// console.log(letters.A.count)
-
-// for (const key in letters) {
-//   console.log(key);
-// }
-
-// Fisher-Yates Algorithm
-let arrayShuffle = function(arr){
-  let newPos,
-      temp;
-  for(let i = arr.length - 1; i > 0; i -- ){
-    newPos = Math.floor(Math.random() * i);
-    temp = arr[i];
-    arr[i] = arr[newPos];
-    arr[newPos] = temp; 
-  }
-  return arr;
-}
-
-
 const Adagrams = {
+  makePool() {
+    const letterPool = []
+    for (const key in letters) {
+      for(let i = 0; i < (letters[key]['count']); i++){
+        letterPool.push(key);
+      }
+    }
+    return letterPool
+  },
+
+  arrayShuffle(arr) {
+    // Fisher-Yates Algorithm
+    let newPos,
+        temp;
+    for(let i = arr.length - 1; i > 0; i -- ){
+      newPos = Math.floor(Math.random() * i);
+      temp = arr[i];
+      arr[i] = arr[newPos];
+      arr[newPos] = temp; 
+    }
+    return arr;
+  },
+
   drawLetters() {
     let hand = [];
     for(let i = 0; i < 10; i++){
-      hand.push(arrayShuffle(deck)[i]);
+      hand.push(Adagrams.arrayShuffle(Adagrams.makePool())[i]);
     }
     return hand
   },
+
   usesAvailableLetters(input, lettersInHand) {
     input = input.split("");
     for(let i = 0; i < input.length; i++){
@@ -155,9 +153,30 @@ const Adagrams = {
     } else{
       return false
     };
+  },
+
+  scoreWord(word) {
+    word = word.split("")
+    let total = 0;
+    for(let i = 0; i < word.length; i++){
+      for(const key in letters){
+        if (key === word[i].toUpperCase()){
+          total += letters[key]['score'];
+        }
+      }
+    }
+    if(word.length > 6){
+      total += 8 
+    }
+    return total 
   }
 };
 
+// console.log(Adagrams.makePool());
+// console.log(Adagrams.drawLetters());
+// console.log(Adagrams.usesAvailableLetters('hello', ['a', 'b', 'e', 'h', 'e', 'l', 'l', 'o']));
+// console.log(Adagrams.usesAvailableLetters('hello', ['a', 'b', 'e', 'e', 'l', 'l', 'o']));
+// console.log(Adagrams.scoreWord('abc'));
 
 // Do not remove this line or your tests will break!
-export default Adagrams;
+// export default Adagrams;
