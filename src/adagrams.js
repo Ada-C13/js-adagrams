@@ -29,7 +29,7 @@ const Adagrams = {
     };
     return drawn;
   },
-
+  //Wave 2
   usesAvailableLetters(input, lettersInHand){
     let inputLetters = input.toUpperCase().split("");
     //make a copy of the drawn letter 
@@ -59,26 +59,76 @@ const Adagrams = {
     };
     return isValid;
   },
-      
 
-    
-   
-      
-
-  
+  //Wave 3
+  scoreWord(word){
+    const wordArray = word.toUpperCase().split("");
+    let score = 0;
+    if (wordArray.lenght === 0){
+      score = 0;
+    }else{
+      let scoreArray = [];
+      wordArray.forEach(element => {
+        switch(element){
+          case 'A':
+          case 'E':
+          case 'I':
+          case 'O':
+          case 'U':
+          case 'L':
+          case 'N':
+          case 'R':
+          case 'S':
+          case 'T':
+            scoreArray.push(1);
+            break;
+          case 'D':
+          case 'G':
+            scoreArray.push(2);
+            break;
+          case 'B':
+          case 'C':
+          case 'M':
+          case 'P':
+            scoreArray.push(3);
+            break;
+          case 'F':
+          case 'H':
+          case 'V':
+          case 'W':
+          case 'Y':
+            scoreArray.push(4);
+            break;
+          case 'K':
+            scoreArray.push(5);
+            break;
+          case 'J':
+          case 'X':
+            scoreArray.push(8);
+            break;
+          case 'Q':
+          case 'Z':
+            scoreArray.push(10);
+            break;
+          default:
+            scoreArray.push(0);
+        };
+      });
+    //get the sum of scoreArray
+      for(let i = 0; i < scoreArray.length; i++){
+        score += scoreArray[i]
+      }
+      // const reducer = (accumulator, currentValue) => accumulator + currentValue;
+      // score = scoreArray.reduce(reducer);
+      if (word.length >= 7){
+        score += 8;
+      }else{
+        score = score;
+      };
+    };
+    return score; 
+  },
 };
-
-
-
-
-
-
-
-
-
-
-
-
 
 // Do not remove this line or your tests will break!
 export default Adagrams;
