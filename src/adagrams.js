@@ -58,7 +58,7 @@ class Adagrams {
   };
 
   static makeLetterPool = function() {
-    let letterPool = []; // let?
+    let letterPool = [];
     for (let letter in this.letterQuantities) {
       for (let i = 0; i < this.letterQuantities[letter]; i++) {
         letterPool.push(letter);
