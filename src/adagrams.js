@@ -19,7 +19,6 @@ const Adagrams = {
       const randomIndex = Math.floor(Math.random()*letters.length); // should this be let?  or will it reset after each loop?
       let letter = letters[randomIndex];
       
-      //delete letter from letters (use splice)
       letters.splice(randomIndex, 1);
 
       lettersInHand.push(letter.toUpperCase());
@@ -106,10 +105,10 @@ const Adagrams = {
   //returns a hash of words and scores
   wordScores(words) {
     const wordsAndScores = {};
-
-    for (const word in words) {
-      wordsAndScores.word = scoreWord(word);
-    };
+    
+     words.forEach(word => {
+      wordsAndScores[word] = scoreWord(word);
+    });
 
     return wordsAndScores;
   },
@@ -120,14 +119,35 @@ const Adagrams = {
     const tieScoreWords = [];
     const winnerObj = {};
 
-    const scores = wordScores(words)
+    const scores = wordScores(words);
+    const entries = Object.entries(scores);
 
+    for (let [word, score] of entries) {
+      if (word.length === 10) {
+        tenLetterWords.push([word, score]);
+      } else {
+        tieScoreWords.push([word, score]);
+      };
+
+      if (tenLetterWords.length > 0) {
+        winnerObj.word = tenLetterWords[0];
+        winnerObj.score = score;
+      } else {
+        winnerObj.word = //the shortest word in tieScoreWords
+        winnerObj.score = score
+      };
+
+      return winnerObj;
+    };
   },
 
   //returns a hash that contains the word and score of best word in an array
   highestScoreFrom(words) {
     const highestScore = {}
 
+    const winningWord = wordScores(words)
+    // loop 
+     
   
   },
 };
