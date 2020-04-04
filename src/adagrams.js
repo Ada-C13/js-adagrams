@@ -29,8 +29,8 @@ const Adagrams = {
     return drawn;
   },
   usesAvailableLetters(input, lettersInHand) {
-    // convert input string to object, use hashmap function to lookup if input is included in lettersInHand
-    inputLetterCount = {};
+    // convert input string to object, use hashmap function to lookup if input is included in lettersInHand at expected quantities
+    const inputLetterCount = {};
     for (let i=0; i<input.length; i++) {
       if (inputLetterCount[input[i]]) {
         inputLetterCount[input[i]] += 1;
@@ -38,10 +38,28 @@ const Adagrams = {
         inputLetterCount[input[i]] = 1;
       };
     };
-    
-    // returns true if input is included in lettersInHand
-    // otherwise, returns false
+
+    const handLetterCount = {};
+    for (let i=0; i<lettersInHand.length; i++) {
+      if (handLetterCount[lettersInHand[i]]) {
+        handLetterCount[lettersInHand[i]] += 1;
+      } else {
+        handLetterCount[lettersInHand[i]] = 1;
+      };
+    };
+
+    // returns false if input is not included in lettersInHand (null or 0?)
     // returns false when input contains letters repeated more than in lettersInHand
+    // otherwise, returns true
+    let isValid = undefined;
+    input.split('').forEach(letter => {
+       if (handLetterCount[letter] == 0 || handLetterCount[letter] !== inputLetterCount[letter]) { 
+         isValid = false;
+       };
+    });
+    isValid = true;
+
+    return isValid;
   },
 };
 
