@@ -55,14 +55,21 @@ const shuffledLettersArray = poolOfLettersShuffle();
 console.log(shuffledLettersArray);
 
 function handOfletters() {
-    let shuffle = 1;
-    while (shuffle < 10) {
-        console.log(shuffledLettersArray.pop());
-        shuffle += 1;
-    }
+    return shuffledLettersArray.slice(0, 10);
 }
+
 console.log(handOfletters());
 
+// function handOfletters() {
+//     let shuffle = 1;
+//     let hand = [];
+//     while (shuffle < 10) {
+//         hand.push(shuffledLettersArray.pop());
+//         shuffle += 1;
+//     }
+//     return hand;
+// }
+// console.log(handOfletters());
 // var n = 0;
 // var x = 0;
 // let arr = ["a", "b", "c"];
