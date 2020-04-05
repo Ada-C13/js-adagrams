@@ -126,12 +126,12 @@ const Adagrams = {
       };
     });
 
-    // in the case of a tie: 1) word with 10 letters, 2) word with the fewest letters, 3) first word in the list 
+    // in the case of a tie: 1) word with 10 letters, 2) word with the fewest letters, 3) first word in the list; return only broke out of one loop, not the whole next, so forEach wasn't working! I needed to wrap the tiebreaking logic into a function, pull out the object into an array and return the first element of the array out of the function
     const tieBreaker = (arr) => {
       arr.sort((a, b) => b.word.length - a.word.length);
       const shortestLength = arr[arr.length-1].word.length;
 
-      arr.forEach(object => {
+      const tieWinner = arr.filter(object => {
         switch (object.word.length) {
           case 10:
             return object;
@@ -140,7 +140,7 @@ const Adagrams = {
         }
       });
 
-      return arr[0];
+      return tieWinner[0];
     };
 
     if (winners.length === 1) {
