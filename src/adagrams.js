@@ -31,6 +31,7 @@ class Adagrams {
     return this.sample(hand)
   }
 
+
   // Helper function for wave 1
   // reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
   randomIdx(max) {
@@ -39,7 +40,7 @@ class Adagrams {
 
 
   // Helper funciton for wave 1
-  sample(letters) {
+   sample(letters) {
     const sample = []
 
     // Get 10 random letter
@@ -68,9 +69,9 @@ class Adagrams {
       const idx = tempLettersInHand.indexOf(char);
       tempLettersInHand.splice(idx, 1);
     };
-
     return true;
   }
+
 
   // wave 3 
   scoreWord(word) {
@@ -117,31 +118,31 @@ class Adagrams {
       };
     })
 
-    contestant.word = this.tieBreaking(winningWords);
+    contestant.word = this.tieBreaker(winningWords);
 
     return contestant;
   }
 
+
   // Helper function for wave 4
   // reference: https://medium.com/coding-at-dawn/the-fastest-way-to-find-minimum-and-maximum-values-in-an-array-in-javascript-2511115f8621
-  // TODO: Can I come up with better variable names? (a, b)
-  tieBreaking(winningWords) {
-    return winningWords.reduce((a, b) => {
+  tieBreaker(winningWords) {
+    return winningWords.reduce((word1, word2) => {
 
-      if (a.length === 10) {
-        return a; 
+      if (word1.length === 10) {
+        return word1; 
       }  
 
-      if (b.length === 10) {
-        return b;
+      if (word2.length === 10) {
+        return word2;
       }
       
-      if (a.length > b.length) {
-        return b;
+      if (word1.length > word2.length) {
+        return word2;
       }
 
       // When length is the same or 'a' has a shorter length
-      return a;
+      return word1;
     })
   }
 };
