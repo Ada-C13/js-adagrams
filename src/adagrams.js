@@ -1,14 +1,14 @@
-// Object Adagrams
-const Adagrams = {
+// Class Adagrams
+class Adagrams {
   // Method to create a hand of 10 letters according to a specific distribution
-  drawLetters() {
+  static drawLetters() {
     const handSize = 10;
     const letterDist = { "A": 9, "B": 2, "C": 2, "D": 4, "E": 12, "F": 2, "G": 3,
                          "H": 2, "I": 9, "J": 1, "K": 1, "L":  4, "M": 2, "N": 6,
                          "O": 8, "P": 2, "Q": 1, "R": 6, "S":  4, "T": 6, "U": 4,
                          "V": 2, "W": 2, "X": 1, "Y": 2, "Z": 1 };
     
-    // Create a long string with all the letters according to the distribution
+    // Create a string with all the letters according to the distribution
     let letterPool = "";
     for (const [letter, value] of Object.entries(letterDist)) { 
       letterPool += letter.repeat(value);
@@ -22,10 +22,10 @@ const Adagrams = {
       hand.push(randLetter);
     }
     return hand;
-  },
+  }
   
-  // Method to check if the word is an anagram of some or all of the given letters in the hand.
-  usesAvailableLetters(input, lettersInHand) {
+  // Method to check if the word is an anagram of some or all of the given letters in the hand
+  static usesAvailableLetters(input, lettersInHand) {
     // Make a copy of the hand so we don't mess with the original one
     let handCopy = Array.from(lettersInHand);
     // Loop thru the word to make sure every letter is in the hand
@@ -41,10 +41,10 @@ const Adagrams = {
       }
     }
     return true;
-  },
+  }
 
   // Method that returns the score of a given word as defined by the Adagrams game
-  scoreWord(word) {
+  static scoreWord(word) {
     const letterValues = { "A": 1, "B": 3, "C":  3, "D": 2, "E":  1, "F": 4, "G": 2,
                            "H": 4, "I": 1, "J":  8, "K": 5, "L":  1, "M": 3, "N": 1,
                            "O": 1, "P": 3, "Q": 10, "R": 1, "S":  1, "T": 1, "U": 1,
@@ -57,10 +57,10 @@ const Adagrams = {
     }
     if (word.length >= 7 && word.length <= 10) score += 8;
     return score;
-  },
+  }
 
 // Method that looks at the array of words and calculates which of these words has the highest score
-  highestScoreFrom(words) {
+  static highestScoreFrom(words) {
     // Find the maximum score from all the words
     let maximumScore = Math.max(...words.map(word => this.scoreWord(word)));
     // Find the words that have the maximum score
@@ -81,36 +81,3 @@ const Adagrams = {
 // Do not remove this line or your tests will break!
 export default Adagrams;
  
-
-
-
-
-
-
-
-
-// # Function to get word with highest score and handles ties (solution A)
-// def highest_score_from(words)
- 
-//   maximum_score = words.map { |word| score_word(word) }.max # turns array of words into array of word scores, then takes the max
-//   highest       = words.select { |word| score_word(word) == maximum_score } # returns an array with words with maximum score
- 
-//   if highest.length == 1
-//     winning_word = highest.first # no ties for winning, get the only word winner
-//   else
-// # finds length of the shortest word. Words with 10 letters are accounted as length 0, so they become the “shortest” of them all.
-//     min_length = highest.map { |word| word.length == 10 ? 0 : word.length }.min
-
-// # gets all words with the shortest length. There’s at least one, but there still could be ties.
-//     shortest = highest.select { |word| min_length == (word.length == 10 ? 0 : word.length) }
-// # if there’s only one “shortest” word, that’s the winning word
-//     winning_word = shortest.first
-//   end
- 
-//   results = {}
-//   results[:word]  = winning_word
-//   results[:score] = maximum_score
-//   return results
- 
-// end
-
