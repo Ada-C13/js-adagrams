@@ -164,9 +164,9 @@ let letterValues = {
 //         let checker = copy.includes(letter);
 //         copy.splice(index, 1);
 
-let hand = ["G", "O", "O", "D"];
+let word = ["G", "O", "O", "D"];
 
-function scoreWord() {
+function scoreWord(word) {
     let letterValues = {
         A: 1,
         B: 3,
@@ -206,7 +206,27 @@ function scoreWord() {
 
     return total;
 }
-console.log(scoreWord());
+// console.log(scoreWord(word));
+
+const words = ["XXX", "XXXX", "X", "XX"];
+
+function highestScoreWord(words) {
+    let maxScore = 0;
+    let maxWord = "";
+    for (let word of words) {
+        let currentScore = scoreWord(word);
+        if (currentScore > maxScore) {
+            maxScore = currentScore;
+            maxWord = word;
+        }
+    }
+    return {
+        word: maxWord,
+        score: maxScore,
+    };
+}
+
+console.log(highestScoreWord(words));
 // function handOfletters() {
 //     let shuffle = 1;
 //     let hand = [];
