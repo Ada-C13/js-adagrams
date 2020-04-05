@@ -101,8 +101,33 @@ const Adagrams = {
   highestScoreFrom(words) {
     // words is an array of strings
     // create an object for each element in words: {word: string of a word, score: score of that word}
+    const wordData = function(word, score) {
+      this['word'] = word;
+      this['score'] = score; 
+    };
+
+    const wordsWithScores = [];
+    words.forEach(word => {
+      const score = this.scoreWord(word);
+      wordsWithScores.push(new wordData(word, score));
+    });
+
+    let highest = 0;
+    let winner = undefined;
+    wordsWithScores.forEach(wordData => {
+      if (wordData['score'] > highest) {
+        highest = wordData['score'];
+      };
+    });
+
     // in the case of a tie: 1) word with 10 letters, 2) word with the fewest letters, 3) first word in the list 
-    // return a single object that represents the data of a winning word and its score 
+    wordsWithScores.forEach(wordData => {
+      if (wordData['score'] === highest) {
+        winner = wordData;
+      };
+    });
+
+    return winner;
   },
 };
 
