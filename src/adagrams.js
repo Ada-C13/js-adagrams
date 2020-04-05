@@ -1,6 +1,6 @@
-const Adagrams = {
+class Adagrams {
   // Implement this method for wave 1
-  createLetterPool() {
+  static createLetterPool() {
     const letter = "abcdefghijklmnopqrstuvwxyz".toUpperCase().split("");
     const quantity = [9, 2, 2, 4, 12, 2, 3, 2, 9, 1, 1, 4, 2, 6, 8, 2, 1, 6, 4, 6, 4, 2, 2, 1, 2, 1];
     
@@ -14,9 +14,9 @@ const Adagrams = {
       };
     };
     return letterPool;
-  },
+  }
 
-  drawLetters() {
+  static drawLetters() {
     let letterPool = this.createLetterPool();
     
     //randomly draw 10 letters from the shuffledLetterPoll
@@ -28,9 +28,9 @@ const Adagrams = {
       letterPool.splice(index, 1);
     };
     return drawn;
-  },
+  }
   //Wave 2
-  usesAvailableLetters(input, lettersInHand){
+  static usesAvailableLetters(input, lettersInHand){
     let inputLetters = input.toUpperCase().split("");
     //make a copy of the drawn letter 
     let dupInputLetters = inputLetters.slice();
@@ -58,10 +58,10 @@ const Adagrams = {
       isValid = true;
     };
     return isValid;
-  },
+  }
 
   //Wave 3
-  scoreWord(word){
+  static scoreWord (word){
     const wordArray = word.toUpperCase().split("");
     let score = 0;
     if (wordArray.lenght === 0){
@@ -127,9 +127,9 @@ const Adagrams = {
       };
     };
     return score; 
-  },
+  }
 
-  highestScoreFrom(words){
+  static highestScoreFrom(words){
     const wordScoreObjArray = [];
     let wordScoreObj = null;
     words.forEach(element =>{
@@ -158,11 +158,7 @@ const Adagrams = {
       if (obj.score === highestScore){
         tiedScores.push(obj);
       }
-
     });
-
-    console.log(tiedScores);
-
     // sort the tiedScores by length of words 
     
     let tiedScoreSorted = tiedScores.sort(function(a, b){
@@ -187,9 +183,7 @@ const Adagrams = {
     return bestWordScore;
   //return a single object represents the data of a winning word and its score.
 
-  },
-};
-
-
+  }
+}
 // Do not remove this line or your tests will break!
 export default Adagrams;
