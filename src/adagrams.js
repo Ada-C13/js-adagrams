@@ -91,12 +91,18 @@ const Adagrams = {
     let score = 0;
     word = word.toUpperCase().split('');
     word.forEach(letter => score += this.LETTERS[letter]['val']);
-    
+
     if (word.length >= 7) {
       score += 8;
     };
 
     return score;
+  },
+  highestScoreFrom(words) {
+    // words is an array of strings
+    // create an object for each element in words: {word: string of a word, score: score of that word}
+    // in the case of a tie: 1) word with 10 letters, 2) word with the fewest letters, 3) first word in the list 
+    // return a single object that represents the data of a winning word and its score 
   },
 };
 
