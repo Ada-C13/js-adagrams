@@ -151,27 +151,41 @@ const Adagrams = {
   
   highestScoreFrom(words) {
     // create an obj of the words and their scores results 
-    scoreResults = {};
+    const scoreResults = {};
 
     for (let word in words) {
       scoreResults[words[word]] = Adagrams.scoreWord(words[word]);
     };
 
-    // find higest scored word 
-    let vals = Object.values(scoreResults);
-
-    return vals;
-
+    // find higest score value 
+    const scores = Object.values(scoreResults);
+    const maxScore = Math.max.apply(Math, scores);
+    
     // check if theres a tie 
+    const tiedWords = [];
+
+    for(let word in scoreResults){
+      if(scoreResults[word] === maxScore) {
+        tiedWords.push(word);
+      }
+    };
+
     // if there's no tie, return highest scored word pair 
+    let winner = {};
+
+    if(tiedWords.length == 1){
+      winner = {word : tiedWords[0], score : maxScore}; 
+      return winner; 
+    }; 
+
     // if there is a tie, apply logic to highest tied words
     // 
   }
 };
 
 // Do not remove this line or your tests will break!
-// export default Adagrams;
+export default Adagrams;
 
-const test = ['X', 'XX', 'XXX', 'XXXX']; 
+// const test = ['X', 'XX', 'XXX', 'XXXX'];
 
-console.log(Adagrams.highestScoreFrom(test));
+// console.log(Adagrams.highestScoreFrom(test));
