@@ -1,11 +1,12 @@
-const Adagrams = {
+class Adagrams{
+
+
   drawLetters() {
-    // Implement this method for wave 1
+
     const letters = ["A", "A", "A", "A", "A", "A", "A", "A", "A", "B", "B", "C", "C", "D", "D", "D", "D", "E", "E","E", "E","E", "E" ,"E", "E","E", "E", "E", "E", 
     "F", "F", "G", "G", "G", "H", "H", "I", "I", "I", "I", "I", "I", "I", "I", "I", "J", "K", "L", "L", "L", "L", "M", "M", "N", "N", "N", "N", "N", "N", 
     "O", "O", "O", "O", "O", "O", "O", "O", "P", "P", "Q", "R", "R", "R", "R", "R", "R", "S", "S", "S", "S",
     "T", "T", "T", "T",  "T", "T", "U", "U", "U", "U", "V", "V", "W", "W", "X", "Y", "Y", "Z"];
-
     let hand = new Array(10);
     //found the random function explaination on stack overflow 
     for (let i = 0; i < hand.length; i++){
@@ -13,22 +14,18 @@ const Adagrams = {
       letters.splice(rand, 1);
       hand.splice(i, 1, letters[rand]);
     }
-    console.log(hand.toString());
     return hand; 
-  },
-
+  }
 
   usesAvailableLetters(input, lettersInHand) {
     let availableLetters = lettersInHand.sort().join().toUpperCase();
     let userInput = input.split("").sort().join().toUpperCase();
     return availableLetters.includes(userInput);
-  },
-
+  }
 
   scoreWord(word){
     let score = 0 
     let array = word.toUpperCase().split("")
-      
     if (word.length >= 7 && word.length <=10){
       score += 8
     }
@@ -55,7 +52,7 @@ const Adagrams = {
           score += 0
       }
       return score
-    },
+    }
 
     highestScoreFrom(words, score){
       let scoreResults = {}
@@ -66,7 +63,6 @@ const Adagrams = {
 
       let maxScore = 0;
       let maxWord = '';
-
       for (let key in scoreResults){
         if(scoreResults[key] > maxScore){
             maxScore = scoreResults[key];
@@ -75,22 +71,21 @@ const Adagrams = {
       }
      
       let tiedHighestWords = {};
+       //adding max to tied highest scores
       tiedHighestWords[maxWord] = maxScore;
       for (let key in scoreResults){
         if(scoreResults[key] === maxScore && key !== maxWord){
             tiedHighestWords[key] = scoreResults[key];
         }
       }
-      //adding max to tied highest scores
-      
-      
+     
       //counting ties
       let tiedCount = 0;
       for (let key in tiedHighestWords){
         tiedCount += 1;
       }
       let winner = {};
-      //working: if winner lenght == 1, there are no ties
+      //working: if winner length == 1, there are no ties
       if(tiedCount == 1){
         winner.word = Object.keys(tiedHighestWords)[0];
         winner.score = Object.values(tiedHighestWords)[0];
@@ -102,7 +97,6 @@ const Adagrams = {
       let tieLength = tiedHighestWords[tieBreaker[0]];
       
       for(let i = 0; i < tieBreaker.length; i++){
-        
         if(tieBreaker[i].length === 10){
           winner.word = tieBreaker[i];
           winner.score = tiedHighestWords[tieBreaker[i]];
@@ -111,15 +105,13 @@ const Adagrams = {
           tieWinner = tieBreaker[i];
           tieLength = tiedHighestWords[tieBreaker[i]];
         }
-        
-
       }
-
       winner.word = tieWinner;
       winner.score = tieLength;
       return winner;
     }
-};
+}
+
 
 
 

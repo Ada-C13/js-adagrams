@@ -3,13 +3,14 @@ import Adagrams from 'adagrams';
 describe('Adagrams', () => {
   describe('drawLetters', () => {
     it('draws ten letters from the letter pool', () => {
-      const drawn = Adagrams.drawLetters();
-
+      const game = new Adagrams();
+      const drawn = game.drawLetters();
       expect(drawn).toHaveLength(10);
     });
 
     it('returns an array, and each item is a single-letter string', () => {
-      const drawn = Adagrams.drawLetters();
+      const game = new Adagrams();
+      const drawn = game.drawLetters();
 
       expect(Array.isArray(drawn)).toBe(true);
       drawn.forEach((l) => {
@@ -20,26 +21,29 @@ describe('Adagrams', () => {
 
   describe('usesAvailableLetters', () => {
     it('returns true if the submitted letters are valid against the drawn letters', () => {
+      const game = new Adagrams();
       const drawn = ['D', 'O', 'G', 'X', 'X', 'X', 'X', 'X', 'X', 'X'];
       const word = 'DOG';
 
-      const isValid = Adagrams.usesAvailableLetters(word, drawn);
+      const isValid = game.usesAvailableLetters(word, drawn);
       expect(isValid).toBe(true);
     });
 
     it('returns false when word contains letters not in the drawn letters', () => {
+      const game = new Adagrams();
       const drawn = ['D', 'O', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'];
       const word = 'DOG';
 
-      const isValid = Adagrams.usesAvailableLetters(word, drawn);
+      const isValid = game.usesAvailableLetters(word, drawn);
       expect(isValid).toBe(false);
     });
 
     it('returns false when word contains repeated letters more than in the drawn letters', () => {
+      const game = new Adagrams();
       const drawn = ['D', 'O', 'G', 'X', 'X', 'X', 'X', 'X', 'X', 'X'];
       const word = 'GOOD';
 
-      const isValid = Adagrams.usesAvailableLetters(word, drawn);
+      const isValid = game.usesAvailableLetters(word, drawn);
       expect(isValid).toBe(false);
 
     });
@@ -47,8 +51,9 @@ describe('Adagrams', () => {
 
   describe('scoreWord', () => {
     const expectScores = (wordScores) => {
+      const game = new Adagrams();
       Object.entries(wordScores).forEach(([word, score]) => {
-        expect(Adagrams.scoreWord(word)).toBe(score);
+        expect(game.scoreWord(word)).toBe(score);
       });
     };
 
@@ -86,22 +91,25 @@ describe('Adagrams', () => {
 
   describe('highestScoreFrom', () => {
     it('returns a hash that contains the word and score of best word in an array', () => {
+      const game = new Adagrams();
       const words = ['X', 'XX', 'XXX', 'XXXX'];
-      const correct = { word: 'XXXX', score: Adagrams.scoreWord('XXXX') };
+      const correct = { word: 'XXXX', score: game.scoreWord('XXXX') };
 
-      expect(Adagrams.highestScoreFrom(words)).toEqual(correct);
+      expect(game.highestScoreFrom(words)).toEqual(correct);
     });
 
     it('accurately finds best scoring word even if not sorted', () => {
+      const game = new Adagrams();
       const words = ['XXX', 'XXXX', 'X', 'XX'];
-      const correct = { word: 'XXXX', score: Adagrams.scoreWord('XXXX') };
+      const correct = { word: 'XXXX', score: game.scoreWord('XXXX') };
 
-      expect(Adagrams.highestScoreFrom(words)).toEqual(correct);
+      expect(game.highestScoreFrom(words)).toEqual(correct);
     });
 
     describe('in case of tied score', () => {
       const expectTie = (words) => {
-        const scores = words.map(word => Adagrams.scoreWord(word));
+        const game = new Adagrams();
+        const scores = words.map(word => game.scoreWord(word));
         const highScore = scores.reduce((h, s) => h < s ? s : h, 0);
         const tiedWords = scores.filter((s) => s == highScore);
 
@@ -110,31 +118,34 @@ describe('Adagrams', () => {
       };
 
       it('selects the word with 10 letters', () => {
+        const game = new Adagrams();
         const words = ['AAAAAAAAAA', 'BBBBBB'];
-        const correct = { word: 'AAAAAAAAAA', score: Adagrams.scoreWord('AAAAAAAAAA') };
+        const correct = { word: 'AAAAAAAAAA', score: game.scoreWord('AAAAAAAAAA') };
         expectTie(words);
 
-        expect(Adagrams.highestScoreFrom(words)).toEqual(correct);
-        expect(Adagrams.highestScoreFrom(words.reverse())).toEqual(correct);
+        expect(game.highestScoreFrom(words)).toEqual(correct);
+        expect(game.highestScoreFrom(words.reverse())).toEqual(correct);
       });
 
       it('selects the word with fewer letters when neither are 10 letters', () => {
+        const game = new Adagrams();
         const words = ['MMMM', 'WWW'];
-        const correct = { word: 'WWW', score: Adagrams.scoreWord('WWW') };
+        const correct = { word: 'WWW', score: game.scoreWord('WWW') };
         expectTie(words);
 
-        expect(Adagrams.highestScoreFrom(words)).toEqual(correct);
-        expect(Adagrams.highestScoreFrom(words.reverse())).toEqual(correct);
+        expect(game.highestScoreFrom(words)).toEqual(correct);
+        expect(game.highestScoreFrom(words.reverse())).toEqual(correct);
       });
 
       it('selects the first word when both have same length', () => {
         const words = ['AAAAAAAAAA', 'EEEEEEEEEE'];
-        const first = { word: 'AAAAAAAAAA', score: Adagrams.scoreWord('AAAAAAAAAA') };
-        const second = { word: 'EEEEEEEEEE', score: Adagrams.scoreWord('EEEEEEEEEE') };
+        const game = new Adagrams();
+        const first = { word: 'AAAAAAAAAA', score: game.scoreWord('AAAAAAAAAA') };
+        const second = { word: 'EEEEEEEEEE', score: game.scoreWord('EEEEEEEEEE') };
         expectTie(words);
 
-        expect(Adagrams.highestScoreFrom(words)).toEqual(first);
-        expect(Adagrams.highestScoreFrom(words.reverse())).toEqual(second);
+        expect(game.highestScoreFrom(words)).toEqual(first);
+        expect(game.highestScoreFrom(words.reverse())).toEqual(second);
       });
     });
   });
