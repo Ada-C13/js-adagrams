@@ -4,6 +4,8 @@
 spiking.js
 .eslintrc
 .vscode
+src/adagrams_object.js
+
 ### macOS ###
 # General
 .DS_Store
