@@ -118,8 +118,12 @@ const Adagrams = {
         let maxScore = 0;
         let maxWord = "";
         for (let word of words) {
+            let wordArray = word.split("");
             let currentScore = this.scoreWord(word);
             if (currentScore > maxScore) {
+                maxScore = currentScore;
+                maxWord = word;
+            } else if (wordArray.length === 10) {
                 maxScore = currentScore;
                 maxWord = word;
             }

@@ -207,26 +207,43 @@ function scoreWord(word) {
     return total;
 }
 // console.log(scoreWord(word));
-
-const words = ["XXX", "XXXX", "X", "XX"];
-
-function highestScoreWord(words) {
-    let maxScore = 0;
-    let maxWord = "";
-    for (let word of words) {
-        let currentScore = scoreWord(word);
-        if (currentScore > maxScore) {
-            maxScore = currentScore;
-            maxWord = word;
-        }
-    }
-    return {
-        word: maxWord,
-        score: maxScore,
-    };
+const words = ["MMMM", "WWW"];
+const wordLength = {};
+for (let i = 0; i < words.length; i++) {
+    let letter = words[i];
+    let array = letter.split("");
+    wordLength[letter] = array.length;
 }
+console.log(wordLength);
+// function highestScoreFrom(words) {
+//     let maxScore = 0;
+//     let maxWord = "";
 
-console.log(highestScoreWord(words));
+//     for (let word of words) {
+//         let wordArray = word.split("");
+//         console.log(wordArray);
+//         let currentScore = scoreWord(word);
+//         console.log(currentScore);
+//         if (wordArray.length === 10) {
+//             maxScore = currentScore;
+//             maxWord = word;
+//         }
+//         if (currentScore > maxScore) {
+//             maxScore = currentScore;
+//             maxWord = word;
+//         }
+//     }
+//     return {
+//         word: maxWord,
+//         score: maxScore,
+//     };
+// }
+
+// // word: "AAAAAAAAAA",
+// //     score: Adagrams.scoreWord("AAAAAAAAAA"),
+// // };
+
+// console.log(highestScoreFrom(words));
 // function handOfletters() {
 //     let shuffle = 1;
 //     let hand = [];
