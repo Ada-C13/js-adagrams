@@ -2,6 +2,7 @@
 
 // ----- HELPER FUNCTIONS -----
 
+// convert letter pool object into an array 
 const createArray = function(obj) {
   const poolArray = [];
 
@@ -17,8 +18,8 @@ const createArray = function(obj) {
   return poolArray;
 }; 
 
-/*  implementation of Fisher Yates shuffle algorithim : https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
-    source: https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array/2450976#2450976 */
+// shuffle array using Fisher Yates shuffle algorithim : https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
+// source: https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array/2450976#2450976
 const shuffleArray = function (array) {
 	let currentIndex = array.length;
 	let temporaryValue, randomIndex;
@@ -36,6 +37,7 @@ const shuffleArray = function (array) {
 	return array;
 };
 
+// record the number of occurences of each element in an array
 const elementCount = function (array) {
   const obj = {}; 
 
@@ -78,6 +80,16 @@ const Adagrams = {
     Z : 1
   },
 
+  scoreChart : {
+    1 : ['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T'],
+    2 : ['D', 'G'],
+    3 : ['B', 'C', 'M', 'P'],
+    4 : ['F', 'H', 'V', 'W', 'Y'],
+    5 : ['K'],
+    8 : ['J', 'X'],
+    10 : ['Q', 'Z']
+  }, 
+
   drawLetters() {
     // set up data
     const hand = [];
@@ -103,7 +115,7 @@ const Adagrams = {
     if(inputArray.length > lettersInHand.length) return false;
 
     // check for mismatching letters
-    for(let letter in inputArray){
+    for(let letter in inputArray) {
       if (lettersInHand.includes(inputArray[letter]) === false) return false;
     }; 
 
@@ -116,11 +128,29 @@ const Adagrams = {
   },
 
   scoreWord(word) {
+    word = word.toUpperCase();
+    const wordArray = word.split('');
+    let score = 0; // assume no negative scores
 
+    // add bonus points for long words
+    if(wordArray.length >= 7 && wordArray.length <= 10) score += 8 ;
+    
+    // calculate score
+    for(let letter in wordArray) {
+      if(Adagrams.scoreChart['1'].includes(wordArray[letter])) score += 1;
+      if(Adagrams.scoreChart['2'].includes(wordArray[letter])) score += 2;
+      if(Adagrams.scoreChart['3'].includes(wordArray[letter])) score += 3;
+      if(Adagrams.scoreChart['4'].includes(wordArray[letter])) score += 4;
+      if(Adagrams.scoreChart['5'].includes(wordArray[letter])) score += 5;
+      if(Adagrams.scoreChart['8'].includes(wordArray[letter])) score += 8;
+      if(Adagrams.scoreChart['10'].includes(wordArray[letter])) score += 10;
+    };
+
+    return score; 
   },
   
   highestScoreFrom(words) {
-
+    // TODO: implement wave 4
   }
 };
 
@@ -129,4 +159,4 @@ export default Adagrams;
 
 // let hand = ['P', 'D', 'A', 'D', 'I', 'L', 'I', 'G', 'A', 'E']
 
-// console.log(Adagrams.usesAvailableLetters('dadd', hand));
+// console.log(Adagrams.scoreWord('jkae'));
