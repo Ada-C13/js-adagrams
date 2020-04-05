@@ -43,7 +43,6 @@ class Adagrams {
    sample(letters) {
     const sample = []
 
-    // Get 10 random letter
     for(let i = 0; i < 10; i++) { 
       const randomIdx = this.randomIdx(letters.length);
       sample.push(letters[randomIdx]);
@@ -88,7 +87,7 @@ class Adagrams {
     for (const char of word) {
       for (const point in scoreChart) {
         if (scoreChart[point].includes(char)) {
-          score += parseInt(point); // since point is a key, it was a string type
+          score += parseInt(point); 
         };
       };
     };
@@ -100,11 +99,12 @@ class Adagrams {
   // Wave 4
   highestScoreFrom(words) {
     
-    // Get highest score
-    words.sort((a, b) => this.scoreWord(a) - this.scoreWord(b));
-    const maxScore = this.scoreWord(words[words.length - 1])
+    // Get the highest score
+    const scores = words.map(word => this.scoreWord(word))
 
-
+    // reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max
+    const maxScore = Math.max(...scores) 
+  
     const contestant = {
       word: "", 
       score: maxScore
@@ -129,23 +129,19 @@ class Adagrams {
   tieBreaker(winningWords) {
     return winningWords.reduce((word1, word2) => {
 
-      if (word1.length === 10) {
-        return word1; 
-      }  
+      if (word1.length === 10) return word1;  
 
-      if (word2.length === 10) {
-        return word2;
-      }
+      if (word2.length === 10) return word2; 
       
-      if (word1.length > word2.length) {
-        return word2;
-      }
+      if (word1.length > word2.length) return word2;
 
-      // When length is the same or 'a' has a shorter length
+      // When length is the same or 'word1' has a shorter length
       return word1;
     })
   }
 };
 
+
 // Do not remove this line or your tests will break!
 export default Adagrams;
+
