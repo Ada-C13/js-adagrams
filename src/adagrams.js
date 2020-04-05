@@ -16,7 +16,7 @@ const Adagrams = {
     // Method discovered on Stack Overflow here: https://stackoverflow.com/questions/5915096/get-random-item-from-javascript-array
     // Here is what I think it's doing:  Math.random returns a floating point between 0-1, multiplies that by the length of the array, and Math.floor rounds that down to determine a 'random' index - is it really random?  According to some people, no.  But we'll take it for our first go at a randomizer. 
     for(let i = 0; i < 10; i++) {
-      const randomIndex = Math.floor(Math.random()*letters.length); // should this be let?  or will it reset after each loop?
+      let randomIndex = Math.floor(Math.random()*letters.length);
       let letter = letters[randomIndex];
       
       letters.splice(randomIndex, 1);
@@ -48,12 +48,11 @@ const Adagrams = {
     let score = 0;
   
     if (word.length > 6) {
-      score += 8
+      score += 8;
     };
   
     const wordArray = word.toUpperCase().split('');
   
-    // could use word.charAt(index)
     for (const char of wordArray) {
       switch(char) {
         case 'A':
@@ -85,7 +84,7 @@ const Adagrams = {
         case 'Y':
           score += 4;
           break;
-        case 'k':
+        case 'K':
           score += 5;
           break;
         case 'J': 
@@ -101,8 +100,6 @@ const Adagrams = {
     return score;
   },
 
-  //takes in words and stores in an object
-  //returns a hash of words and scores
   wordScores(words) {
     const wordsAndScores = {};
     
@@ -113,7 +110,6 @@ const Adagrams = {
     return wordsAndScores;
   },
 
-  //tie breaking method
   tieBreaker(words) {
     const tenLetterWords = [];
     const tieScoreWords = [];
@@ -138,13 +134,12 @@ const Adagrams = {
     return winner;
   },
 
-  //returns a hash that contains the word and score of best word in an array
   highestScoreFrom(words) {
     let highestScore = {};
 
-    const scores = this.wordScores(words); //returns a hash of words and scores
+    const scores = this.wordScores(words);
     
-    const winningWord = this.getMax(scores); // returns word OR words with tied scores (WORDS ONLY)
+    const winningWord = this.getMax(scores);
 
     if (winningWord.length > 1) {
       let winner = this.tieBreaker(winningWord);
@@ -161,65 +156,14 @@ const Adagrams = {
     return highestScore;
   },
   
-  getMax(object) {
-    return Object.keys(object).filter(x => {
-      return object[x] == Math.max.apply(null, 
-        Object.values(object));
+  getMax(wordScores) {
+    return Object.keys(wordScores).filter(x => {
+      return wordScores[x] == Math.max.apply(null, 
+        Object.values(wordScores));
     });
   }, 
 
 }
 
-  
-
-
-// > Object.entries({a: 1, b: 2})
-// [ [ 'a', 1 ], [ 'b', 2 ] ]
-// > Object.keys({a: 1, b: 2})
-// [ 'a', 'b' ]
-// > Object.values({a: 1, b: 2})
-// [ 1, 2 ]
-
 // Do not remove this line or your tests will break!
 export default Adagrams;
-
-
-// const letters = {
-//   a: 9,
-//   b: 2,
-//   c: 2,
-//   d: 4,
-//   e: 12,
-//   f: 2,
-//   g: 3,
-//   h: 2,
-//   i: 9,
-//   j: 1,
-//   k: 1,
-//   l: 4,
-//   m: 2,
-//   n: 6,
-//   o: 8,
-//   p: 2,
-//   q: 2,
-//   r: 6,
-//   s: 4,
-//   t: 6,
-//   u: 4,
-//   v: 2,
-//   w: 2,
-//   x: 1,
-//   y: 2,
-//   z: 1,
-// };
-
-//returns single winner
-// { MMMM: 12, WWW: 13 }
-//     Object.keys(scorez).reduce((a,b) => scorez[a] > scorez[b] ? a : b);
-
-// returns multiple winners if there's a tie
-// const getMax = object => {
-//   return Object.keys(object).filter(x => {
-//        return object[x] == Math.max.apply(null, 
-//        Object.values(object));
-//  });
