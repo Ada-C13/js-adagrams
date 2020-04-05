@@ -36,6 +36,16 @@ const shuffleArray = function (array) {
 	return array;
 };
 
+const elementCount = function (array) {
+  const obj = {}; 
+
+  array.forEach( function(i) {
+    obj[i] = (obj[i] || 0) + 1;
+  } ); 
+
+  return obj;
+};
+
 // ----- MAIN OBJECT -----
 
 const Adagrams = {
@@ -69,7 +79,7 @@ const Adagrams = {
   },
 
   drawLetters() {
-    // set up
+    // set up data
     const hand = [];
     const letterArray = createArray(Adagrams.pool);
     shuffleArray(letterArray);
@@ -83,28 +93,26 @@ const Adagrams = {
   },
 
   usesAvailableLetters(input, lettersInHand) {
+    // set up data
     input = input.toUpperCase();
     const inputArray = input.split('');
-    const lettersUsed = {};
+    const handLetterCounts = elementCount(lettersInHand);
+    const inputLetterCounts = elementCount(inputArray);
 
+    // word should not be bigger than hand
     if(inputArray.length > lettersInHand.length) return false;
 
+    // check for mismatching letters
     for(let letter in inputArray){
       if (lettersInHand.includes(inputArray[letter]) === false) return false;
     }; 
 
+    // compare count occurences    
+    for(let key in inputLetterCounts) {
+      if(inputLetterCounts[key] > handLetterCounts[key]) return false;
+    };
+  
     return true;
-    // for each letter in word
-      // if word does not match a value in lettersinHand 
-      // return false 
-
-    // in word, find how many duplicates there are
-    // compare against how many duplicates there are in hand 
-    // if duplicates in word supersede duplicates in hand, return false
-
-    // else return true
-
-
   },
 
   scoreWord(word) {
@@ -117,8 +125,8 @@ const Adagrams = {
 };
 
 // Do not remove this line or your tests will break!
-//export default Adagrams;
+export default Adagrams;
 
-let hand = ['P', 'D', 'A', 'D', 'I', 'L', 'I', 'G', 'A', 'E']
+// let hand = ['P', 'D', 'A', 'D', 'I', 'L', 'I', 'G', 'A', 'E']
 
-console.log(Adagrams.usesAvailableLetters('yas', hand));
+// console.log(Adagrams.usesAvailableLetters('dadd', hand));
