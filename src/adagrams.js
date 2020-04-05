@@ -33,9 +33,9 @@ const Adagrams = {
       return key.repeat(value).split('');
     })
 
-    sample = sample.flat()
+    sample = sample.flat();
 
-    const lettersAtHand = []
+    const lettersAtHand = [];
 
     for (let i = 0; i < 10; i++){
       lettersAtHand.push(sample[Math.floor(Math.random()* sample.length)]);
@@ -47,13 +47,12 @@ const Adagrams = {
     const inputLetters = Array.from(input);
 
     //make an object that hold all the letters in the lettersInHand and how many times they appear
-    const lettersAppear = {}
+    const lettersAppear = {};
 
     lettersInHand.forEach(letter => {
       if (letter in lettersAppear) {
         lettersAppear[letter] += 1;
-      }
-      else {
+      } else {
         lettersAppear[letter] = 1;
       }
     });
@@ -61,14 +60,12 @@ const Adagrams = {
     //make another loop that will go through the object and decrement if it exists 
     for (let i in inputLetters ){
 
-      let letter = inputLetters[i]
+      let letter = inputLetters[i];
 
       if ((lettersAppear[letter] !== undefined) && (lettersAppear[letter] > 0 )) {
         lettersAppear[letter] -= 1;
-        console.log(letter)
+        i++;
       } else{
-        console.log(letter)
-
         return false; 
       }
     };
@@ -105,18 +102,14 @@ const Adagrams = {
     if (lettersInWord.length >= 7 && lettersInWord.length <= 10){
       score += 8;
     };
-    return score 
-
+    return score; 
   },
 
   highestScoreFrom (words) {
-    //maybe refactor this to use a forEach loop instead 
+
     let wordAndScore = {};
-    for (let i = 0; i < words.length; i++){
-      let word = words[i]
-      wordAndScore[word] = this.scoreWord(word);
-    };
-    // console.log(wordAndScore)
+    words.forEach(element => wordAndScore[element] = this.scoreWord(element));
+  
     let highestScore = 0 
     let wordHighestScore = undefined
     //find the highest scoring word in the object 
@@ -129,26 +122,28 @@ const Adagrams = {
       if (highestScore === value){
         if (wordHighestScore.length < 10 && key.length < 10 && wordHighestScore.length > key.length) {
           wordHighestScore = key;
-        }
-        else if ((wordHighestScore.length >= 10 || key.length >= 10) && key.length > wordHighestScore.length ){
+        } else if ((wordHighestScore.length >= 10 || key.length >= 10) && key.length > wordHighestScore.length ){
           wordHighestScore = key;
         }
       };
     };
 
     let highestScoreWord = {};
-    highestScoreWord["word"] = wordHighestScore
-    highestScoreWord["score"] = highestScore
-    
-    return highestScoreWord
+    highestScoreWord["word"] = wordHighestScore;
+    highestScoreWord["score"] = highestScore;
+    return highestScoreWord;
   },
 
 
 
 };
 
-// Adagrams.highestScoreFrom(['hello', 'apple', 'mair'])
+
 
 
 // Do not remove this line or your tests will break!
 export default Adagrams;
+
+
+
+
