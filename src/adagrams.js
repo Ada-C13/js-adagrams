@@ -51,15 +51,13 @@ const Adagrams = {
     // returns false if input is not included in lettersInHand (null or 0?)
     // returns false when input contains letters repeated more than in lettersInHand
     // otherwise, returns true
-    let isValid = undefined;
-    input.split('').forEach(letter => {
-       if (handLetterCount[letter] == 0 || handLetterCount[letter] !== inputLetterCount[letter]) { 
-         isValid = false;
-       };
-    });
-    isValid = true;
+    for (const key in inputLetterCount) {
+      if (!handLetterCount[key] || handLetterCount[key] < inputLetterCount[key]) { 
+        return false;
+      };
+    };
 
-    return isValid;
+    return true;
   },
 };
 
