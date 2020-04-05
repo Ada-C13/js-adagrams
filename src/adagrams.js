@@ -118,7 +118,7 @@ class Adagrams {
       }
     });
     // sort the tiedScores by length of words 
-    
+    //reference: http://www.javascriptkit.com/javatutors/arraysort2.shtml
     let tiedScoreSorted = tiedScores.sort(function(a, b){
       return a.word.length-b.word.length;
   })
