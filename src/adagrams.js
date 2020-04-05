@@ -86,13 +86,19 @@ const Adagrams = {
   scoreWord(word) {
     // change word to uppercase
     // split word into array of letters
-    // loop thru letters array, lookup score in LETTERS pool (LETTERS pool will need to be moved outside of the drawLetters function)
+    // if word length is 7, 8, 9, 10, add 8 points
+    // else loop thru letters array, lookup value in LETTERS pool and add to score
+    let score = 0;
+    word = word.toUpperCase().split('');
+    word.forEach(letter => score += this.LETTERS[letter]['val']);
+    
+    if (word.length >= 7) {
+      score += 8;
+    };
+
+    return score;
   },
 };
 
 // Do not remove this line or your tests will break!
 export default Adagrams;
-
-// let score = 0
-// word = word.toUpperCase().split('')
-// word.forEach(letter => score += Adagrams.LETTERS[letter][val]);
