@@ -1,0 +1,12 @@
+{
+    "name": "Launch via NPM",
+    "type": "node",
+    "request": "launch",
+    "cwd": "${workspaceRoot}",
+    "runtimeExecutable": "npm",
+    "runtimeArgs": [
+        /*npm test test/adagrams.test.js*/
+        "test", "test/adagrams.test.js*/"
+    ],
+    "port": 5858
+}
