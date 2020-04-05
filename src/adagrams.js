@@ -107,7 +107,7 @@ const Adagrams = {
     const wordsAndScores = {};
     
      words.forEach(word => {
-      wordsAndScores[word] = scoreWord(word);
+      wordsAndScores[word] = this.scoreWord(word);
     });
 
     return wordsAndScores;
@@ -117,40 +117,61 @@ const Adagrams = {
   tieBreaker(words) {
     const tenLetterWords = [];
     const tieScoreWords = [];
-    const winnerObj = {};
+    let winner = null;
 
-    const scores = wordScores(words);
+    const scores = this.wordScores(words);
     const entries = Object.entries(scores);
 
     for (let [word, score] of entries) {
       if (word.length === 10) {
-        tenLetterWords.push([word, score]);
+        tenLetterWords.push(word);
       } else {
-        tieScoreWords.push([word, score]);
+        tieScoreWords.push(word);
       };
 
       if (tenLetterWords.length > 0) {
-        winnerObj.word = tenLetterWords[0];
-        winnerObj.score = score;
+        winner = tenLetterWords[0];
       } else {
-        winnerObj.word = //the shortest word in tieScoreWords
-        winnerObj.score = score
+        winner = tieScoreWords.reduce((a,b) => a.length <= b.length ? a : b);
       };
-
-      return winnerObj;
     };
+    return winner;
   },
 
   //returns a hash that contains the word and score of best word in an array
   highestScoreFrom(words) {
-    const highestScore = {}
+    let highestScore = {};
 
-    const winningWord = wordScores(words)
-    // loop 
-     
-  
+    const scores = this.wordScores(words); //returns a hash of words and scores
+    
+    const winningWord = this.getMax(scores); // returns word OR words with tied scores (WORDS ONLY)
+
+    if (winningWord.length > 1) {
+      let winner = this.tieBreaker(winningWord);
+      let scored = this.scoreWord(winner);
+      highestScore['score'] = scored;
+      highestScore['word'] = winner;
+    } else {
+      let winner = winningWord[0];
+      let scored = this.scoreWord(winner);
+      highestScore['score'] = scored;
+      highestScore['word'] = winner;
+    };
+
+    return highestScore;
   },
-};
+  
+  getMax(object) {
+    return Object.keys(object).filter(x => {
+      return object[x] == Math.max.apply(null, 
+        Object.values(object));
+    });
+  }, 
+
+}
+
+  
+
 
 // > Object.entries({a: 1, b: 2})
 // [ [ 'a', 1 ], [ 'b', 2 ] ]
@@ -192,3 +213,13 @@ export default Adagrams;
 //   z: 1,
 // };
 
+//returns single winner
+// { MMMM: 12, WWW: 13 }
+//     Object.keys(scorez).reduce((a,b) => scorez[a] > scorez[b] ? a : b);
+
+// returns multiple winners if there's a tie
+// const getMax = object => {
+//   return Object.keys(object).filter(x => {
+//        return object[x] == Math.max.apply(null, 
+//        Object.values(object));
+//  });
