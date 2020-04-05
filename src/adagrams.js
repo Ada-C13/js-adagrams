@@ -12,8 +12,8 @@ class Adagrams  {
   }
 
   static usesAvailableLetters(input, lettersInHand) {
-    const splitInput = input.toUpperCase().split('')
-    const tenLetters = this.arrayToObject(lettersInHand)
+    const splitInput = input.toUpperCase().split('');
+    const tenLetters = this.arrayToObject(lettersInHand);
     
     for (let char of splitInput) {
       if (tenLetters[char]) {
@@ -87,7 +87,7 @@ class Adagrams  {
   }
 
   static arrayToObject(array) {
-    const newObject = {}
+    const newObject = {};
     for (let element of array) {
       if (newObject[element]) {
         newObject[element] += 1;
