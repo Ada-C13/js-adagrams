@@ -1,6 +1,6 @@
 const Adagrams = {
   drawLetters() {    //wave one, no prams,  return an array of strings
-    const lettersAmount = {   //how come this is not like this "lettersAmount:""
+    const lettersAmount = {   
       'A': 9,
       'B': 2,
       'C': 2,
@@ -40,10 +40,10 @@ const Adagrams = {
     let i = 0;
     while (i < 10) {
       let randNum = (Math.floor((Math.random() * 98) + 1));
+
       while (randArray.includes(randNum)){
         randNum = (Math.floor((Math.random() * 98) + 1));
       }
-
       randArray.push(randNum)
       i++;
     }
@@ -56,14 +56,15 @@ const Adagrams = {
 
   usesAvailableLetters(input, lettersInHand) {   // wave 2 return true or false if the input letter work with the hand
     const inputArray = input.split('');
+    let lettersInHandCopy = lettersInHand  //we needed a copy in ruby I guess we need one here too?
 
     for (let i = 0; i < inputArray.length; i++ ){
-      const handIndex = lettersInHand.indexOf(inputArray[i])
+      const handIndex = lettersInHandCopy.indexOf(inputArray[i])
 
       if (handIndex === -1) {     // indexOf returns -1 if not found
         return false;
       }else {
-        lettersInHand.splice(handIndex, 1);
+        lettersInHandCopy.splice(handIndex, 1);
       }
     }
     return true
@@ -130,17 +131,15 @@ const Adagrams = {
     let bestScore = 0;
     let wordsValuesObject = {};
 
-    //score each word with scoreWord function
+    
     words.forEach (word => {
       const score = this.scoreWord(word);
-      //put word and score in a object
       wordsValuesObject[word] = score;
       
       if (bestScore < score) {
         bestScore = score;
         bestScoringWord = word;
       }
-      //console.log(`best score ${bestScore} and best word ${bestScoringWord} object ${wordsValuesObject}`);
     })
   
     const values = Object.values(wordsValuesObject);
