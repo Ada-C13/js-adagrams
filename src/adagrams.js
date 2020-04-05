@@ -129,21 +129,15 @@ class Adagrams  {
     // To store the word with the same highest score.
     const winnerWords = {};
     
+    // It itarates over the the words and those one with the highest score. 
     Object.keys(wordsObj).forEach(function (item) {
       if (wordsObj[item] === highestScore){
         winnerWords[item] = wordsObj[item]
       }
     });
-
-    // set up the length up to 15 to have an inicial value greater than a possible word lenght.
-    let minLength = 15;
+   
     const winner = {};
-    // It returns the length of the shortest word. 
-    for (let [key] of Object.entries(winnerWords)) {
-      if (key.length < minLength) {
-        minLength = key.length
-      }
-    }
+    
     // It retuns the winner if the word length is 10. 
     for (let [key,value] of Object.entries(winnerWords)) {
       if (key.length == 10) {
@@ -152,14 +146,20 @@ class Adagrams  {
         return winner;
       }
     }
-    // It return the shortest word with the higthest score.
+
+    // set up the length up to 15 to have an inicial value greater than a possible word lenght.
+    let minLength = 15;
+
+    // It returns the length of the shortest word. 
     for (let [key,value] of Object.entries(winnerWords)) {
-      if (key.length == minLength) {
+      if (key.length < minLength) {
+        minLength = key.length
         winner['word'] = key,
         winner['score'] = value
-        return winner;
       }
     }
+    // It return the shortest word with the higthest score.
+    return winner;
   }
 }
 
