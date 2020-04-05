@@ -140,11 +140,19 @@ const Adagrams = {
         bestScore = score;
         bestScoringWord = word;
       }
-      console.log(`best score ${bestScore} and best word ${bestScoringWord} object ${wordsValuesObject}`);
+      //console.log(`best score ${bestScore} and best word ${bestScoringWord} object ${wordsValuesObject}`);
     })
       //figure out if there are more than two of the highest score put the word in a variable to campare them
     const values = Object.values(wordsValuesObject);
-    console.log(`object values ${Object.values(wordsValuesObject)}`);
+
+    let tieCount = 0;
+    for(let i = 0; i < values.length; ++i){
+      if(values[i] == bestScore) {
+        tieCount++;
+      }
+    }
+
+    console.log(`object values ${Object.values(wordsValuesObject)} count ${tieCount} `);
 
 
     //figure out if there are more than two of the highest score put the word in a variable to campare them
