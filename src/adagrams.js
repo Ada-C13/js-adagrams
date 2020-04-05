@@ -1,29 +1,53 @@
 const Adagrams = {
+  LETTERS: {
+    'A': {num: 9, val: 1}, 
+    'B': {num: 2, val: 3}, 
+    'C': {num: 2, val: 3}, 
+    'D': {num: 4, val: 2}, 
+    'E': {num: 12, val: 1}, 
+    'F': {num: 2, val: 4}, 
+    'G': {num: 3, val: 2}, 
+    'H': {num: 2, val: 4}, 
+    'I': {num: 9, val: 1}, 
+    'J': {num: 1, val: 8}, 
+    'K': {num: 1, val: 5}, 
+    'L': {num: 4, val: 1}, 
+    'M': {num: 2, val: 3}, 
+    'N': {num: 6, val: 1}, 
+    'O': {num: 8, val: 1}, 
+    'P': {num: 2, val: 3}, 
+    'Q': {num: 1, val: 10}, 
+    'R': {num: 6, val: 1}, 
+    'S': {num: 4, val: 1}, 
+    'T': {num: 6, val: 1}, 
+    'U': {num: 4, val: 1}, 
+    'V': {num: 2, val: 4}, 
+    'W': {num: 2, val: 4}, 
+    'X': {num: 1, val: 8}, 
+    'Y': {num: 2, val: 4}, 
+    'Z': {num: 1, val: 10},
+  },
   drawLetters() {
-    const LETTERS = {
-      'A': 9, 'B': 2, 'C': 2, 'D': 4, 'E': 12, 'F': 2, 'G': 3, 'H': 2, 'I': 9, 'J': 1, 'K': 1, 'L': 4, 'M': 2, 'N': 6, 'O': 8, 'P': 2, 'Q': 1, 'R': 6, 'S': 4, 'T': 6, 'U': 4, 'V': 2, 'W': 2, 'X': 1, 'Y': 2, 'Z': 1
-    }; // wave 3: make each key into an object containing scores and numbers available?
-
     // this ensures a more weighted distribution
-    const lettersArr = [];
-    for (const key in LETTERS) {
-      for (let i=0; i<LETTERS[key]; i++) {
-        lettersArr.push(key);
+    const letterPool = [];
+    for (const letter in this.LETTERS) {
+      for (let i=0; i<this.LETTERS[letter]['num']; i++) {
+        letterPool.push(letter);
       };
     };
 
     const drawn = [];
     for (let i=0; i<10; i++) {
-      let letter = lettersArr[Math.floor(Math.random()*lettersArr.length)];
+      let letter = letterPool[Math.floor(Math.random()*letterPool.length)];
 
       // if the number available in the pool is less than 1, a new random value is assigned to letter
-      while (LETTERS[letter] < 1) {
-        letter = lettersArr[Math.floor(Math.random()*lettersArr.length)];
+      while (this.LETTERS[letter]['num'] < 1) {
+        letter = letterPool[Math.floor(Math.random()*letterPool.length)];
       };
 
       // if the letter is available, it is added to the hand and the number available in the pool is decremented 
       drawn[i] = letter;
-      LETTERS[letter] -= 1;
+      this.LETTERS[letter]['num'] -= 1;
     };
 
     return drawn;
@@ -68,3 +92,7 @@ const Adagrams = {
 
 // Do not remove this line or your tests will break!
 export default Adagrams;
+
+// let score = 0
+// word = word.toUpperCase().split('')
+// word.forEach(letter => score += Adagrams.LETTERS[letter][val]);
