@@ -171,21 +171,28 @@ const Adagrams = {
     };
 
     // if there's no tie, return highest scored word pair 
-    let winner = {};
-
     if(tiedWords.length == 1){
-      winner = {word : tiedWords[0], score : maxScore}; 
-      return winner; 
+      return {word : tiedWords[0], score : maxScore}; 
     }; 
 
     // if there is a tie, apply logic to highest tied words
-    // 
+    let tieWinner = tiedWords[0]; // intentionally use first word in array so that if multiple words are the same score and the same length, the first one in the supplied list is chosen
+
+    for(let challenger in tiedWords){
+      // first word with length 10 automatically wins the tie
+      if(tiedWords[challenger].length === 10){
+        tieWinner = tiedWords[challenger];
+        return {word : tieWinner, score : maxScore};
+      }
+      // else the shortest length word wins the tie 
+      else if (tiedWords[challenger].length < tieWinner.length){
+        tieWinner = tiedWords[challenger];
+      }
+    }; 
+
+    return {word : tieWinner, score : maxScore};
   }
 };
 
 // Do not remove this line or your tests will break!
 export default Adagrams;
-
-// const test = ['X', 'XX', 'XXX', 'XXXX'];
-
-// console.log(Adagrams.highestScoreFrom(test));
