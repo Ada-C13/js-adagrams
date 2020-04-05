@@ -4,7 +4,7 @@ class Adagrams {
   constructor() {
     this.letters_pool = {
       A: 9, B: 2, C: 2, D: 4, E: 12, F: 2, G: 3, H: 2, I: 9, J: 1, K: 1, L: 4, M: 2, N: 6, O: 8, P: 2, Q: 1, R: 6, S: 4, T: 6, U: 4, V: 2, W: 2, X: 1, Y: 2, Z: 1
-    }
+    };
 
     this.scoreChart = {
       1: ["A", "E", "I", "O", "U", "L", "N", "R", "S", "T"],
@@ -14,8 +14,8 @@ class Adagrams {
       5: ["K"],
       8: ["J", "X"],
       10: ["Q, Z"]
-    }
-  }
+    };
+  };
 
   // Implement this method for wave 1
   drawLetters() {
@@ -25,23 +25,23 @@ class Adagrams {
     for (const letter in letters_pool) {
       for (let i = 0; i < letters_pool[letter]; i++) {
         hand.push(letter);
-      }
+      };
     };   
 
-    return this.sample(hand)
-  }
+    return this.sample(hand);
+  };
 
 
   // Helper function for wave 1
   // reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
   randomIdx(max) {
     return Math.floor(Math.random() * Math.floor(max));
-  }
+  };
 
 
   // Helper funciton for wave 1
    sample(letters) {
-    const sample = []
+    const sample = [];
 
     for(let i = 0; i < 10; i++) { 
       const randomIdx = this.randomIdx(letters.length);
@@ -49,27 +49,27 @@ class Adagrams {
 
       letters.splice(randomIdx, 1); // delete
     }  
-    return sample
-  }
+    return sample;
+  };
 
 
   // wave 2
   usesAvailableLetters(input, lettersInHand) {    
-    const tempLettersInHand = lettersInHand.slice(0) // clone 
+    const tempLettersInHand = lettersInHand.slice(0); // clone 
 
     input = input.toUpperCase();
 
     for(const char of input) {
       if (!tempLettersInHand.includes(char)) {
         return false;
-      }
+      };
       
       // if a letter is found, delete a letter from a temp array
       const idx = tempLettersInHand.indexOf(char);
       tempLettersInHand.splice(idx, 1);
     };
     return true;
-  }
+  };
 
 
   // wave 3 
@@ -78,7 +78,7 @@ class Adagrams {
 
     if (word.length >= 7 && word.length <= 10) {
       score += 8;
-    }
+    };
 
     const scoreChart = this.scoreChart;
 
@@ -93,22 +93,22 @@ class Adagrams {
     };
 
     return score;
-  }
+  };
 
 
   // Wave 4
   highestScoreFrom(words) {
     
     // Get the highest score
-    const scores = words.map(word => this.scoreWord(word))
+    const scores = words.map(word => this.scoreWord(word));
 
     // reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max
-    const maxScore = Math.max(...scores) 
+    const maxScore = Math.max(...scores);
   
     const contestant = {
       word: "", 
       score: maxScore
-    }
+    };
 
     // Get winning words
     const winningWords = []
@@ -116,12 +116,12 @@ class Adagrams {
       if (this.scoreWord(word) === maxScore) {
         winningWords.push(word);
       };
-    })
+    });
 
     contestant.word = this.tieBreaker(winningWords);
 
     return contestant;
-  }
+  };
 
 
   // Helper function for wave 4
@@ -137,8 +137,8 @@ class Adagrams {
 
       // When length is the same or 'word1' has a shorter length
       return word1;
-    })
-  }
+    });
+  };
 };
 
 
