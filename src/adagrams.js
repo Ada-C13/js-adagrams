@@ -42,29 +42,23 @@ const Adagrams = {
     'Z': 1
   }
   
-  let letterPool = [],
+  let letterPool = [];
 
   for (const letter in letterCounts) {
     for (let x = 1; x < letterCounts[letter]; x++) {
-      letterPool.push(letter)
+      letterPool.push(letter);
     }
   }
 
 
-//   const object = {a: 1, b: 2, c: 3};
-
-// for (const property in object) {
-//   console.log(`${property}: ${object[property]}`);
-// }
-
-// expected output:
-// "a: 1"
-// "b: 2"
-// "c: 3"
-
-
   drawLetters() {
-    // Implement this method for wave 1
+    let letterHand = [];
+    
+    for (let x = 0; x < 10; x++) {
+      let rand = Math.floor(Math.random() * letterPool.length);
+      letterHand.push(letterPool[rand]);
+      letterPool.splice(rand, 1);
+    };
   };
 };
 
