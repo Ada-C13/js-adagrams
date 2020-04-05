@@ -158,7 +158,7 @@ const Adagrams = {
       let tieLength = 0;
 
       tieCount.forEach (word =>{
-        if (word.length === 10 && bestTieWord !== 10) {
+        if (word.length === 10 && bestTieWord.length !== 10) {
           bestTieWord = word;
           tieLength = 1;
         }else if (tieLength === 0){
@@ -172,13 +172,9 @@ const Adagrams = {
       })
       bestScoringWord = bestTieWord
     }
-    //console.log(`best tie word ${bestTieWord}`);
     return {word: bestScoringWord, score: bestScore};
   }
 }
-
-
-
 
 // Do not remove this line or your tests will break!
 export default Adagrams;
