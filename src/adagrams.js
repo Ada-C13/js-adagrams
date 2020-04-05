@@ -29,12 +29,14 @@ const Adagrams = {
   },
   drawLetters() {
     const letterPool = [];
+    // loop through value of each letter to create pool
     for(const letter in this.letterDistribution) {      
       for(let i = 0; i < this.letterDistribution[letter]; i++) {        
         letterPool.push(letter);
       }
     };
 
+    // create a hand of ten random letters
     const hand = [];
     for(let i = 0; i < 10; i++) {
       const randomNum = this.random(letterPool);
@@ -42,13 +44,9 @@ const Adagrams = {
       letterPool.splice(randomNum, 1);      
     }
 
-    // add letters back to pool
-    for(let i = 0; i < 10; i++) {
-      letterPool.push(hand[i]);
-    }
-
     return hand;    
   },
+  // helper method that returns a random number between 0 and length of array
   random(letterPool) {
     return Math.floor(Math.random() * (letterPool.length+1));
   },
@@ -56,8 +54,9 @@ const Adagrams = {
     input = input.split('');
     let result = true;
 
-    input.forEach(letter => {      
+    input.forEach(letter => {
       if(lettersInHand.includes(letter)) {
+        // find the first index that matches the letter
         let index = lettersInHand.findIndex(element => element === letter);        
         lettersInHand.splice(index, 1);        
       } else {
@@ -69,10 +68,7 @@ const Adagrams = {
     return result;
   },
   scoreWord(word) {
-    if (word === '') {
-      return 0;
-    }
-
+    if (word === '') return 0;
     const scoring = {
       A: 1,
       E: 1,
@@ -100,53 +96,45 @@ const Adagrams = {
       X: 8,
       Q: 10,
       Z: 10
-    };    
-    word = word.toUpperCase().split('');
-    let points = 0;
-
-    word.forEach(element => {
-      points += scoring[element];
-    });
-
-    if(word.length >= 7) {
-      points += 8;
     };
+    let points = 0;
+    word = word.toUpperCase().split('');
+    
+    word.forEach(element => points += scoring[element]);
+    if(word.length >= 7) points += 8;
 
     return points;
   },
 
-  // find the highest scoring word. This function looks at the array of words and calculates which of these words has the highest score, applies any tie-breaking logic, and returns the winning word in a special data structure.
-
+  // find the highest scoring word
   highestScoreFrom(words) {
-    // find highest score by scoring each word
+    // create array of all word scores
     const scores = words.map(word => this.scoreWord(word));
+    // find highest score
     const highestScore = Math.max(...scores);
     const winningWord = {score: highestScore};    
     const highestScoringWords = [];
     
-    // find highest scoring words
+    // add all words with highest score to an array
     words.forEach ((word, i) => {
-      if (scores[i] === highestScore) {
-        // add words with highest score to an array
-        highestScoringWords.push(word);
-      }
+      if (scores[i] === highestScore) highestScoringWords.push(word);
     });
 
-    // if there is only one word
-    // set winningWord to that word and evaluate score
+    // if there is only one word,
+    // set winningWord to that word
     if (highestScoringWords.length === 1) {
       winningWord['word'] = highestScoringWords[0];
-    };
-
-    const tenCharacters = highestScoringWords.find(word => word.length === 10);
-
-    if (tenCharacters) {
-      winningWord['word'] = tenCharacters;
     } else {
-      // a is first element, b is next element
-      // if a.length is less than b.length, replace current value with a. else replace with b
-      winningWord['word'] = highestScoringWords.reduce((a, b) => a.length <= b.length ? a : b);
-    }
+      // find first word with 10 characters
+      const tenCharacters = highestScoringWords.find(word => word.length === 10);
+      if (tenCharacters) {
+        winningWord['word'] = tenCharacters;
+      } else {
+        // a is current word, b is the following word
+        // if a.length is less than b.length, replace current value with a. else replace with b
+        winningWord['word'] = highestScoringWords.reduce((a, b) => a.length <= b.length ? a : b);
+      }
+    };
 
     return winningWord;
   }
