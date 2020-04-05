@@ -47,64 +47,36 @@ class Adagrams {
       }; 
     };
     return true;
-
-    //find to see if there is any false in the timesTure array
-    // let isValid = undefined;
-    // if (timesTrue.includes(false) === true){
-    //   isValid = false;
-    // }else{
-    //   isValid = true;
-    // };
-    // return isValid;
   };
 
   //Wave 3
   static scoreWord (word){
     const wordArray = word.toUpperCase().split("");
     let score = 0;
-    if (wordArray.lenght === 0){
+    if (wordArray.length === 0){
       score = 0;
     }else{
       wordArray.forEach(element => {
         switch(element){
-          case 'A':
-          case 'E':
-          case 'I':
-          case 'O':
-          case 'U':
-          case 'L':
-          case 'N':
-          case 'R':
-          case 'S':
-          case 'T':
+          case 'A': case 'E': case 'I': case 'O': case 'U': case 'L': case 'N': case 'R': case 'S': case 'T':
             score += 1;
             break;
-          case 'D':
-          case 'G':
+          case 'D': case 'G':
             score += 2;
             break;
-          case 'B':
-          case 'C':
-          case 'M':
-          case 'P':
+          case 'B': case 'C': case 'M': case 'P':
             score += 3;
             break;
-          case 'F':
-          case 'H':
-          case 'V':
-          case 'W':
-          case 'Y':
+          case 'F': case 'H': case 'V': case 'W': case 'Y':
             score += 4;
             break;
           case 'K':
             score += 5;
             break;
-          case 'J':
-          case 'X':
+          case 'J': case 'X':
             score += 8;
             break;
-          case 'Q':
-          case 'Z':
+          case 'Q': case 'Z':
             score += 10;
             break;
         };
@@ -129,7 +101,6 @@ class Adagrams {
       };
       wordScoreObjArray.push(wordScoreObj);
     })
-
     // find the highest score
     let bestWordScore = null; //object 
     let allScores = [];
@@ -140,7 +111,6 @@ class Adagrams {
     const highestScore = Math.max.apply(null, allScores);
     
     //Ties
-
     let tiedScores = [];
     wordScoreObjArray.forEach(obj =>{
       if (obj.score === highestScore){
@@ -152,7 +122,6 @@ class Adagrams {
     let tiedScoreSorted = tiedScores.sort(function(a, b){
       return a.word.length-b.word.length;
   })
-
     // highestScoreFrom
     if (tiedScoreSorted.length === 1){
       bestWordScore = tiedScoreSorted[0];
