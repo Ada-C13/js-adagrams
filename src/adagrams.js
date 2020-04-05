@@ -41,6 +41,35 @@ const Adagrams = {
     "Z": 1
   },
 
+  LETTER_VALUES: {
+    "A": 1,
+    "B": 3,
+    "C": 3,
+    "D": 2,
+    "E": 1,
+    "F": 4,
+    "G": 2,
+    "H": 4,
+    "I": 1,
+    "J": 8,
+    "K": 5,
+    "L": 1,
+    "M": 3,
+    "N": 1,
+    "O": 1,
+    "P": 3,
+    "Q": 10,
+    "R": 1,
+    "S": 1,
+    "T": 1,
+    "U": 1,
+    "V": 4,
+    "W": 4,
+    "X": 8,
+    "Y": 4,
+    "Z": 10
+  },
+
   drawLetters() {
     let letterPool = [];
     // push letters by quantity into pool
@@ -67,21 +96,19 @@ const Adagrams = {
       delete hand[hand.indexOf(letter)];
       return true;
     });
+  },
+
+  scoreWord(word) {
+    let totalScore = 0;
+    if(word.length > 6) totalScore += 8;
+    const wordArray = word.toUpperCase().split('');
+    for(const letter in wordArray) {
+      totalScore += Adagrams.LETTER_VALUES[wordArray[letter]]
+    }
+    return totalScore;
   }
 
 };
 
 // Do not remove this line or your tests will break!
 export default Adagrams;
-
-// Wave 2
-// Next, we need a way to check if an input word (a word a player submits) only uses characters that are contained within a collection (or hand) of drawn letters.
-
-// To do so, add a function called Adagrams.usesAvailableLetters in src/adagrams.js. This method should have the following properties:
-
-// Has two parameters:
-// input, the first parameter, describes some input word, and is a string
-// lettersInHand, the second parameter, describes an array of drawn letters in a hand. You can expect this to be an array of ten strings, with each string representing a letter
-// Returns either true or false
-// Returns true if every letter in the input word is available (in the right quantities) in the lettersInHand
-// Returns false if not; if there is a letter in input that is not present in the lettersInHand or has too much of compared to the lettersInHand
