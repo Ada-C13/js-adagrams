@@ -63,11 +63,10 @@ const Adagrams = {
   },
 
 // wave 4
-//Add a function named highestScoreFrom in the Adagrams object in src/adagrams.js.
- 
-
-
+//Add a function named highestScoreFrom 
+  highestScoreFrom(words)
 //Has one parameter: words, which is an array of strings
+
 //Returns a single object that represents the data of a winning word and its score. The object should have the following keys:
 //word, whose value is a string of a word
 //score, whose value is the score of that word
