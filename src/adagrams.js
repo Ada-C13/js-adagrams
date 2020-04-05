@@ -128,7 +128,68 @@ const Adagrams = {
     };
     return score; 
   },
+
+  highestScoreFrom(words){
+    const wordScoreObjArray = [];
+    let wordScoreObj = null;
+    words.forEach(element =>{
+        wordScoreObj ={
+        word: element,
+        score: this.scoreWord(element)
+      };
+      wordScoreObjArray.push(wordScoreObj);
+    })
+
+    // find the highest score
+    let bestWordScore = null; //object 
+    let allScores = [];
+    wordScoreObjArray.forEach(obj =>{
+      allScores.push(obj.score);
+    });
+    console.log(allScores);
+    
+    const highestScore = Math.max.apply(null, allScores);
+    console.log(highestScore);
+    
+    //Ties
+
+    let tiedScores = [];
+    wordScoreObjArray.forEach(obj =>{
+      if (obj.score === highestScore){
+        tiedScores.push(obj);
+      }
+
+    });
+
+    console.log(tiedScores);
+
+    // sort the tiedScores by length of words 
+    
+    let tiedScoreSorted = tiedScores.sort(function(a, b){
+      return a.word.length-b.word.length;
+  })
+    console.log(tiedScoreSorted);
+
+    // highestScoreFrom
+    //   returns a hash that contains the word and score of best word in an array 
+    //   accurately finds best scoring word even if not sorted
+    if (tiedScoreSorted.length === 1){
+      bestWordScore = tiedScoreSorted[0];
+    }else if ((tiedScoreSorted[0].word.length !== tiedScoreSorted[tiedScoreSorted.length - 1].word.length) &&(tiedScoreSorted[tiedScoreSorted.length - 1].word.length === 10)){
+      bestWordScore = tiedScoreSorted[tiedScoreSorted.length - 1];
+    }else if (tiedScoreSorted[tiedScoreSorted.length - 1].word.length !== 10){
+      bestWordScore = tiedScoreSorted[0];
+    }else if ((tiedScoreSorted[0].word.length === tiedScoreSorted[tiedScoreSorted.length - 1].word.length) && (tiedScoreSorted[tiedScoreSorted.length - 1].word.length !== 10)){
+      bestWordScore = tiedScoreSorted[0];
+    }else{
+      bestWordScore = tiedScoreSorted[0];
+    }
+    return bestWordScore;
+  //return a single object represents the data of a winning word and its score.
+
+  },
 };
+
 
 // Do not remove this line or your tests will break!
 export default Adagrams;
