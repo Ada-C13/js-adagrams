@@ -113,6 +113,22 @@ const Adagrams = {
 
         return total;
     },
+
+    highestScoreFrom(words) {
+        let maxScore = 0;
+        let maxWord = "";
+        for (let word of words) {
+            let currentScore = this.scoreWord(word);
+            if (currentScore > maxScore) {
+                maxScore = currentScore;
+                maxWord = word;
+            }
+        }
+        return {
+            word: maxWord,
+            score: maxScore,
+        };
+    },
 };
 
 export default Adagrams;
