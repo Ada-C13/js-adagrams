@@ -11,55 +11,71 @@
 
 
 const Adagrams = {
-  const handSize = 10,
-
-  const letterCounts = {
-    'A': 9,
-    'B': 2,
-    'C': 2,
-    'D': 4,
-    'E': 12,
-    'F': 2,
-    'G': 3,
-    'H': 2,
-    'I': 9,
-    'J': 1,
-    'K': 1,
-    'L': 4,
-    'M': 2,
-    'N': 6,
-    'O': 8,
-    'P': 2,
-    'Q': 1,
-    'R': 6,
-    'S': 4,
-    'T': 6,
-    'U': 4,
-    'V': 2,
-    'W': 2,
-    'X': 1,
-    'Y': 2,
-    'Z': 1
-  }
   
-  let letterPool = [];
 
-  for (const letter in letterCounts) {
-    for (let x = 1; x < letterCounts[letter]; x++) {
-      letterPool.push(letter);
-    }
-  }
+  
 
 
   drawLetters() {
-    let letterHand = [];
+    const letterCounts = {
+      'A': 9,
+      'B': 2,
+      'C': 2,
+      'D': 4,
+      'E': 12,
+      'F': 2,
+      'G': 3,
+      'H': 2,
+      'I': 9,
+      'J': 1,
+      'K': 1,
+      'L': 4,
+      'M': 2,
+      'N': 6,
+      'O': 8,
+      'P': 2,
+      'Q': 1,
+      'R': 6,
+      'S': 4,
+      'T': 6,
+      'U': 4,
+      'V': 2,
+      'W': 2,
+      'X': 1,
+      'Y': 2,
+      'Z': 1
+    }
+    
+    let letterPool = [];
+  
+    for (const letter in letterCounts) {
+      for (let x = 1; x < letterCounts[letter]; x++) {
+        letterPool.push(letter);
+      }
+    }
+  
+    let lettersInHand = [];
     
     for (let x = 0; x < 10; x++) {
       let rand = Math.floor(Math.random() * letterPool.length);
-      letterHand.push(letterPool[rand]);
+      lettersInHand.push(letterPool[rand]);
       letterPool.splice(rand, 1);
     };
-  };
+    return lettersInHand
+  }
+
+  // Check if a word a player submits only uses characters that are contained within a hand of drawn letters
+
+  usesAvailableLetters(input, lettersInHand) = {
+
+  }
+
+  
+
+  // - Returns either `true` or `false`
+  // - Returns `true` if every letter in the `input` word is available (in the right quantities) in the `lettersInHand`
+  // - Returns `false` if not; if there is a letter in `input` that is not present in the `lettersInHand` or has too much of compared to the `lettersInHand`
+
 };
 
 // Do not remove this line or your tests will break!
