@@ -54,33 +54,41 @@ const Adagrams = {
     for (let i = 0; i < word.length; i++) {
       totalScore += score[word[i].toUpperCase()]
     }
-   
-    if (word.length >= 7 && word.length <= 10) {
+
+    if (word.length > 6 && word.length <= 10) {
       totalScore += 8
     };
     return totalScore;
-    
+
   },
 
-// wave 4
-//Add a function named highestScoreFrom 
-  highestScoreFrom(words)
-//Has one parameter: words, which is an array of strings
+  // wave 4
+  //Add a function named highestScoreFrom 
+  highestScoreFrom(words) {
+    //Has one parameter: words, which is an array of strings
 
-//Returns a single object that represents the data of a winning word and its score. The object should have the following keys:
-//word, whose value is a string of a word
-//score, whose value is the score of that word
-//In the case of tie in scores, use these tie-breaking rules:
-//prefer the word with the fewest letters...
-//...unless one word has 10 letters. If the top score is tied between multiple words and one is 10 letters long, choose the one with 10 letters over the one with fewer tiles
-//If the there are multiple words that are the same score and the same length, pick the first one in the supplied list
+    //Returns a single object that represents the data of a winning word and its score. The object should have the following keys:
+    //word, whose value is a string of a word
+    //score, whose value is the score of that word
+    const winningWordAndScore = {}
+
+    // loop through each word and find the score each word
+    // and put them in a new Map where the word is the key and the count is the value
+    // create a variable to store the highestScore
+    //loop through the map and check each score
+    // if the currentScore is > the highestScore
+    // set the highestScore to be the currentScore
+    // set highestScoredWord to be the currentWord
+
+    // else if the currentScore is === to the highestScore
+    // tie breaker rule:
+    // compare the currentWord to the highestScoredWord      
+    // return an object of highestScoredWord and highestScore    
 
 
-
-
+  }
 
 };
-
 // Do not remove this line or your tests will break!
 export default Adagrams;
 
