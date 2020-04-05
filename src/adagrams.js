@@ -142,23 +142,11 @@ const Adagrams = {
 
     if (tenCharacters) {
       winningWord['word'] = tenCharacters;
-    };
-
-    //   if any word has .length === 10
-    //     winningWord = that word;
-    //   else 
-    //     shortest word should win
-    //     set a variable to length of first word
-    //     loop through the array and check the length of each word
-    //       if the length is shorter than the previous shortest length,
-    //       change shortest length to that length
-    //       continue
-    //     end
-    //     set winningWord to first word that matches the shortest length
-    //     find score of that word again
-    //     set word & score to winningWord
-    //   end
-    // end
+    } else {
+      // a is first element, b is next element
+      // if a.length is less than b.length, replace current value with a. else replace with b
+      winningWord['word'] = highestScoringWords.reduce((a, b) => a.length <= b.length ? a : b);
+    }
 
     return winningWord;
   }
