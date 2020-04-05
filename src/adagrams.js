@@ -29,7 +29,7 @@ class Adagrams {
   }
 
   // helper method that returns a random number between 0 and length of array
-  static random = letterPool => Math.floor(Math.random() * (letterPool.length+1));
+  static random = letterPool => Math.floor(Math.random() * (letterPool.length));
 
   static drawLetters = () => {
     const letterPool = [];
