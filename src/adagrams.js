@@ -1,5 +1,5 @@
-const Adagrams = {
-  drawLetters() {
+class Adagrams {
+  static drawLetters() {
     const letterValues = {
       A: 9,
       B: 2,
@@ -29,9 +29,9 @@ const Adagrams = {
       Z: 1,
     };
     //make an array containing all available letters 
-    let sample = Object.entries(letterValues).map(function ([key , value]){
+    let sample = Object.entries(letterValues).map(([key , value]) => {
       return key.repeat(value).split('');
-    })
+    });
 
     sample = sample.flat();
 
@@ -40,10 +40,10 @@ const Adagrams = {
     for (let i = 0; i < 10; i++){
       lettersAtHand.push(sample[Math.floor(Math.random()* sample.length)]);
     };
-    return lettersAtHand  
-  },
+    return lettersAtHand;  
+  }
 
-  usesAvailableLetters (input, lettersInHand){
+  static usesAvailableLetters(input, lettersInHand){
     const inputLetters = Array.from(input);
 
     //make an object that hold all the letters in the lettersInHand and how many times they appear
@@ -59,54 +59,49 @@ const Adagrams = {
 
     //make another loop that will go through the object and decrement if it exists 
     for (let i in inputLetters ){
-
       let letter = inputLetters[i];
-
       if ((lettersAppear[letter] !== undefined) && (lettersAppear[letter] > 0 )) {
         lettersAppear[letter] -= 1;
-        i++;
       } else{
         return false; 
       }
     };
     return true; 
-  },
+  }
 
-  scoreWord (word) {
-
-  const lettersInWord = Array.from(word.toUpperCase())
-   let score = 0
-    for (let i = 0; i < lettersInWord.length; i++){
-      if ('AEIOULNRST'.includes(lettersInWord[i])){
-        score += 1;
-      }
-      if ('DG'.includes(lettersInWord[i])){
-        score += 2;
-      }
-      if ('BCMP'.includes(lettersInWord[i])){
-        score += 3;
-      }
-      if ('FHVWY'.includes(lettersInWord[i])){
-        score += 4;
-      }
-      if ('K'.includes(lettersInWord[i])){
-        score += 5;
-      }
-      if ('JX'.includes(lettersInWord[i])){
+  static scoreWord(word){
+    const lettersInWord = Array.from(word.toUpperCase());
+    let score = 0
+      for (let i = 0; i < lettersInWord.length; i++){
+        if ('AEIOULNRST'.includes(lettersInWord[i])){
+          score += 1;
+        }
+        if ('DG'.includes(lettersInWord[i])){
+          score += 2;
+        }
+        if ('BCMP'.includes(lettersInWord[i])){
+          score += 3;
+        }
+        if ('FHVWY'.includes(lettersInWord[i])){
+          score += 4;
+        }
+        if ('K'.includes(lettersInWord[i])){
+          score += 5;
+        }
+        if ('JX'.includes(lettersInWord[i])){
+          score += 8;
+        }
+        if ('QZ'.includes(lettersInWord[i])){
+          score += 10;
+        }
+      };
+      if (lettersInWord.length >= 7 && lettersInWord.length <= 10){
         score += 8;
-      }
-      if ('QZ'.includes(lettersInWord[i])){
-        score += 10;
-      }
-    };
-    if (lettersInWord.length >= 7 && lettersInWord.length <= 10){
-      score += 8;
-    };
-    return score; 
-  },
+      };
+      return score; 
+  }
 
-  highestScoreFrom (words) {
-
+  static highestScoreFrom(words){
     let wordAndScore = {};
     words.forEach(element => wordAndScore[element] = this.scoreWord(element));
   
@@ -132,13 +127,9 @@ const Adagrams = {
     highestScoreWord["word"] = wordHighestScore;
     highestScoreWord["score"] = highestScore;
     return highestScoreWord;
-  },
-
-
+  }
 
 };
-
-
 
 
 // Do not remove this line or your tests will break!
