@@ -59,6 +59,11 @@ const Adagrams = {
 
     return true;
   },
+  scoreWord(word) {
+    // change word to uppercase
+    // split word into array of letters
+    // loop thru letters array, lookup score in LETTERS pool (LETTERS pool will need to be moved outside of the drawLetters function)
+  },
 };
 
 // Do not remove this line or your tests will break!
