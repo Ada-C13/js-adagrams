@@ -142,29 +142,39 @@ const Adagrams = {
       }
       //console.log(`best score ${bestScore} and best word ${bestScoringWord} object ${wordsValuesObject}`);
     })
-      //figure out if there are more than two of the highest score put the word in a variable to campare them
+  
     const values = Object.values(wordsValuesObject);
+    const keys = Object.keys(wordsValuesObject);
 
-    let tieCount = 0;
+    let tieCount = [];
     for(let i = 0; i < values.length; ++i){
       if(values[i] == bestScore) {
-        tieCount++;
+        tieCount.push(keys[i]);
       }
     }
 
-    console.log(`object values ${Object.values(wordsValuesObject)} count ${tieCount} `);
+    if (tieCount.length > 1) {
+      let bestTieWord = '';
+      let tieLength = 0;
 
+      tieCount.forEach (word =>{
+        if (word.length === 10 && bestTieWord !== 10) {
+          bestTieWord = word;
+          tieLength = 1;
+        }else if (tieLength === 0){
+          bestTieWord = word;
+          tieLength = word.length;
+        }else if (word.length < tieLength) {
+          bestTieWord = word;
+          tieLength = word.length;
+        }
 
-    //figure out if there are more than two of the highest score put the word in a variable to campare them
-    //if that tie variable is greater than length  2  go in to testing the tie
-    //create holder variables for the bestTieWord and tieLength 
-    //If the word 10 in length if yes return that word!
-    //else if the tieLenght variable is still 0  we need to input the first item that comes in as our base in our holder variables
-    //elsif the word is shorter than the tieLength  variable we want to set that to our holder variables
-    //return the holder variables in an object
+      })
+      bestScoringWord = bestTieWord
+    }
+    //console.log(`best tie word ${bestTieWord}`);
+    return {word: bestScoringWord, score: bestScore};
   }
-
-
 }
 
 
