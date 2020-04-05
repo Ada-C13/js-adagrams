@@ -1,6 +1,9 @@
 # Created by https://www.gitignore.io/api/node,macos
 # Edit at https://www.gitignore.io/?templates=node,macos
 
+spiking.js
+.eslintrc
+.vscode
 ### macOS ###
 # General
 .DS_Store

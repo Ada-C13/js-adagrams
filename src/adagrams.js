@@ -1,19 +1,17 @@
-const Adagrams = {
-  drawLetters() {
-    const poolLetters = [];
 
-    for (const [letter,quant] of Object.entries(this.letterQuantities)) {
-      for (let i = 0; i < quant; i++) {
-        poolLetters.push(letter);
-      }
-    }
-    
-    const lettersInHand = this.getSample(10, poolLetters);
+class Adagrams  {
 
+  constructor() {
+    // this.poolLetters = this.buildPoolLetters(); //generate pool in constructor if changed below to instance methods
+  }
+
+  static drawLetters() {
+    const classPool = this.buildPoolLetters();
+    const lettersInHand = this.getSample(10, classPool);  //use this.poolLetters as argument if changed to instance method
     return lettersInHand;
-  },
+  }
 
-  usesAvailableLetters(input, lettersInHand) {
+  static usesAvailableLetters(input, lettersInHand) {
     const splitInput = input.toUpperCase().split('')
     const tenLetters = this.arrayToObject(lettersInHand)
     
@@ -26,9 +24,9 @@ const Adagrams = {
     }
  
     return true;
-  },
+  }
 
-  scoreWord(word) {
+  static scoreWord(word) {
     let score = 0;
     const splitWord = word.toUpperCase().split('');
 
@@ -41,9 +39,9 @@ const Adagrams = {
     }
 
     return score;
-  },
+  }
 
-  highestScoreFrom(words) {
+  static highestScoreFrom(words) {
     let highest = {word: "", score: 0};
     
     for (let word of words) {
@@ -63,9 +61,21 @@ const Adagrams = {
     }
 
     return highest;
-  },
+  }
 
-  getSample(total, paramsArray) {
+  static buildPoolLetters() {
+    const pool = [];
+
+    for (const [letter,quant] of Object.entries(this.letterQuantities)) {
+      for (let i = 0; i < quant; i++) {
+        pool.push(letter);
+      }
+    }
+
+    return pool;
+  }
+
+  static getSample(total, paramsArray) {
     let inputArray = paramsArray.slice();  //clone a new array to manipulate
     const sampleArray = [];
     for (let i = 0; i < total; i++) {
@@ -74,9 +84,9 @@ const Adagrams = {
       inputArray[randomIndex] = inputArray[inputArray.length - 1 - i];  //replace chosen element with last element
     }
     return sampleArray;
-  },
+  }
 
-  arrayToObject(array) {
+  static arrayToObject(array) {
     const newObject = {}
     for (let element of array) {
       if (newObject[element]) {
@@ -86,9 +96,9 @@ const Adagrams = {
       }
     }
     return newObject;
-  },
+  }
 
-  letterQuantities: {
+  static letterQuantities = {
     'A': 9,
     'B': 2,
     'C': 2,
@@ -115,9 +125,9 @@ const Adagrams = {
     'X': 1,
     'Y': 2,
     'Z': 1
-  },
+  };
 
-  pointsPerLetter: {
+  static pointsPerLetter = {
     'A': 1,
     'B': 3,
     'C': 3,
@@ -144,20 +154,8 @@ const Adagrams = {
     'X': 8,
     'Y': 4,
     'Z': 10
-  },
-
-  // getSample(total, paramsArray) {
-  //   let inputArray = Array.from(paramsArray.keys());
-  //   const sampleArray = [];
-  //   for (let i = 1; i <= total; i++) {
-  //     const randomIndex = Math.floor(Math.random() * (inputArray.length - i));
-  //     sampleArray.push(inputArray[randomIndex]);
-  //     inputArray[randomIndex] = inputArray[inputArray.length - i];
-  //   }
-  //   return sampleArray;
-  // },
-
-};
+  };
+}
 
 // Do not remove this line or your tests will break!
 export default Adagrams;
