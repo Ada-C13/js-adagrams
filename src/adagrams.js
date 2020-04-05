@@ -93,19 +93,19 @@ class Adagrams  {
     }
 
     let score = 0;
-    const wordLength = word.length;
+
     const wordUpCase = word.toUpperCase();
-    // ()...) spread syntax to convert a string into an array.
-    const wordArray = [...wordUpCase];
-    
-    for (const letter of wordArray) {
-      // find the value within the scoreChar Object.
-      if (scoreChart[letter] !== undefined) {
-        score += scoreChart[letter];
+
+    for (let i = 0; i < wordUpCase.length; i++){
+      if (scoreChart[wordUpCase[i]] !== undefined) {
+        score += scoreChart[wordUpCase[i]];
+      }
+      else {
+        throw 'Please enter only letters';
       }
     }
 
-    if (wordLength > 6) {
+    if (word.length > 6) {
       score += 8;
     }
 
@@ -163,10 +163,7 @@ class Adagrams  {
   }
 }
 
+// console.log(Adagrams.scoreWord('dogd2ogdog'));
+
 // Do not remove this line or your tests will break!
-
-//  console.log(Adagrams.drawLetters());
-//  console.log(Adagrams.usesAvailableLetters('DOG',['D', 'O', 'G', 'X', 'X', 'X', 'X', 'X', 'X', 'X']));
-//  console.log(Adagrams.scoreWord('DOG'));
-
 export default Adagrams;
