@@ -29,36 +29,34 @@ class Adagrams {
     };
     return drawn;
   }
+
   //Wave 2
   static usesAvailableLetters(input, lettersInHand){
-    let inputLetters = input.toUpperCase().split("");
+    const inputLetters = input.toUpperCase().split("");
     //make a copy of the drawn letter 
-    let dupInputLetters = inputLetters.slice();
-
-    //1.empty array called timesTrue = []
-    let timesTrue = [];
-    
-    // 2.Loop through each element of inputLetters and check to see if it exists in letterInHand
-    dupInputLetters.forEach(element => {
-      if (lettersInHand.includes(element) === true){
-        timesTrue.push(true)
+    const dupInputLetters = lettersInHand.slice();
+    //Loop through each element of inputLetters and check to see if it exists in letterInHand
+    for (let i = 0; i < inputLetters.length; i++){
+      if (dupInputLetters.includes(inputLetters[i])){
+        // timesTrue.push(true)
         //delete that letter from inputLetters to prevent the extra counts of letter
-        let indexOfElement = lettersInHand.indexOf(element); //return the first index at which a given element can be found
-        lettersInHand.splice(indexOfElement,1)
+        let indexOfElement = dupInputLetters.indexOf(inputLetters[i]); //return the first index at which a given element can be found
+        dupInputLetters.splice(indexOfElement,1);
       }else{
-        timesTrue.push(false);
-      }
-    });
+        return false;
+      }; 
+    };
+    return true;
 
     //find to see if there is any false in the timesTure array
-    let isValid = undefined;
-    if (timesTrue.includes(false) === true){
-      isValid = false;
-    }else{
-      isValid = true;
-    };
-    return isValid;
-  }
+    // let isValid = undefined;
+    // if (timesTrue.includes(false) === true){
+    //   isValid = false;
+    // }else{
+    //   isValid = true;
+    // };
+    // return isValid;
+  };
 
   //Wave 3
   static scoreWord (word){
@@ -67,7 +65,6 @@ class Adagrams {
     if (wordArray.lenght === 0){
       score = 0;
     }else{
-      let scoreArray = [];
       wordArray.forEach(element => {
         switch(element){
           case 'A':
@@ -80,46 +77,39 @@ class Adagrams {
           case 'R':
           case 'S':
           case 'T':
-            scoreArray.push(1);
+            score += 1;
             break;
           case 'D':
           case 'G':
-            scoreArray.push(2);
+            score += 2;
             break;
           case 'B':
           case 'C':
           case 'M':
           case 'P':
-            scoreArray.push(3);
+            score += 3;
             break;
           case 'F':
           case 'H':
           case 'V':
           case 'W':
           case 'Y':
-            scoreArray.push(4);
+            score += 4;
             break;
           case 'K':
-            scoreArray.push(5);
+            score += 5;
             break;
           case 'J':
           case 'X':
-            scoreArray.push(8);
+            score += 8;
             break;
           case 'Q':
           case 'Z':
-            scoreArray.push(10);
+            score += 10;
             break;
-          default:
-            scoreArray.push(0);
         };
       });
-    //get the sum of scoreArray
-      for(let i = 0; i < scoreArray.length; i++){
-        score += scoreArray[i]
-      }
-      // const reducer = (accumulator, currentValue) => accumulator + currentValue;
-      // score = scoreArray.reduce(reducer);
+
       if (word.length >= 7){
         score += 8;
       }else{
@@ -146,10 +136,8 @@ class Adagrams {
     wordScoreObjArray.forEach(obj =>{
       allScores.push(obj.score);
     });
-    console.log(allScores);
-    
+
     const highestScore = Math.max.apply(null, allScores);
-    console.log(highestScore);
     
     //Ties
 
@@ -164,11 +152,8 @@ class Adagrams {
     let tiedScoreSorted = tiedScores.sort(function(a, b){
       return a.word.length-b.word.length;
   })
-    console.log(tiedScoreSorted);
 
     // highestScoreFrom
-    //   returns a hash that contains the word and score of best word in an array 
-    //   accurately finds best scoring word even if not sorted
     if (tiedScoreSorted.length === 1){
       bestWordScore = tiedScoreSorted[0];
     }else if ((tiedScoreSorted[0].word.length !== tiedScoreSorted[tiedScoreSorted.length - 1].word.length) &&(tiedScoreSorted[tiedScoreSorted.length - 1].word.length === 10)){
@@ -181,8 +166,6 @@ class Adagrams {
       bestWordScore = tiedScoreSorted[0];
     }
     return bestWordScore;
-  //return a single object represents the data of a winning word and its score.
-
   }
 }
 // Do not remove this line or your tests will break!
