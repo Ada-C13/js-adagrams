@@ -101,7 +101,7 @@ const Adagrams = {
   highestScoreFrom(words) {
     // words is an array of strings
     // create an object for each element in words: {word: string of a word, score: score of that word}
-    const wordData = function(word, score) {
+    const Object = function(word, score) {
       this['word'] = word;
       this['score'] = score; 
     };
@@ -109,25 +109,45 @@ const Adagrams = {
     const wordsWithScores = [];
     words.forEach(word => {
       const score = this.scoreWord(word);
-      wordsWithScores.push(new wordData(word, score));
+      wordsWithScores.push(new Object(word, score));
     });
 
     let highest = 0;
-    let winner = undefined;
-    wordsWithScores.forEach(wordData => {
-      if (wordData['score'] > highest) {
-        highest = wordData['score'];
+    wordsWithScores.forEach(word => {
+      if (word['score'] > highest) {
+        highest = word['score'];
+      };
+    });
+
+    const winners = [];
+    wordsWithScores.forEach(word => {
+      if (word['score'] === highest) {
+        winners.push(word);
       };
     });
 
     // in the case of a tie: 1) word with 10 letters, 2) word with the fewest letters, 3) first word in the list 
-    wordsWithScores.forEach(wordData => {
-      if (wordData['score'] === highest) {
-        winner = wordData;
-      };
-    });
+    const tieBreaker = (arr) => {
+      arr.sort((a, b) => b.word.length - a.word.length);
+      const shortestLength = arr[arr.length-1].word.length;
 
-    return winner;
+      arr.forEach(object => {
+        switch (object.word.length) {
+          case 10:
+            return object;
+          case shortestLength:
+            return object;
+        }
+      });
+
+      return arr[0];
+    };
+
+    if (winners.length === 1) {
+      return winners[0];
+    } else {
+    return tieBreaker(winners);
+    };
   },
 };
 
