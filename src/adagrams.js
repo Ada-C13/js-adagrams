@@ -13,6 +13,7 @@ const Adagrams = {
       letters.splice(rand, 1);
       hand.splice(i, 1, letters[rand]);
     }
+    console.log(hand.toString());
     return hand; 
   },
 
@@ -74,19 +75,19 @@ const Adagrams = {
       }
      
       let tiedHighestWords = {};
-
+      tiedHighestWords[maxWord] = maxScore;
       for (let key in scoreResults){
         if(scoreResults[key] === maxScore && key !== maxWord){
             tiedHighestWords[key] = scoreResults[key];
         }
       }
       //adding max to tied highest scores
-      tiedHighestWords[maxWord] = maxScore;
+      
+      
+      //counting ties
       let tiedCount = 0;
       for (let key in tiedHighestWords){
         tiedCount += 1;
-        console.log("this is the key: " + key);
-        console.log(tiedHighestWords[key]);
       }
       let winner = {};
       //working: if winner lenght == 1, there are no ties
@@ -95,30 +96,33 @@ const Adagrams = {
         winner.score = Object.values(tiedHighestWords)[0];
         return winner;
       }
-      
-      const tieBreaker = Object.keys(tiedHighestWords);
+      console.log(Object.keys(tiedHighestWords));
+      const tieBreaker = Object.keys(tiedHighestWords); //EEEEEEEEEE,AAAAAAAAAA
       let tieWinner = tieBreaker[0];
-      let tieLength = 0;
-
+      let tieLength = tiedHighestWords[tieBreaker[0]];
+      
       for(let i = 0; i < tieBreaker.length; i++){
+        
         if(tieBreaker[i].length === 10){
-          tieWinner = tieBreaker[i];
           winner.word = tieBreaker[i];
           winner.score = tiedHighestWords[tieBreaker[i]];
           return winner;
         }else if (tieBreaker[i].length < tieWinner.length){
-
           tieWinner = tieBreaker[i];
           tieLength = tiedHighestWords[tieBreaker[i]];
+          console.log(tieLength);
         }
+        
+
       }
+
       winner.word = tieWinner;
       winner.score = tieLength;
       return winner;
     }
 };
-
-
+//console.log(Adagrams.drawLetters());
+console.log(Adagrams.highestScoreFrom(['WWW', 'MMMM']));
 
 // Do not remove this line or your tests will break!
-export default Adagrams;
+//export default Adagrams;
