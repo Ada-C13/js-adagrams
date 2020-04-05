@@ -118,23 +118,46 @@ const Adagrams = {
       }
     });
     
-  if (wordArray.length > 6) {
+    if (wordArray.length > 6) {
     wordScore += 8;
+    }
+
+    return (wordScore);
+  },
+
+  highestScoreFrom (words) {    // wave 4 Returns a single object that represents the data of a winning word and its score
+    let bestScoringWord = '';
+    let bestScore = 0;
+    let wordsValuesObject = {};
+
+    //score each word with scoreWord function
+    words.forEach (word => {
+      const score = this.scoreWord(word);
+      //put word and score in a object
+      wordsValuesObject[word] = score;
+      
+      if (bestScore < score) {
+        bestScore = score;
+        bestScoringWord = word;
+      }
+      console.log(`best score ${bestScore} and best word ${bestScoringWord} object ${wordsValuesObject}`);
+    })
+      //figure out if there are more than two of the highest score put the word in a variable to campare them
+    const values = Object.values(wordsValuesObject);
+    console.log(`object values ${Object.values(wordsValuesObject)}`);
+
+
+    //figure out if there are more than two of the highest score put the word in a variable to campare them
+    //if that tie variable is greater than length  2  go in to testing the tie
+    //create holder variables for the bestTieWord and tieLength 
+    //If the word 10 in length if yes return that word!
+    //else if the tieLenght variable is still 0  we need to input the first item that comes in as our base in our holder variables
+    //elsif the word is shorter than the tieLength  variable we want to set that to our holder variables
+    //return the holder variables in an object
   }
 
-  //console.log("Word = " + word + " --- Score = " + wordScore);
 
-  return (wordScore);
-  }
 }
-
-  
-
-
-
-  //highestScoreFrom(words) {  // wave 4 Returns a single object that represents the data of a winning word and its score
-
-  //}
 
 
 
