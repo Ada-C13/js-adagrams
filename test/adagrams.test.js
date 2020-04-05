@@ -82,6 +82,16 @@ describe('Adagrams', () => {
         XXXXXXXXXX: 88,
       });
     });
+    // Test if the user enters a number within the word.
+    it('it trhows and error if the word contains numbers', () => {
+      expect (function () {
+        expectScores({
+          XXXXXXX2: 64,
+          XXXXXXXX5: 72,
+        
+        });
+      }).toThrow ('Please enter only letters');
+    });
   });
 
   describe('highestScoreFrom', () => {
