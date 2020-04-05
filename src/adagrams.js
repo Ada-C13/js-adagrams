@@ -1,5 +1,5 @@
-const Adagrams = {
-  letterDistribution: {
+class Adagrams {
+  static letterDistribution = {
     A : 9,
     N : 6,
     B : 2,
@@ -26,31 +26,32 @@ const Adagrams = {
     Y : 2,
     M : 2,	
     Z : 1
-  },
-  drawLetters() {
+  }
+
+  // helper method that returns a random number between 0 and length of array
+  static random = letterPool => Math.floor(Math.random() * (letterPool.length+1));
+
+  static drawLetters = () => {
     const letterPool = [];
-    // loop through value of each letter to create pool
+    // loop through value of each letter to create pool    
     for(const letter in this.letterDistribution) {      
       for(let i = 0; i < this.letterDistribution[letter]; i++) {        
         letterPool.push(letter);
       }
-    };
+    };    
 
     // create a hand of ten random letters
     const hand = [];
     for(let i = 0; i < 10; i++) {
       const randomNum = this.random(letterPool);
       hand.push(letterPool[randomNum]);
-      letterPool.splice(randomNum, 1);      
+      letterPool.splice(randomNum, 1);         
     }
-
+    
     return hand;    
-  },
-  // helper method that returns a random number between 0 and length of array
-  random(letterPool) {
-    return Math.floor(Math.random() * (letterPool.length+1));
-  },
-  usesAvailableLetters(input, lettersInHand) {
+  }
+
+  static usesAvailableLetters(input, lettersInHand) {
     input = input.split('');
     let result = true;
 
@@ -66,8 +67,9 @@ const Adagrams = {
     })
 
     return result;
-  },
-  scoreWord(word) {
+  }
+
+  static scoreWord(word) {
     if (word === '') return 0;
     const scoring = {
       A: 1,
@@ -104,10 +106,10 @@ const Adagrams = {
     if(word.length >= 7) points += 8;
 
     return points;
-  },
+  }
 
   // find the highest scoring word
-  highestScoreFrom(words) {
+  static highestScoreFrom(words) {
     // create array of all word scores
     const scores = words.map(word => this.scoreWord(word));
     // find highest score
