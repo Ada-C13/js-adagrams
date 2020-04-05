@@ -96,8 +96,8 @@ const Adagrams = {
         winner.score = Object.values(tiedHighestWords)[0];
         return winner;
       }
-      console.log(Object.keys(tiedHighestWords));
-      const tieBreaker = Object.keys(tiedHighestWords); //EEEEEEEEEE,AAAAAAAAAA
+      
+      const tieBreaker = Object.keys(tiedHighestWords); 
       let tieWinner = tieBreaker[0];
       let tieLength = tiedHighestWords[tieBreaker[0]];
       
@@ -110,7 +110,6 @@ const Adagrams = {
         }else if (tieBreaker[i].length < tieWinner.length){
           tieWinner = tieBreaker[i];
           tieLength = tiedHighestWords[tieBreaker[i]];
-          console.log(tieLength);
         }
         
 
@@ -121,8 +120,8 @@ const Adagrams = {
       return winner;
     }
 };
-//console.log(Adagrams.drawLetters());
-console.log(Adagrams.highestScoreFrom(['WWW', 'MMMM']));
+
+
 
 // Do not remove this line or your tests will break!
-//export default Adagrams;
+export default Adagrams;
