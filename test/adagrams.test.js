@@ -82,9 +82,19 @@ describe('Adagrams', () => {
         XXXXXXXXXX: 88,
       });
     });
+    // Test if the user enters a number within the word.
+    it('it trhows and error if the word contains numbers', () => {
+      expect (function () {
+        expectScores({
+          XXXXXXX2: 64,
+          XXXXXXXX5: 72,
+        
+        });
+      }).toThrow ('Please enter only letters');
+    });
   });
 
-  describe.skip('highestScoreFrom', () => {
+  describe('highestScoreFrom', () => {
     it('returns a hash that contains the word and score of best word in an array', () => {
       const words = ['X', 'XX', 'XXX', 'XXXX'];
       const correct = { word: 'XXXX', score: Adagrams.scoreWord('XXXX') };
