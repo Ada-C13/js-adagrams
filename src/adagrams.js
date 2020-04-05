@@ -156,7 +156,3 @@ const Adagrams = {
 
 // Do not remove this line or your tests will break!
 export default Adagrams;
-
-// let hand = ['P', 'D', 'A', 'D', 'I', 'L', 'I', 'G', 'A', 'E']
-
-// console.log(Adagrams.scoreWord('jkae'));
