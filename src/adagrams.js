@@ -118,11 +118,10 @@ const Adagrams = {
   // find the highest scoring word. This function looks at the array of words and calculates which of these words has the highest score, applies any tie-breaking logic, and returns the winning word in a special data structure.
 
   highestScoreFrom(words) {
-    const winningWord = {/* word: score */};    
-    
     // find highest score by scoring each word
     const scores = words.map(word => this.scoreWord(word));
     const highestScore = Math.max(...scores);
+    const winningWord = {score: highestScore};    
     const highestScoringWords = [];
     
     // find highest scoring words
@@ -133,13 +132,18 @@ const Adagrams = {
       }
     });
 
+    // if there is only one word
+    // set winningWord to that word and evaluate score
     if (highestScoringWords.length === 1) {
       winningWord['word'] = highestScoringWords[0];
-      winningWord['score'] = highestScore;
     };
-    // else continue to tie breaker
 
-    // if tie
+    const tenCharacters = highestScoringWords.find(word => word.length === 10);
+
+    if (tenCharacters) {
+      winningWord['word'] = tenCharacters;
+    };
+
     //   if any word has .length === 10
     //     winningWord = that word;
     //   else 
