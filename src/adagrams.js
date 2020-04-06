@@ -101,28 +101,30 @@ const Adagrams = {
   highestScoreFrom(words) {
     // words is an array of strings
     // create an object for each element in words: {word: string of a word, score: score of that word}
-    const Object = function(word, score) {
-      this['word'] = word;
-      this['score'] = score; 
-    };
+    class WordData {
+      constructor(word, score) {
+        this.word = word;
+        this.score = score;
+      }
+    }
 
     const wordsWithScores = [];
     words.forEach(word => {
       const score = this.scoreWord(word);
-      wordsWithScores.push(new Object(word, score));
+      wordsWithScores.push(new WordData(word, score));
     });
 
     let highest = 0;
-    wordsWithScores.forEach(word => {
-      if (word['score'] > highest) {
-        highest = word['score'];
+    wordsWithScores.forEach(wordData => {
+      if (wordData.score > highest) {
+        highest = wordData.score;
       };
     });
 
     const winners = [];
-    wordsWithScores.forEach(word => {
-      if (word['score'] === highest) {
-        winners.push(word);
+    wordsWithScores.forEach(wordData => {
+      if (wordData.score === highest) {
+        winners.push(wordData);
       };
     });
 
