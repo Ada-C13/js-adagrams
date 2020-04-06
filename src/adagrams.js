@@ -25,34 +25,41 @@ const Adagrams = {
     sattoloShuffle[0].push(lettersInHand);
   }
   return lettersInHand
-};
+  };
 
-// Start of Wave 2 Psuedocode
+  // Start of Wave 2 Psuedocode
 
-function usesAvailableLetters(input, lettersInHand) {
+  function usesAvailableLetters(input, lettersInHand) {
 
-  //Create a copy of lettersInHand
-  let tempHand = [...lettersInHand];
+    //Create a copy of lettersInHand
+    let tempHand = [...lettersInHand];
 
-  //Create an array of characters from input
-  let inputArray = inputArray.from(input);
+    //Create an array of characters from input
+    let inputArray = inputArray.from(input);
 
-  if (input.length > 10 || input.length < 1) {
-    return false;
-  }
-
-  //Iterate through inputArray to check if [i] is in hand
-  for (const letter of inputArray) {
-    if (!tempHand.includes(letter)) {
+    if (input.length > 10 || input.length < 1) {
       return false;
-    } else {
-      tempHand.delete(letter);
     }
+
+    //Iterate through inputArray to check if [i] is in hand
+    for (const letter of inputArray) {
+      if (!tempHand.includes(letter)) {
+        return false;
+      } else {
+        tempHand.delete(letter);
+      }
+    }
+    return true;
   }
-  return true;
-}
 
+  //Start of Wave 3 pseudocode 
 
+  function scoreWord(word) {
+    //Add in 
+    
+
+    //Add in .each replacement here 
+  }
 
 // Do not remove this line or your tests will break!
 export default Adagrams;
