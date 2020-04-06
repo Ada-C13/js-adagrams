@@ -35,7 +35,25 @@ const Adagrams = {
         letterPool.push(letter);
       } 
     }
-
+    // shuffle letterPool
+    let letterPoolClone = letterPool.map((x) => x);
+    let m = letterPoolClone.length;
+    let t = null;
+    let i = null;
+  
+    // While there remain elements to shuffle…
+    while (m) {
+  
+      // Pick a remaining element…
+      i = Math.floor(Math.random() * m--);
+  
+      // And swap it with the current element.
+      t = letterPoolClone[m];
+      letterPoolClone[m] = letterPoolClone[i];
+      letterPoolClone[i] = t;
+    }
+  const chosenLetters = letterPoolClone.slice(0,10);
+  return chosenLetters;
   },
 
 
