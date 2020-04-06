@@ -117,6 +117,7 @@ const Adagrams = {
         words.sort(function(a, b) {
             return a.length - b.length; //ASC, For Descending order use: b - a
         });
+
         return words;
     },
 
