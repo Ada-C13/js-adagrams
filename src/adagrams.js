@@ -6,11 +6,8 @@ const Adagrams = {
     // Implement this method for wave 1
     // Create hash of letterInfo with counts
     // https://stackoverflow.com/questions/6298169/how-to-create-a-hash-or-dictionary-object-in-javascript  
-    letterInfo = {
-      'A' : {
-        count: 9,
-        score: 1
-      },
+    const letterInfo = {
+      'A' : 9,
       'N' : 6,
       'B' : 2,
       'O' : 8,
@@ -39,26 +36,40 @@ const Adagrams = {
     };
 
     // Loop thru letterInfo and populate deck 
+    // let = scope
     let deck = [];    
     //https://stackoverflow.com/questions/34913675/how-to-iterate-keys-values-in-javascript
-    
+    //used ecmas2017 version of loop- ok per Devin
+    for (const [key, value] of Object.entries(letterInfo)) {
+      //console.log(key, value);
+      //https://www.w3schools.com/js/js_loop_for.asp
+      for (let i = 0; i < value; i++) {
+        deck.push(key);
+      }
+      
+    }
+    //console.log(deck.length)
 
     // randomly pick 10 from deck
-    let drawn = []
+    let drawn = [];
     
     // create 10 times loop
-    //https://stackoverflow.com/questions/36069870/how-to-remove-random-item-from-array-and-then-remove-it-from-array-until-array-i
-    // get a randomn index from 0 - length of deck
-    // push the letter at the random index
-    // remove the letter from deck
-        
+    for (let i = 0; i < 10; i++) {
+      //https://stackoverflow.com/questions/36069870/how-to-remove-random-item-from-array-and-then-remove-it-from-array-until-array-i
+      // get a random index from 0 to the length of deck
+      let index = Math.floor(Math.random() * deck.length);
+      // push the letter at the random index
+      drawn.push(deck[index])
+      // remove the letter from deck array
+      deck.splice(index, 1);
+    }
     return drawn
   },
 };
 
 // Do not remove this line or your tests will break!
-//export default Adagrams;
+export default Adagrams;
 
 // test code
-const drawn = Adagrams.drawLetters();
-console.log(drawn)
+// const drawn = Adagrams.drawLetters();
+// console.log(drawn)
