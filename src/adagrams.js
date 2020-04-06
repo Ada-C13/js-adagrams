@@ -70,21 +70,46 @@ const Adagrams = {
 
   usesAvailableLetters(input, lettersInHand) {
     // parse string input to get array of letters
+    let letters = input.split('');
+    console.log(letters);
     // loop through array of letters
-    // check if letter is included in lettersinHand 
-    // if included, move to next letter
-      //remove letter from lettersinHand
-    // if not included, return false
-    //return true when gone through all letters
+    // https://codeburst.io/javascript-the-difference-between-foreach-and-for-in-992db038e4c2
+    for (let i = 0; i < letters.length; i++) {
+      let letter = letters[i]
+      // check if letter is included in lettersinHand 
+      if (lettersInHand.includes(letter)) {
+        //remove letter from lettersinHand
+        var index = lettersInHand.indexOf(letter);
+        if (index !== -1) lettersInHand.splice(index, 1);
+      } else {
+        // if not included, return false
+        return false;
+      } 
+    }
 
+    // for (index in letters) {
+    //   console.log(letters[index])
+    // }
+
+    // letters.forEach(letter => {
+       //   console.log(letter)
+    // });
+    //return true when gone through all letters
+    return true;
   },
+
+
+
+
+
 }; //const Adagrams
 
 
 // Do not remove this line or your tests will break!
-// export default Adagrams;
+ export default Adagrams;
 
 // test code
-const drawn = Adagrams.drawLetters();
-console.log(drawn)
-//Adagrams.drawLetters("blah",drawn)
+// const drawn = Adagrams.drawLetters();
+// console.log(drawn)
+
+// console.log(Adagrams.usesAvailableLetters("blah", ["a","n","y"]))
