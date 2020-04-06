@@ -62,7 +62,7 @@ const Adagrams = {
       deck.splice(index, 1);
     }
     return drawn
-  },
+  }, //end of drawLetters
 
   //--------------------------
   // example: input = "doo"
@@ -86,17 +86,9 @@ const Adagrams = {
         return false;
       } 
     }
-
-    // for (index in letters) {
-    //   console.log(letters[index])
-    // }
-
-    // letters.forEach(letter => {
-       //   console.log(letter)
-    // });
     //return true when gone through all letters
     return true;
-  },
+  }, //end of usesAvailableLetters
 
 
 
