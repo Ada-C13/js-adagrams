@@ -91,7 +91,15 @@ const Adagrams = {
       let wordsScore = this.scoreWord(words[i]);
       if(wordsScore > winningWordScore) {
         winningWordScore = wordsScore;
-        winningWord = words[i]
+        winningWord = words[i];
+      }else if(wordsScore === winningWordScore){
+        if(words[i].length === 10 && winningWord.length !== 10){
+          winningWordScore = wordsScore;
+          winningWord = words[i];
+        }else if(words[i].length < winningWord.length && winningWord.length !== 10){
+          winningWordScore = wordsScore;
+          winningWord = words[i];
+        }
       };
     };
     return {word: winningWord, score: winningWordScore};
