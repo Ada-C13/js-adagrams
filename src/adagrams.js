@@ -63,19 +63,23 @@ const Adagrams = {
     } else {
       letterCount[char] = 1;
     } })
-    
 
-    let result = true
-    input.toUpperCase().split('').forEach((check_char) => {
-      if (letterCount[check_char] >= 1 ){
-        letterCount[check_char] -= 1;
+    const checkLetter = input.toUpperCase().split('');
+    console.log(checkLetter[2]);
+    console.log(letterCount[checkLetter[1]]);
+
+    for( let i = 0; i < checkLetter.length ; i++ ) {
+      if (letterCount[checkLetter[i]] >= 1 ) {
+        letterCount[checkLetter[i]] -= 1;
+        console.log(checkLetter[i]);
       } else {
-        result = false ;
+        return false;
       }
-    } ); 
-    
-    return result;
+    };
+
+    return true;
   },
+    
 
   scoreWord(word) {
     let score = 0;
@@ -141,10 +145,10 @@ const Adagrams = {
 }
 
 //console.log(Adagrams.drawLetters());
-//console.log(Adagrams.usesAvailableLetters("Helllllo", ['H', 'E','L', 'L', 'O']));
+console.log(Adagrams.usesAvailableLetters("Dog", ['D', 'O', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X']));
 //console.log(Adagrams.scoreWord("hello"));
 //console.log(Adagrams.scoreWord("dog"));
-console.log(Adagrams.highestScoreFrom(['AAAAAAAAAA', 'BBBBBB']));
+//console.log(Adagrams.highestScoreFrom(['AAAAAAAAAA', 'BBBBBB']));
 
 
 
