@@ -69,7 +69,6 @@ const Adagrams = {
     input.toUpperCase().split('').forEach((check_char) => {
       if (letterCount[check_char] >= 1 ){
         letterCount[check_char] -= 1;
-        console.log(letterCount[check_char]);
       } else {
         result = false ;
       }
@@ -123,15 +122,16 @@ const Adagrams = {
   },
 
    highestScoreFrom(words) {
-    let highestScore = { word: "", score: 0};
+    let highestScore = { word: "", score: 0 };
     words.forEach((word) => {
-      if (this.scoreWord(word) > highestScore["score"]) {
-        highestScore["score"] = this.scoreWord(word);
-        highestScore["word"] = word;
-      } else if (this.scoreWord(word) === highestScore["score"] &&  highestScore['word'].length !== 10) {
-          if (( word.length < highestScore["word"].length) ||( word.length === 10 && highestScore['word'].length !== 10)) {
-            highestScore["score"]= this.scoreWord(word);
-            highestScore["word"] = word;
+      let currScore = this.scoreWord(word);
+      if (currScore > highestScore.score) {
+        highestScore.score = currScore;
+        highestScore.word = word;
+      } else if (currScore === highestScore.score &&  highestScore.word.length !== 10) {
+          if (( word.length < highestScore.word.length) ||( word.length === 10 && highestScore.word.length !== 10)) {
+            highestScore.score = currScore;
+            highestScore.word  = word;
           } ;
       };
     })
