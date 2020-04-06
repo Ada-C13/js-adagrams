@@ -32,7 +32,7 @@ const Adagrams = {
     // Implement this method for wave 1
     let chosen = {};
     let drawn = [];
-    //ASCII for A-Z
+    //ASCII for A-Z, using ASCII to draw letters to reduce time complexity for having loop inside loop
     const min = 65;
     const max = 90;
     const range = max - min + 1;
@@ -65,13 +65,10 @@ const Adagrams = {
     } })
 
     const checkLetter = input.toUpperCase().split('');
-    console.log(checkLetter[2]);
-    console.log(letterCount[checkLetter[1]]);
 
     for( let i = 0; i < checkLetter.length ; i++ ) {
       if (letterCount[checkLetter[i]] >= 1 ) {
         letterCount[checkLetter[i]] -= 1;
-        console.log(checkLetter[i]);
       } else {
         return false;
       }
@@ -117,15 +114,15 @@ const Adagrams = {
         default:
           score += 1;
       }
-    }
-    )
+    });
+
     if(wordArray.length >= 7){
       score += 8;
     };
     return score;
   },
 
-   highestScoreFrom(words) {
+  highestScoreFrom(words) {
     let highestScore = { word: "", score: 0 };
     words.forEach((word) => {
       let currScore = this.scoreWord(word);
@@ -141,11 +138,10 @@ const Adagrams = {
     })
     return highestScore;
   },
- 
 }
 
 //console.log(Adagrams.drawLetters());
-console.log(Adagrams.usesAvailableLetters("Dog", ['D', 'O', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X']));
+//console.log(Adagrams.usesAvailableLetters("Dog", ['D', 'O', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X']));
 //console.log(Adagrams.scoreWord("hello"));
 //console.log(Adagrams.scoreWord("dog"));
 //console.log(Adagrams.highestScoreFrom(['AAAAAAAAAA', 'BBBBBB']));
