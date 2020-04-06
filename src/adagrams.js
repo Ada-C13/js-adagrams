@@ -1,7 +1,5 @@
 const Adagrams = {
   
-
-
   drawLetters() {
     // Implement this method for wave 1
     // Create hash of letterInfo with counts
@@ -65,11 +63,28 @@ const Adagrams = {
     }
     return drawn
   },
-};
+
+  //--------------------------
+  // example: input = "doo"
+  // lettersinhand = a,b,y,d,o,g
+
+  usesAvailableLetters(input, lettersInHand) {
+    // parse string input to get array of letters
+    // loop through array of letters
+    // check if letter is included in lettersinHand 
+    // if included, move to next letter
+      //remove letter from lettersinHand
+    // if not included, return false
+    //return true when gone through all letters
+
+  },
+}; //const Adagrams
+
 
 // Do not remove this line or your tests will break!
-export default Adagrams;
+// export default Adagrams;
 
 // test code
-// const drawn = Adagrams.drawLetters();
-// console.log(drawn)
+const drawn = Adagrams.drawLetters();
+console.log(drawn)
+//Adagrams.drawLetters("blah",drawn)
