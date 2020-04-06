@@ -1,49 +1,48 @@
-const poolOfLetters = [
-  ['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A'],
-  ['B', 'B'],
-  ['C', 'C'],
-  ['D', 'D', 'D', 'D'],
-  ['E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E'],
-  ['F', 'F'],
-  ['G', 'G', 'G'],
-  ['H', 'H'],
-  ['I', 'I', 'I', 'I', 'I', 'I', 'I', 'I', 'I'],
-  ['J'],
-  ['K'],
-  ['L', 'L', 'L', 'L'],
-  ['M', 'M'],
-  ['N', 'N', 'N', 'N', 'N', 'N'],
-  ['O', 'O', 'O', 'O', 'O', 'O', 'O', 'O'],
-  ['P', 'P'],
-  ['Q'],
-  ['R', 'R', 'R', 'R', 'R', 'R'],
-  ['S', 'S', 'S', 'S'],
-  ['T', 'T', 'T', 'T', 'T', 'T'],
-  ['U', 'U', 'U', 'U'],
-  ['V', 'V'],
-  ['W', 'W'],
-  ['X'],
-  ['Y', 'Y'],
-  ['Z'],
-];
-
-const getrandNum = () => {
-  return Math.floor(Math.random() * 26)
-};
-
 const Adagrams = {
+  poolOfLetters: [
+    'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A',
+    'B', 'B',
+    'C', 'C',
+    'D', 'D', 'D', 'D',
+    'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E',
+    'F', 'F',
+    'G', 'G', 'G',
+    'H', 'H',
+    'I', 'I', 'I', 'I', 'I', 'I', 'I', 'I', 'I',
+    'J',
+    'K',
+    'L', 'L', 'L', 'L',
+    'M', 'M',
+    'N', 'N', 'N', 'N', 'N', 'N',
+    'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O',
+    'P', 'P',
+    'Q',
+    'R', 'R', 'R', 'R', 'R', 'R',
+    'S', 'S', 'S', 'S',
+    'T', 'T', 'T', 'T', 'T', 'T',
+    'U', 'U', 'U', 'U',
+    'V', 'V',
+    'W', 'W',
+    'X',
+    'Y', 'Y',
+    'Z',
+  ],
+
+  getrandNum() {
+    return Math.floor(Math.random() * this.poolOfLetters.length)
+  },
+
   drawLetters() {
     const userHand = [];
 
     while (userHand.length < 10) {
-      let randNum = getrandNum();
-      let randLetter = poolOfLetters[randNum][0];
-      if (userHand.filter(x => x == randLetter).length < poolOfLetters[randNum].length) {
-        userHand.push(randLetter);
-      };
+      let randNum = this.getrandNum();
+      let randLetter = this.poolOfLetters[randNum];
+      userHand.push(randLetter);
+      this.poolOfLetters.splice(randNum, 1);
     };
 
-    return userHand
+    return userHand;
   },
 
   usesAvailableLetters(input, lettersInHand) {
@@ -99,31 +98,30 @@ const Adagrams = {
   },
 
   highestScoreFrom(words) {
-    const winningWordandScore = {};
-    let highestScore = 0;
-    let highestWord;
+    const winner = {
+      word: '',
+      score: 0
+    };
 
     words.forEach(word => {
       let score = this.scoreWord(word);
-      if (score > highestScore) {
-        highestScore = score;
-        highestWord = word;
-      } else if (score == highestScore) {
-        if (word.length != 10 && highestWord.length != 10) {
-          if (word.length < highestWord.length) {
-            highestScore = score;
-            highestWord = word;
+      if (score > winner.score) {
+        winner.score = score;
+        winner.word = word;
+      } else if (score == winner.score) {
+        if (word.length != 10 && winner.word.length != 10) {
+          if (word.length < winner.word.length) {
+            winner.score = score;
+            winner.word = word;
           };
-        } else if (word.length == 10 && highestWord.length != 10) {
-          highestScore = score;
-          highestWord = word;
+        } else if (word.length == 10 && winner.word.length != 10) {
+          winner.score = score;
+          winner.word = word;
         };
       };
     });
 
-    winningWordandScore["word"] = highestWord
-    winningWordandScore["score"] = highestScore
-    return winningWordandScore
+    return winner;
   },
 };
 
