@@ -31,3 +31,28 @@ const Adagrams = {
 // Do not remove this line or your tests will break!
 export default Adagrams;
 
+// Start of Wave 2 Psuedocode
+
+function usesAvailableLetters(input, lettersInHand) {
+
+  //Create a copy of lettersInHand
+  let tempHand = [...lettersInHand];
+
+  //Create an array of characters from input
+  let inputArray = inputArray.from(input);
+
+  if (input.length > 10 || input.length < 1) {
+    return false;
+  }
+
+
+  //Iterate through inputArray to check if [i] is in hand
+  for (const letter of inputArray) {
+    if (!tempHand.includes(letter)) {
+      return false;
+    } else {
+      tempHand.delete(letter);
+    }
+  }
+  return true;
+}
