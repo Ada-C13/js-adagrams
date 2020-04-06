@@ -1,7 +1,7 @@
 import Model from 'demo/model';
 import Adagrams from 'demo/adagrams';
 
-xdescribe('Game Model', () => {
+describe('Game Model', () => {
   const config = {
     players: [
       'Player A',
