@@ -66,6 +66,10 @@ const Adagrams = {
 
   // Check if a word a player submits only uses characters that are contained within a hand of drawn letters
 
+    // - Has two parameters:
+  //    - `input`, the first parameter, describes some input word, and is a string
+  //    - `lettersInHand`, the second parameter, describes an array of drawn letters in a hand. You can expect this to be an array of ten strings, with each string representing a letter
+
   usesAvailableLetters(input, lettersInHand) {
     input = input.toUpperCase();
     let charsArray = input.split('');
@@ -83,7 +87,7 @@ const Adagrams = {
       };
     };
 
-    letterHash.keys.forEach(function(key) {
+    Object.keys(letterHash).forEach((key) => {
       if (letterHash[key] !== 0) {
         return false;
       };
@@ -93,9 +97,7 @@ const Adagrams = {
   }
 
   
-  // - Has two parameters:
-  //    - `input`, the first parameter, describes some input word, and is a string
-  //    - `lettersInHand`, the second parameter, describes an array of drawn letters in a hand. You can expect this to be an array of ten strings, with each string representing a letter
+
   // - Returns either `true` or `false`
   // - Returns `true` if every letter in the `input` word is available (in the right quantities) in the `lettersInHand`
   // - Returns `false` if not; if there is a letter in `input` that is not present in the `lettersInHand` or has too much of compared to the `lettersInHand`
