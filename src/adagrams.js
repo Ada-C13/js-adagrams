@@ -1,7 +1,6 @@
 class Adagrams {
-
-  static drawLetters = function() {
-    const bigPoolOfLetters = {
+  constructor() {
+    this.bigPoolOfLetters = {
       A : 9,
       B : 2,
       C : 2,
@@ -27,31 +26,34 @@ class Adagrams {
       W : 2,
       X : 2,
       Z : 1,
-    };
+    }; 
+  };
 
+  allLettersArray  = function() {
     const allLeters = [];
-    for(let [letter, numbers] of Object.entries(bigPoolOfLetters)){
+    for(let [letter, numbers] of Object.entries(this.bigPoolOfLetters)){
       for(let i = 0; i<numbers; i++){
         allLeters.push(letter);
       };
     };
- 
+    return allLeters;
+  };
+
+  drawLetters = function() { 
     const userLetters = [];
-
     while(userLetters.length < 10){
+      
+      const randLetter = this.allLettersArray()[Math.floor(Math.random() * Math.floor(this.allLettersArray().length))];
 
-      const randLetter = allLeters[Math.floor(Math.random() * Math.floor(allLeters.length))];
-
-      if(bigPoolOfLetters[randLetter] !== 0){
+      if(this.bigPoolOfLetters[randLetter] !== 0){
         userLetters.push(randLetter);
-        bigPoolOfLetters[randLetter] -= 1;
+        this.bigPoolOfLetters[randLetter] -= 1;
       };
     };
-    
     return userLetters;
   };
 
-  static usesAvailableLetters = function(input, lettersInHand){
+  usesAvailableLetters = function(input, lettersInHand){
 
     const inputUpCase = input.toUpperCase();
 
@@ -68,7 +70,7 @@ class Adagrams {
     return true;
   };
 
-  static scoreWord = function(word){
+  scoreWord = function(word){
     const wordUpCase = word.toUpperCase();
     
     let extraPoints = 0;
@@ -106,7 +108,7 @@ class Adagrams {
     return total;
   };
 
-  static highestScoreFrom = function(words){
+  highestScoreFrom = function(words){
    
     let maxScore = 0;
     let maxScoreWord = "";
@@ -136,7 +138,5 @@ class Adagrams {
   };
 };
 
-// // Do not remove this line or your tests will break!
 export default Adagrams;
-
 
