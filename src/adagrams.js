@@ -58,7 +58,7 @@ const letterValues = {
 
 // Credit for shuffling function described at
 // https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
-let shuffle = function(array) {
+const shuffle = function(array) {
   for (let r = array.length - 1; r > 0; r--) {
     const s = Math.floor(Math.random() * (r + 1));
     [array[r], array[s]] = [array[s], array[r]];
@@ -88,8 +88,7 @@ const Adagrams = {
       if (!drawn.includes(currentLetter)) {
         return false;
       } else {
-        //find the index where letter IS found 
-        // have var outside of false check and have it equal index of current letter, then use splice at that index
+        // find index of current letter in drawn, then splice at that index
         let letterIndex = drawn.indexOf(currentLetter);
         // splice letter at that index from drawn
         drawn.splice(letterIndex, 1);
@@ -101,63 +100,48 @@ const Adagrams = {
   // Wave 3
   scoreWord(word) {
     let totalPoints = 0;
-    const lettersToScore = word.toUpperCase();
+    const lettersToScore = word.toUpperCase().split('');
     if (lettersToScore.length >= 7) {
       totalPoints += 8;
     }
-    // for each item in lettersToScore, find the associated value in letterValues and add to totalPoints
-    for (let i = 0; i < lettersToScore.length; i++) {
-      let currentLetter = lettersToScore.charAt(i);
-      let scoreToAdd = letterValues[currentLetter];
-      totalPoints += scoreToAdd;
-    }
+
+    lettersToScore.forEach((letter) => {
+       totalPoints += letterValues[letter];
+    });
   
     return totalPoints;
   },
 
   // Wave 4
+  totalScoreWord(word) {
+    let score = Adagrams.scoreWord(word);
+    return { word: word, score: score };
+  },
+
   highestScoreFrom(words) {
-    let allWords = [];
-    let maxScore = 0;
-  
-    for (const word in words) {
-      const wordObj = {};
-      wordObj.word = words[word];
-      wordObj.score = Adagrams.scoreWord(words[word]);
-      allWords.push(wordObj);
-    }
-  
-    let tieScore = [];
-    for (let i = 0; i < allWords.length; i++) {
-      const currentScore = allWords[i].score;
-      if (currentScore > maxScore) {
-        maxScore = currentScore;
-        tieScore = [allWords[i]];
-      } else if (currentScore === maxScore) {
-        tieScore.push(allWords[i]);
+    let totalScores = words.map((word) => {
+      return Adagrams.totalScoreWord(word);
+    });
+
+    totalScores = totalScores.sort((a, b) => {
+      // return 1 if a comes after b
+      // return -1 if a comes before b
+      // return 0 if tied
+      if (a.score > b.score) {
+        // a's score is higher so it comes earlier in the array
+        return -1;
+      } else if (b.score > a.score) {
+        // b wins
+        return 1;
+      } else {
+        if(a.word.length === b.word.length){ return 0; } // both same so really a tie
+        if(a.word.length === 10){ return -1; } // a is 10 so it wins
+        if(b.word.length === 10){ return 1; } // b is 10 so it wins
+        return a.word.length - b.word.length;
       }
-    }
-  
-    let smallest = 11;
-    let shortestWords = [];
-  
-    if (tieScore.length === 1) {
-      return tieScore[0];
-    }
-  
-    for (const tie in tieScore) {
-      const currentTie = tieScore[tie];
-      if (currentTie.word.length === 10) {
-        return currentTie;
-      } else if (currentTie.word.length < smallest) {
-        smallest = currentTie.word.length;
-        shortestWords = [currentTie];
-      } else if (currentTie.word.length === smallest) {
-        shortestWords.push(currentTie);
-      }
-    }
-  
-    return shortestWords[0];
+    });
+
+    return totalScores[0];
   }
 }
 
