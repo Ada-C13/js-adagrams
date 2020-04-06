@@ -2,11 +2,11 @@
 class Adagrams {
   // Method to create a hand of 10 letters according to a specific distribution
   static drawLetters() {
-    const handSize = 10;
+    const handSize   = 10;
     const letterDist = { "A": 9, "B": 2, "C": 2, "D": 4, "E": 12, "F": 2, "G": 3,
                          "H": 2, "I": 9, "J": 1, "K": 1, "L":  4, "M": 2, "N": 6,
                          "O": 8, "P": 2, "Q": 1, "R": 6, "S":  4, "T": 6, "U": 4,
-                         "V": 2, "W": 2, "X": 1, "Y": 2, "Z": 1 };
+                         "V": 2, "W": 2, "X": 1, "Y": 2, "Z":  1 };
     
     // Create a string with all the letters according to the distribution
     let letterPool = "";
@@ -28,7 +28,7 @@ class Adagrams {
   static usesAvailableLetters(input, lettersInHand) {
     // Make a copy of the hand so we don't mess with the original one
     let handCopy = Array.from(lettersInHand);
-    // Loop thru the word to make sure every letter is in the hand
+    // Loop thru the word/input to make sure every letter is in the hand
     for(let i = 0; i < input.length; i++) {
       let letter = input[i];
       // Check if the letter is in the hand
@@ -59,7 +59,7 @@ class Adagrams {
     return score;
   }
 
-// Method that looks at the array of words and calculates which of these words has the highest score
+  // Method that looks at the array of words and calculates which of these words has the highest score
   static highestScoreFrom(words) {
     // Find the maximum score from all the words
     let maximumScore = Math.max(...words.map(word => this.scoreWord(word)));
