@@ -3,7 +3,7 @@
 // ----- HELPER FUNCTIONS -----
 
 // convert letter pool object into an array 
-const createArray = function(obj) {
+const _createArray = function(obj) {
   const poolArray = [];
 
   for (let letter in obj) {
@@ -20,7 +20,7 @@ const createArray = function(obj) {
 
 // shuffle array using Fisher Yates shuffle algorithim : https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
 // source: https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array/2450976#2450976
-const shuffleArray = function (array) {
+const _shuffleArray = function (array) {
 	let currentIndex = array.length;
 	let temporaryValue, randomIndex;
 
@@ -38,7 +38,7 @@ const shuffleArray = function (array) {
 };
 
 // record the number of occurences of each element in an array
-const elementCount = function (array) {
+const _elementCount = function (array) {
   const obj = {}; 
 
   array.forEach( function(i) {
@@ -93,8 +93,8 @@ const Adagrams = {
   drawLetters() {
     // set up data
     const hand = [];
-    const letterArray = createArray(Adagrams.pool);
-    shuffleArray(letterArray);
+    const letterArray = _createArray(this.pool);
+    _shuffleArray(letterArray);
 
     // choose hand
     for(let i = 0; i < 10 ; i++) {
@@ -108,8 +108,8 @@ const Adagrams = {
     // set up data
     input = input.toUpperCase();
     const inputArray = input.split('');
-    const handLetterCounts = elementCount(lettersInHand);
-    const inputLetterCounts = elementCount(inputArray);
+    const handLetterCounts = _elementCount(lettersInHand);
+    const inputLetterCounts = _elementCount(inputArray);
 
     // word should not be bigger than hand
     if(inputArray.length > lettersInHand.length) return false;
@@ -137,13 +137,13 @@ const Adagrams = {
     
     // calculate score
     for(let letter in wordArray) {
-      if(Adagrams.scoreChart['1'].includes(wordArray[letter])) score += 1;
-      if(Adagrams.scoreChart['2'].includes(wordArray[letter])) score += 2;
-      if(Adagrams.scoreChart['3'].includes(wordArray[letter])) score += 3;
-      if(Adagrams.scoreChart['4'].includes(wordArray[letter])) score += 4;
-      if(Adagrams.scoreChart['5'].includes(wordArray[letter])) score += 5;
-      if(Adagrams.scoreChart['8'].includes(wordArray[letter])) score += 8;
-      if(Adagrams.scoreChart['10'].includes(wordArray[letter])) score += 10;
+      if(this.scoreChart['1'].includes(wordArray[letter])) score += 1;
+      if(this.scoreChart['2'].includes(wordArray[letter])) score += 2;
+      if(this.scoreChart['3'].includes(wordArray[letter])) score += 3;
+      if(this.scoreChart['4'].includes(wordArray[letter])) score += 4;
+      if(this.scoreChart['5'].includes(wordArray[letter])) score += 5;
+      if(this.scoreChart['8'].includes(wordArray[letter])) score += 8;
+      if(this.scoreChart['10'].includes(wordArray[letter])) score += 10;
     };
 
     return score; 
@@ -154,7 +154,7 @@ const Adagrams = {
     const scoreResults = {};
 
     for (let word in words) {
-      scoreResults[words[word]] = Adagrams.scoreWord(words[word]);
+      scoreResults[words[word]] = this.scoreWord(words[word]);
     };
 
     // find higest score value 
