@@ -8,7 +8,7 @@ const Adagrams = {
     };
 
     for (const letter in letterChoices) {
-      if (letterChoices != undefined) {
+      if (letterChoices !== undefined) {
         const charCount = letterChoices[letter];
         const repeatSplit = letter.repeat(charCount).split('');
         letterPool = letterPool.concat(repeatSplit);
@@ -70,7 +70,7 @@ const Adagrams = {
       wordScoreHash[word] = this.scoreWord(word);
     });
     const scores = Object.values(wordScoreHash);
-    const wordKeys= Object.keys(wordScoreHash);
+    const wordKeys = Object.keys(wordScoreHash);
     const highestScore = Math.max(...scores);
     const index = scores.findIndex((score) => score === highestScore);
     let winningWord = wordKeys[index];
@@ -89,6 +89,7 @@ const Adagrams = {
     return {'word': winningWord, 'score': highestScore};
   },
 };
+
 
 // Do not remove this line or your tests will break!
 export default Adagrams;
