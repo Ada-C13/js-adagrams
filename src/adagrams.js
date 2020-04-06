@@ -66,9 +66,7 @@ const Adagrams = {
 
   // Check if a word a player submits only uses characters that are contained within a hand of drawn letters
 
-    // - Has two parameters:
-  //    - `input`, the first parameter, describes some input word, and is a string
-  //    - `lettersInHand`, the second parameter, describes an array of drawn letters in a hand. You can expect this to be an array of ten strings, with each string representing a letter
+  
 
   usesAvailableLetters(input, lettersInHand) {
     input = input.toUpperCase();
@@ -93,14 +91,79 @@ const Adagrams = {
       };
     });
 
+    // for in or 
+
     return true;
-  }
-
-  
-
+  },
   // - Returns either `true` or `false`
   // - Returns `true` if every letter in the `input` word is available (in the right quantities) in the `lettersInHand`
   // - Returns `false` if not; if there is a letter in `input` that is not present in the `lettersInHand` or has too much of compared to the `lettersInHand`
+
+  //   We want a function that returns the score of a given word as defined by the Adagrams game.
+
+  scoreWord(word) {
+    const letterScores = {
+      "A": 1,	
+      "B": 3,	
+      "C": 3,	
+      "D": 2,	
+      "E": 1,	
+      "F": 4,
+      "G": 2,	
+      "H": 4,	
+      "I": 1,	
+      "J": 8,	
+      "K": 5,	
+      "L": 1,	
+      "M": 3,	
+      "N": 1,
+      "O": 1,
+      "P": 3,
+      "Q": 10,
+      "R": 1,
+      "S": 1,
+      "T": 1,
+      "U": 1,
+      "V": 4,
+      "W": 4,
+      "X": 8,
+      "Y": 4,
+      "Z": 10
+    };
+    
+    let score = 0;
+    if (word.length >= 7 && word.length <= 10) {
+      score = 8;
+    }
+
+    let wordChars = word.toUpperCase().split('');
+
+    wordChars.forEach((letter) => {
+      score += letterScores[letter];
+    });
+
+    return score;
+
+  }
+
+  // Make a function named `scoreWord` in the `Adagrams` object in `src/adagrams.js`. This method should have the following properties:
+
+  // - Has one parameter: `word`, which is a string of characters
+  // - Returns an integer representing the number of points
+  // - Each letter within `word` has a point value. The number of points of each letter is summed up to represent the total score of `word`
+  // - Each letter's point value is described in the table below
+  // - If the length of the word is 7, 8, 9, or 10, then the word gets an additional 8 points
+
+  // #### Score chart
+  // |Letter                        | Value|
+  // |:----------------------------:|:----:|
+  // |A, E, I, O, U, L, N, R, S, T  |   1  |
+  // |D, G                          |   2  |
+  // |B, C, M, P                    |   3  |
+  // |F, H, V, W, Y                 |   4  |
+  // |K                             |   5  |
+  // |J, X                          |   8  |
+  // |Q, Z                          |   10 |
 
 };
 
