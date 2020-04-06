@@ -70,21 +70,44 @@ const Adagrams = {
     //Returns a single object that represents the data of a winning word and its score. The object should have the following keys:
     //word, whose value is a string of a word
     //score, whose value is the score of that word
-    const winningWordAndScore = {}
 
     // loop through each word and find the score each word
-    // and put them in a new Map where the word is the key and the count is the value
+    let scoreBoard = new Map();
+    for (let i = 0; i < words.length; i++) {
+      // and put them in a new Map where the word is the key and the count is the value
+      scoreBoard[words[i]] = this.scoreWord(words[i])
+      //const currentWord = words[i];
+      //scoreBoard[currentWord] = this.score(currentWord);
+    }
     // create a variable to store the highestScore
+    let highestScore = -1;
+    let highestScoredWord = "";
     //loop through the map and check each score
-    // if the currentScore is > the highestScore
-    // set the highestScore to be the currentScore
-    // set highestScoredWord to be the currentWord
+    for (let currentWord in scoreBoard) {
+      let currentScore = scoreBoard[currentWord];
+      // if the currentScore is > the highestScore
 
-    // else if the currentScore is === to the highestScore
-    // tie breaker rule:
-    // compare the currentWord to the highestScoredWord      
-    // return an object of highestScoredWord and highestScore    
 
+      if (currentScore > highestScore) {
+        // set the highestScore to be the currentScore
+        // set highestScoredWord to be the currentWord
+        highestScore = currentScore;
+        highestScoredWord = currentWord;
+      }
+      // else if the currentScore is === to the highestScore
+      else if (currentScore === highestScore) {
+        // tie breaker rule:
+        // compare the currentWord to the highestScoredWord
+        if (highestScoredWord.length < 10 && currentWord.length < 10 && highestScoredWord.length > currentWord.length) {
+          highestScoredWord = currentWord
+        }
+        else if ((highestScoredWord.length >= 10 || currentWord.length >= 10) && currentWord.length > highestScoredWord.length) {
+          highestScoredWord = currentWord
+        }
+      }
+    }
+    // return an object of highestScoredWord and highestScore  
+    return { score: highestScore, word: highestScoredWord };
 
   }
 
