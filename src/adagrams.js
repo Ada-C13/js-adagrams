@@ -126,7 +126,6 @@ const Adagrams = {
       for(const word in winningWords) { // determines whether word is 10 letters long
         if(winningWords[word].length == 10) {
           return { word: winningWords[word], score: highestScore };
-          // { word: 'XXXX', score: Adagrams.scoreWord('XXXX') }
         }
       }
       // if there is no 10 letter word, find shortest word
@@ -141,5 +140,5 @@ const Adagrams = {
   }
 };
 
-// Do not remove this line or your tests will break!
+// This line is needed for tests
 export default Adagrams;
