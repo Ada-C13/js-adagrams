@@ -55,6 +55,16 @@ const Adagrams = {
   const chosenLetters = letterPoolClone.slice(0,10);
   return chosenLetters;
   },
+  usesAvailableLetters: function(input, lettersInHand) {
+    for(let i = 0; i < input.length; i++) {
+      if(lettersInHand.includes(input[i])){
+        lettersInHand.splice(lettersInHand.indexOf(input[i]), 1 );
+      } else {
+        return false;
+      }
+    }
+  return true
+  },
 
 
 };
