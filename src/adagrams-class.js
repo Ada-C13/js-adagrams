@@ -90,6 +90,6 @@ class Adagrams {
     };
     return winnerWord;
   }
-}
+};
 
 export default Adagrams;

@@ -63,7 +63,7 @@ const Adagrams = {
     };
     if (string.length >= 7) {
       score += 8;
-    }
+    };
     return score;
   },
 
