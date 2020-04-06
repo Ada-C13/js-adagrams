@@ -106,8 +106,39 @@ const Adagrams = {
       totalScore += Adagrams.LETTER_VALUES[wordArray[letter]]
     }
     return totalScore;
-  }
+  },
 
+  highestScoreFrom(words) {
+    let highestScore = 0;
+    let winningWords = [];
+    for(const word in words) {
+      if(this.scoreWord(words[word]) > highestScore) {
+        highestScore = this.scoreWord(words[word]);
+        winningWords = ([words[word]]);
+      } else if(this.scoreWord(words[word]) == highestScore) {
+        winningWords.push(words[word]);
+      }
+    }
+    // no tie scenario
+    if(winningWords.length == 1) {
+      return { word: winningWords[0], score: highestScore };
+    } else { // tie scenario
+      for(const word in winningWords) { // determines whether word is 10 letters long
+        if(winningWords[word].length == 10) {
+          return { word: winningWords[word], score: highestScore };
+          // { word: 'XXXX', score: Adagrams.scoreWord('XXXX') }
+        }
+      }
+      // if there is no 10 letter word, find shortest word
+      let winner = winningWords[0];
+      for(const word in winningWords) {
+        if(winningWords[word].length < winner.length) {
+          winner = winningWords[word]
+        }
+      }
+      return { word: winner, score: highestScore };
+    }
+  }
 };
 
 // Do not remove this line or your tests will break!
