@@ -7,10 +7,12 @@ const Adagrams = {
       { R: 6 }, { S: 4 }, { T: 6 }, { U: 4 }, { V: 2 }, { W: 2 }, { X: 1 }, { Y: 2 }, { Z: 1 }
     ];
 
+    // Populate player's hand 
+    let lettersInHand = [];
+
     // Create Sattolo Cycle implementation for shuffle
-    // Research: thin v thick arrow usage
     function sattoloShuffle(pool) {
-      for (let f = pool.length; f -> 1;) }
+      for (let f = pool.length - 1; f >= 0; f--) {
       let b = Math.floor(Math.random() * f)
       let temp = pool[f];
       pool[f] = pool[b];
@@ -19,17 +21,11 @@ const Adagrams = {
   return pool;
   };
 
-  // Populate player's hand 
-  let lettersInHand = [];
-
   for (let c = 0; c < 10; c++) {
     sattoloShuffle[0].push(lettersInHand);
   }
   return lettersInHand
 };
-
-// Do not remove this line or your tests will break!
-export default Adagrams;
 
 // Start of Wave 2 Psuedocode
 
@@ -45,7 +41,6 @@ function usesAvailableLetters(input, lettersInHand) {
     return false;
   }
 
-
   //Iterate through inputArray to check if [i] is in hand
   for (const letter of inputArray) {
     if (!tempHand.includes(letter)) {
@@ -56,3 +51,8 @@ function usesAvailableLetters(input, lettersInHand) {
   }
   return true;
 }
+
+
+
+// Do not remove this line or your tests will break!
+export default Adagrams;
