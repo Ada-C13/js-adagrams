@@ -113,17 +113,31 @@ const Adagrams = {
 
         return total;
     },
+    sortWordsArray(words) {
+        words.sort(function(a, b) {
+            return a.length - b.length; //ASC, For Descending order use: b - a
+        });
+        return words;
+    },
 
     highestScoreFrom(words) {
         let maxScore = 0;
         let maxWord = "";
+        this.sortWordsArray(words);
         for (let word of words) {
             let wordArray = word.split("");
+            console.log(wordArray);
             let currentScore = this.scoreWord(word);
-            if (currentScore > maxScore) {
+            console.log(currentScore);
+            if (wordArray.length === 10) {
                 maxScore = currentScore;
                 maxWord = word;
-            } else if (wordArray.length === 10) {
+                return {
+                    word: maxWord,
+                    score: maxScore,
+                };
+            }
+            if (currentScore > maxScore) {
                 maxScore = currentScore;
                 maxWord = word;
             }

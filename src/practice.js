@@ -164,7 +164,7 @@ let letterValues = {
 //         let checker = copy.includes(letter);
 //         copy.splice(index, 1);
 
-let word = ["G", "O", "O", "D"];
+// let word = ["G", "O", "O", "D"];
 
 function scoreWord(word) {
     let letterValues = {
@@ -208,40 +208,56 @@ function scoreWord(word) {
 }
 // console.log(scoreWord(word));
 const words = ["MMMM", "WWW"];
-const wordLength = {};
-for (let i = 0; i < words.length; i++) {
-    let letter = words[i];
-    let array = letter.split("");
-    wordLength[letter] = array.length;
-}
-console.log(wordLength);
-// function highestScoreFrom(words) {
-//     let maxScore = 0;
-//     let maxWord = "";
 
-//     for (let word of words) {
-//         let wordArray = word.split("");
-//         console.log(wordArray);
-//         let currentScore = scoreWord(word);
-//         console.log(currentScore);
-//         if (wordArray.length === 10) {
-//             maxScore = currentScore;
-//             maxWord = word;
-//         }
-//         if (currentScore > maxScore) {
-//             maxScore = currentScore;
-//             maxWord = word;
-//         }
-//     }
-//     return {
-//         word: maxWord,
-//         score: maxScore,
-//     };
+// const wordLength = {};
+// for (let i = 0; i < words.length; i++) {
+//     let letter = words[i];
+//     let array = letter.split("");
+//     wordLength[letter] = array.length;
 // }
+// console.log(wordLength);
 
-// // word: "AAAAAAAAAA",
-// //     score: Adagrams.scoreWord("AAAAAAAAAA"),
-// // };
+function sortWordsArray(words) {
+    words.sort(function(a, b) {
+        return a.length - b.length; //ASC, For Descending order use: b - a
+    });
+    return words;
+}
+
+function highestScoreFrom(words) {
+    let maxScore = 0;
+    let maxWord = "";
+    sortWordsArray(words);
+
+    for (let word of words) {
+        let wordArray = word.split("");
+        console.log(wordArray);
+        let currentScore = scoreWord(word);
+        console.log(currentScore);
+        if (wordArray.length === 10) {
+            maxScore = currentScore;
+            maxWord = word;
+            console.log(currentScore);
+            return {
+                word: maxWord,
+                score: maxScore,
+            };
+        }
+        if (currentScore > maxScore) {
+            maxScore = currentScore;
+            maxWord = word;
+        }
+    }
+    return {
+        word: maxWord,
+        score: maxScore,
+    };
+}
+console.log(highestScoreFrom(words));
+
+// // // word: "AAAAAAAAAA",
+// // //     score: Adagrams.scoreWord("AAAAAAAAAA"),
+// // // };
 
 // console.log(highestScoreFrom(words));
 // function handOfletters() {
