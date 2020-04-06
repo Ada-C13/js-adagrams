@@ -1,5 +1,7 @@
-const Adagrams = {
-  drawLetters: function() {
+class Adagrams {
+  constructor() {
+  }
+  static drawLetters() {
     const letterDist = {
       A : 9, 
       B : 2,  
@@ -54,9 +56,9 @@ const Adagrams = {
     }
   const chosenLetters = letterPoolClone.slice(0,10);
   return chosenLetters;
-  },
+  }
 
-  usesAvailableLetters: function(input, lettersInHand) {
+  static usesAvailableLetters(input, lettersInHand) {
     for(let i = 0; i < input.length; i++) {
       if(lettersInHand.includes(input[i])){
         lettersInHand.splice(lettersInHand.indexOf(input[i]), 1 );
@@ -65,9 +67,9 @@ const Adagrams = {
       }
     }
   return true
-  },
+  }
 
-  scoreWord: function(word) {
+  static scoreWord(word) {
     let numPoints = 0
     let letterScores = {
     'A':1, 'E':1, 'I':1, 'O':1, 'U':1, 'L':1, 'N':1, 'R':1, 'S':1, 'T':1, 'D':2, 'G':2, 'B':3, 'C':3, 'M':3, 'P':3, 'F':4, 'H':4, 'V':4, 'W':4, 'Y':4, 'K':5,'J':8, 'X':8,'Q':10, 'Z':10
@@ -82,9 +84,9 @@ const Adagrams = {
     }
     
     return numPoints;
-  },
+  }
 
-  highestScoreFrom: function(words) {
+  static highestScoreFrom(words) {
     let winningWord = "";
     let winningWordScore = 0;
     for(let i = 0; i < words.length; i++) {
@@ -103,7 +105,6 @@ const Adagrams = {
       };
     };
     return {word: winningWord, score: winningWordScore};
-  
   }
 };
 
