@@ -84,7 +84,17 @@ const Adagrams = {
     return numPoints;
   },
 
-  highestScoreFrom: function() {
+  highestScoreFrom: function(words) {
+    let winningWord = "";
+    let winningWordScore = 0;
+    for(let i = 0; i < words.length; i++) {
+      let wordsScore = this.scoreWord(words[i]);
+      if(wordsScore > winningWordScore) {
+        winningWordScore = wordsScore;
+        winningWord = words[i]
+      };
+    };
+    return {word: winningWord, score: winningWordScore};
   
   }
 };
