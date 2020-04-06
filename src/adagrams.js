@@ -64,7 +64,7 @@ const Adagrams = {
     return drawn
   }, //end of drawLetters
 
-  //--------------------------
+  //-------------------------------------------------------------------
   // example: input = "doo"
   // lettersinhand = a,b,y,d,o,g
 
@@ -90,18 +90,112 @@ const Adagrams = {
     return true;
   }, //end of usesAvailableLetters
 
+  //------------------------------------------------------------------
+  //example: word: "dog"
+  //score = 2+1+2 = 5
 
+  scoreWord(word) {
+     //create letterScore
+    const letterScore = {
+      'A' : 1,
+      'N' : 1,
+      'B' : 3,
+      'O' : 1,
+      'C' : 3,
+      'P' : 3,
+      'D' : 2,
+      'Q' : 10,
+      'E' : 1,
+      'R' : 1,
+      'F' : 4,
+      'S' : 1,
+      'G' : 2,
+      'T' : 1,
+      'H' : 4,
+      'U' : 1,
+      'I' : 1,
+      'V' : 4,
+      'J' : 8,
+      'W' : 4,
+      'K' : 5,
+      'X' : 8,
+      'L' : 1,
+      'Y' : 4,
+      'M' : 3,
+      'Z' : 10
+    };
 
+    //initialize total
+    let total = 0;
+    //parse word into array of letters
+    let letters = word.toUpperCase().split('');
+    //if array of letters ===7,8,9,10
+    if (letters.length >= 7 && letters.length <= 10) {
+      //additional 8 points
+      total += 8;
+    }
+    //loop through array of letters to find assigned value for that letter
+    for (let i = 0; i < letters.length; i++) {
+    //add values
+      total = total + letterScore[letters[i]];
+    }
+    // return score that is integer
+    return total;  
+  },//end of scoreWord
+//------------------------------------------------------------------
+//example: ["dog", "cheese", "no"]
+//result: cheese: 11
+highestScoreFrom(words) {
+  //create empty object
+  let winningWord = {
+    "word": '',
+    "score": 0
+};
+// loop thru each word using for/in to go through every property in object
+// https://www.w3schools.com/js/js_loop_for.asp
+for (let i in words) {
+  let currentWord = words[i]
+  let currentScore = this.scoreWord(currentWord);
+  // compare current word score to winning word score
+  // if better score make current word the winning word
+  if (currentScore > winningWord.score) {
+      winningWord.score = currentScore;
+      winningWord.word = currentWord;
+  } else if (currentScore === winningWord.score){
+    //tie break logic for currentscore == winningword.score
+
+    //check currentWord.length if it's not equal to 10, winningword has a chance
+    if(winningWord.word.length != 10) {
+      //does currentWord equal to 10
+      if(currentWord.length === 10) {
+        winningWord.word = currentWord;
+        winningWord.score = currentScore;
+      }
+      else if (currentWord.length < winningWord.word.length) {
+        //check currentword.length is larger than winningword.word.length
+        //if length of currentword > winningword.word.length
+        //currentWord is the winner
+        winningWord.word = currentWord;
+        winningWord.score = currentScore;
+      }
+    }
+  }
+}
+//return winning word and score
+return winningWord;
+}, //end of highestScoreFrom
 
 
 }; //const Adagrams
 
 
 // Do not remove this line or your tests will break!
- export default Adagrams;
+export default Adagrams;
 
-// test code
-// const drawn = Adagrams.drawLetters();
-// console.log(drawn)
+//test code
+//const drawn = Adagrams.drawLetters();
+//console.log(drawn)
 
-// console.log(Adagrams.usesAvailableLetters("blah", ["a","n","y"]))
+//console.log(Adagrams.usesAvailableLetters("blah", ["a","n","y"]))
+//console.log(Adagrams.scoreWord("cheese"))
+//console.log(Adagrams.highestScoreFrom(["dog", "cheese", "no"]))
