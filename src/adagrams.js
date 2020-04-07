@@ -64,7 +64,7 @@ class Adagrams {
         return false;
       };
       
-      // if a letter is found, delete a letter from a temp array
+      // if a letter is found, delete the letter from a temp array
       const idx = tempLettersInHand.indexOf(char);
       tempLettersInHand.splice(idx, 1);
     };
@@ -134,7 +134,7 @@ class Adagrams {
       
       if (word1.length > word2.length) return word2;
 
-      // When length is the same or 'word1' has a shorter length
+      // When both word1 and word2's length are the same or word1 has a shorter length than word2, return word1
       return word1;
     });
   };
