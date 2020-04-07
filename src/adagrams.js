@@ -1,5 +1,6 @@
-const Adagrams = {
-  LETTERS: {
+class Adagrams {
+  
+  static LETTERS = {
     'A': {num: 9, val: 1}, 
     'B': {num: 2, val: 3}, 
     'C': {num: 2, val: 3}, 
@@ -26,8 +27,9 @@ const Adagrams = {
     'X': {num: 1, val: 8}, 
     'Y': {num: 2, val: 4}, 
     'Z': {num: 1, val: 10},
-  },
-  drawLetters() {
+  };
+  
+  static drawLetters() {
     const letterPool = []; 
     for (const char in this.LETTERS) {
       for (let i=0; i<this.LETTERS[char]['num']; i++) letterPool.push(char);
@@ -44,8 +46,9 @@ const Adagrams = {
     };
 
     return drawn;
-  },
-  usesAvailableLetters(input, lettersInHand) {
+  };
+
+  static usesAvailableLetters(input, lettersInHand) {
     const inputCharCount = {};
     for (let i=0; i<input.length; i++) {
       (inputCharCount[input[i]]) ? inputCharCount[input[i]]++ : inputCharCount[input[i]] = 1;  
@@ -61,16 +64,18 @@ const Adagrams = {
     }; // check if the letter is available in hand
 
     return true;
-  },
-  scoreWord(word) {
+  };
+
+  static scoreWord(word) {
     let score = 0;
     word = word.toUpperCase().split('');
     word.forEach(char => score += this.LETTERS[char]['val']); // increment score based on letter value
     if (word.length >= 7) score += 8;
 
     return score;
-  },
-  highestScoreFrom(words) {
+  };
+
+  static highestScoreFrom(words) {
     class WordData {
       constructor(word, score) {
         this.word = word;
@@ -106,7 +111,7 @@ const Adagrams = {
     };
 
     return (winners.length === 1) ? winners[0] : tieBreaker(winners); // if there's only one winner, tieBreaker() is not needed
-  },
+  };
 };
 
 // Do not remove this line or your tests will break!
