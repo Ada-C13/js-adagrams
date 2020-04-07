@@ -35,20 +35,20 @@ const Adagrams = {
       tiles.push(key.repeat(value).split(''));
     }
     tiles = tiles.flat()
-    // Shuffle array
-    const n = 10
+    const numberOfTiles = 10
+    //https://stackoverflow.com/questions/19269545/how-to-get-n-no-elements-randomly-from-an-array
     const shuffled = tiles.sort(() => 0.5 - Math.random());
-    let hand = shuffled.slice(0, n);
+    let hand = shuffled.slice(0, numberOfTiles);
     return hand;
   },
 
   usesAvailableLetters(input, lettersInHand) {
-    let inputArray = input.toUpperCase().split('');
-    let handCopy = Array.from(lettersInHand);
+    let clonedHand = [...lettersInHand]
 
-    for (let letter of inputArray) {
-      if (handCopy[letter]) {
-        handcopy[letter] -= 1;
+    for(let i = 0; i < input.length; i++) {
+      let letter = input[i];
+      if(clonedHand.includes(letter)) {
+        clonedHand.splice(clonedHand.indexOf(letter), 1);
       } else {
         return false;
       }
@@ -97,7 +97,24 @@ const Adagrams = {
     return wordScore
   },
 
+  highestScoreFrom(words) {
+    let bestScoringWord;
+    let bestScore = 0;
 
+    for (let word of words) {
+      let score = this.scoreWord(word);
+      if (word.length === 10) {
+        bestScoringWord = { word: word, score: score };
+        break;
+      } else if (score > bestScore) {
+        bestScore = score;
+        bestScoringWord = { word: word, score: score };
+      } else if (word.length < bestScoringWord.word.length && score === bestScore) {
+        bestScoringWord = { word: word, score: score };
+      };
+    };
+    return bestScoringWord;
+  }
 }
 // Do not remove this line or your tests will break!
 export default Adagrams;
