@@ -125,10 +125,15 @@ const Adagrams = {
   },
   
   //wave 4
-  
+  highestScoreFrom(words){
+    //hash that stores winning word and score
+    //empty string = 0
+    //fewest letters win
+    //unless there are 10 letters; tie goes to 10 >
+    //multiple wiining word === score && length; FIFO
+  }
 
-
-};
+}
 
 // Do not remove this line or your tests will break!
 export default Adagrams;
