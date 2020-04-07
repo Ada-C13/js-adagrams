@@ -55,10 +55,33 @@ const Adagrams = {
   //Start of Wave 3 pseudocode 
 
   function scoreWord(word) {
-    //Add in 
-    
+    //Create scoring chart 
+    const points = [
+      { A: 1 }, { B: 3 }, { C: 3 }, { D: 2 }, { E: 1 }, { F: 4 }, { G: 2 }, { H: 4 },
+      { I: 1 }, { J: 8 }, { K: 5 }, { L: 1 }, { M: 3 }, { N: 1 }, { O: 1 }, { P: 3 }, { Q: 10 },
+      { R: 1}, { S: 1 }, { T: 1 }, { U: 1 }, { V: 4 }, { W: 4 }, { X: 8 }, { Y: 4 }, { Z: 10 }
+    ];
 
-    //Add in .each replacement here 
+    //Set scoring counter
+    let score = 0 
+    
+    //Handle extra points for certain word lengths
+    if (word.length > 6 && word.length < 11) {
+      score +== 8;
+    }
+
+    // Create array of characters from word 
+    let wordArray = wordArray.from(word);
+
+    //Iterate through wordArray to sum points of a given word
+    for (const item of wordArray) {
+      if(!points.includes(item) {
+        return false;
+    } else if {
+        score +== points(value);
+      }
+    }
+    return score
   }
 
 // Do not remove this line or your tests will break!
