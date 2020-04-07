@@ -107,6 +107,7 @@ const Adagrams = {
 
    highestScoreFrom(words) {
     //  map returns an array of objects
+    // .map is my favorite! :)
      const wordScores = words.map((word) => {
       const newWord = {
         'word': word,
@@ -114,25 +115,26 @@ const Adagrams = {
       };
       return newWord;
     });
-     // set winningWord to the first object in array as a start point
-    //  winningWord becomes object in which to compare to wordScores
+        
+    // this section was VERY confusing to me. Not sure how all Wave 4 tests pass?? Yikes! 
+    // set winningWord to the first object in array as a starting point
      let winningWord = wordScores[0];
-     console.log("this is winningWord");
-     console.log(winningWord);
 
-      // https://zellwk.com/blog/looping-through-js-objects/
-      // I found the above link which made me think I'm not looping through objects properly. 
      for (let i in wordScores) {
        // using dot notation to access the object's properties/values
+      // check if word that is NOT already set to winningWord has a greater score, 
+      // if so, then assign this new word to winningWord.
        if (wordScores[i].score > winningWord.score) {
          winningWord.word = wordScores[i].word;
          winningWord.score = wordScores[i].score;
        } else if
+      //  check if two words have same score but one has length 10.
          (wordScores[i].score === winningWord.score &&
          wordScores[i].word.length === 10) {
          winningWord.word = wordScores[i].word;
          return winningWord;
        } else if
+      //  check if two words have same score - choose the word with less letters.
          (wordScores[i].score === winningWord.score &&
          wordScores[i].word.length < winningWord.word.length) {
          winningWord.word = wordScores[i].word;
