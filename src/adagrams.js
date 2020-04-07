@@ -35,7 +35,7 @@ const Adagrams = {
       tiles.push(key.repeat(value).split(''));
     }
     tiles = tiles.flat()
-    const numberOfTiles = 10
+    const numberOfTiles = 10;
     //https://stackoverflow.com/questions/19269545/how-to-get-n-no-elements-randomly-from-an-array
     const shuffled = tiles.sort(() => 0.5 - Math.random());
     let hand = shuffled.slice(0, numberOfTiles);
@@ -43,7 +43,7 @@ const Adagrams = {
   },
 
   usesAvailableLetters(input, lettersInHand) {
-    let clonedHand = [...lettersInHand]
+    let clonedHand = [...lettersInHand];
 
     for(let i = 0; i < input.length; i++) {
       let letter = input[i];
@@ -94,7 +94,7 @@ const Adagrams = {
     if (word.length >= 7) {
       wordScore += 8;
     }
-    return wordScore
+    return wordScore;
   },
 
   highestScoreFrom(words) {
