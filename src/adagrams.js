@@ -4,7 +4,7 @@ class Adagrams {
     const letter = "abcdefghijklmnopqrstuvwxyz".toUpperCase().split("");
     const quantity = [9, 2, 2, 4, 12, 2, 3, 2, 9, 1, 1, 4, 2, 6, 8, 2, 1, 6, 4, 6, 4, 2, 2, 1, 2, 1];
     
-    let letterPool = [];
+    const letterPool = [];
 
     for (let i = 0; i < 26 ; i++){
       let j = 0;
@@ -17,10 +17,10 @@ class Adagrams {
   }
 
   static drawLetters() {
-    let letterPool = this.createLetterPool();
+    const letterPool = this.createLetterPool();
     
     //randomly draw 10 letters from the shuffledLetterPoll
-    let drawn = [];
+    const drawn = [];
     for (let i = 0; i <10; i++){
       let index = Math.floor(Math.random()*letterPool.length); //get the index
       drawn.push(letterPool[index]);
