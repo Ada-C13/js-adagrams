@@ -1,4 +1,4 @@
-const lettersInfo = {
+const letterBank = {
   'A': {
     'quantity': 9,
     'score': 1
@@ -109,10 +109,10 @@ const Adagrams = {
   drawLetters() {
     let lettersDeck = []
 
-    for (let key in lettersInfo) {
-      while (lettersInfo[key]['quantity'] > 0) {
+    for (let key in letterBank) {
+      while (letterBank[key]['quantity'] > 0) {
         lettersDeck.push(key);
-        lettersInfo[key]['quantity'] -= 1;
+        letterBank[key]['quantity'] -= 1;
       };
     };
 
@@ -143,12 +143,11 @@ const Adagrams = {
   },
 
   scoreWord(word) {
-    score = 0;
+    let score = 0;
 
-    for (let key in lettersInfo) {
-      for (let i =0; i < word.length; i++) {
-        score += letterInfo[key]['score'];
-      };
+    for (let i =0; i < word.length; i++) {
+      let upcaseLetter = word.toUpperCase();
+      score += letterBank[upcaseLetter['score']];
     };
 
     if (word.length >= 7) {
