@@ -40,7 +40,7 @@ const Adagrams = {
 
       // if the letter is unavailable, assign a new random letter
       while (this.LETTERS[char]['num'] < 1) char = letterPool[Math.floor(Math.random()*letterPool.length)];
-      
+
       // if the letter is available, add it to the hand and decrement the number available in the pool
       drawn[i] = char;
       this.LETTERS[char]['num']--;
@@ -89,16 +89,16 @@ const Adagrams = {
       return new WordData(word, this.scoreWord(word));
     });
 
-    const max = Math.max.apply(null, wordsWithScores.map(wordData => wordData.score));
+    const maxScore = Math.max.apply(null, wordsWithScores.map(wordData => wordData.score));
 
     // filter all WordData objects that contain the max score
     const winners = wordsWithScores.filter(wordData => {
-      if (wordData.score === max) return wordData;
+      if (wordData.score === maxScore) return wordData;
     });
 
-    // helper function that handles the tie-breaking logic: 1) words with length of 10, 2) words with the shortest length, 3) first word in list
+    // helper function that handles the tie-breaking logic: 1) 10-letter words, 2) shortest word, 3) first word in list
     const tieBreaker = (winners) => {
-      winners.sort((a, b) => b.word.length - a.word.length);
+      winners.sort((a, b) => b.word.length - a.word.length); // sort from longest to shortest; without this, the function will not prioritize 10-letter words
       const shortestLength = winners[winners.length-1].word.length;
 
       const tieWinner = winners.filter(wordData => {
