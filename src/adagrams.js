@@ -122,13 +122,17 @@ class Adagrams {
     let tiedScoreSorted = tiedScores.sort(function(a, b){
       return a.word.length-b.word.length;
   })
-    // highestScoreFrom
+    // highestScoreFrom 
+    // we know that the max length of the string is 10
     if (tiedScoreSorted.length === 1){
       bestWordScore = tiedScoreSorted[0];
+    // selects the word with 10 letters, pick the last index of that 10 letters
     }else if ((tiedScoreSorted[0].word.length !== tiedScoreSorted[tiedScoreSorted.length - 1].word.length) &&(tiedScoreSorted[tiedScoreSorted.length - 1].word.length === 10)){
       bestWordScore = tiedScoreSorted[tiedScoreSorted.length - 1];
+    // selects the word with fewer letters when neither are 10 letters
     }else if (tiedScoreSorted[tiedScoreSorted.length - 1].word.length !== 10){
       bestWordScore = tiedScoreSorted[0];
+    //selects the first word when both have same length
     }else if ((tiedScoreSorted[0].word.length === tiedScoreSorted[tiedScoreSorted.length - 1].word.length) && (tiedScoreSorted[tiedScoreSorted.length - 1].word.length !== 10)){
       bestWordScore = tiedScoreSorted[0];
     }else{
