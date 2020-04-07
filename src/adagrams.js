@@ -1,20 +1,10 @@
-// > Object.entries({a: 1, b: 2})
-// [ [ 'a', 1 ], [ 'b', 2 ] ]
-// > Object.keys({a: 1, b: 2})
-// [ 'a', 'b' ]
-// > Object.values({a: 1, b: 2})
-// [ 1, 2 ]
-
-
 const Adagrams = {
-  // this is a function inside of an object
-  // it's the same as writing ==> drawLetters: function() {...}
   drawLetters() {
     let letters = ['a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'b', 'b', 'c', 'c', 'd', 'd', 'd', 'd', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'f', 'f', 'g', 'g', 'g', 'h', 'h', 'i', 'i', 'i', 'i', 'i', 'i', 'i', 'i', 'i', 'j', 'k', 'l', 'l', 'l', 'l', 'm', 'm', 'n', 'n', 'n','n', 'n', 'n', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'p', 'p', 'q', 'r', 'r', 'r', 'r', 'r', 'r', 's', 's', 's', 's', 't', 't', 't', 't', 't', 't', 'u', 'u', 'u', 'u', 'v', 'v', 'w', 'w', 'x', 'y', 'y', 'z'];
 
     const lettersInHand = [];
-    // Method discovered on Stack Overflow here: https://stackoverflow.com/questions/5915096/get-random-item-from-javascript-array
-    // Here is what I think it's doing:  Math.random returns a floating point between 0-1, multiplies that by the length of the array, and Math.floor rounds that down to determine a 'random' index - is it really random?  According to some people, no.  But we'll take it for our first go at a randomizer. 
+    // Method from Stack Overflow here: https://stackoverflow.com/questions/5915096/get-random-item-from-javascript-array
+    // Math.random returns a floating point between 0-1, multiplies that by the length of the array, and Math.floor rounds that down to determine a 'random' index - is it really random?  According to some people, no.  But we'll take it for our first go at a randomizer. 
     for(let i = 0; i < 10; i++) {
       let randomIndex = Math.floor(Math.random()*letters.length);
       let letter = letters[randomIndex];
@@ -128,6 +118,8 @@ const Adagrams = {
       if (tenLetterWords.length > 0) {
         winner = tenLetterWords[0];
       } else {
+        // I found this reduce code snippet on stack overflow, but I sadly closed the tab before I got the URL
+        // This method reduces tieScoreWords array by the given function; (a,b) are the parameters of an anonymous function; the ternary operator assigns the shortest word to winner which is then returned
         winner = tieScoreWords.reduce((a,b) => a.length <= b.length ? a : b);
       };
     };
@@ -137,9 +129,9 @@ const Adagrams = {
   highestScoreFrom(words) {
     let highestScore = {};
 
-    const scores = this.wordScores(words);
+    const allScores = this.wordScores(words);
     
-    const winningWord = this.getMax(scores);
+    const winningWord = this.getMax(allScores);
 
     if (winningWord.length > 1) {
       let winner = this.tieBreaker(winningWord);
@@ -156,13 +148,14 @@ const Adagrams = {
     return highestScore;
   },
   
+  // Method from https://stackoverflow.com/questions/27376295/getting-key-with-the-highest-value-from-object
+  // This method looks at the values of the given object and finds the maximum, then filters the keys that have the same value.  This returns an array of all words with the max score which is helpful for determining a tie.
   getMax(wordScores) {
-    return Object.keys(wordScores).filter(x => {
-      return wordScores[x] == Math.max.apply(null, 
+    return Object.keys(wordScores).filter(key => {
+      return wordScores[key] == Math.max.apply(null, 
         Object.values(wordScores));
     });
   }, 
-
 }
 
 // Do not remove this line or your tests will break!
