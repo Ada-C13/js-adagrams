@@ -25,11 +25,11 @@ const Adagrams = {
     sattoloShuffle[0].push(lettersInHand);
   }
   return lettersInHand
-  };
+  },
 
   // Start of Wave 2 Psuedocode
 
-  function usesAvailableLetters(input, lettersInHand) {
+  usesAvailableLetters(input, lettersInHand) {
 
     //Create a copy of lettersInHand
     const tempHand = [...lettersInHand];
@@ -50,58 +50,47 @@ const Adagrams = {
       }
     }
     return true;
-  }
+  },
 
   //Start of Wave 3 pseudocode 
 
-  function scoreWord(word) {
+  scoreWord(word) {
     //Create scoring chart 
-    const points = [
-      { A: 1 }, { B: 3 }, { C: 3 }, { D: 2 }, { E: 1 }, { F: 4 }, { G: 2 }, { H: 4 },
-      { I: 1 }, { J: 8 }, { K: 5 }, { L: 1 }, { M: 3 }, { N: 1 }, { O: 1 }, { P: 3 }, { Q: 10 },
-      { R: 1}, { S: 1 }, { T: 1 }, { U: 1 }, { V: 4 }, { W: 4 }, { X: 8 }, { Y: 4 }, { Z: 10 }
-    ];
+    const points = { A: 1, B: 3, C: 3, D: 2, E: 1, F: 4, G: 2, H: 4, I: 1, J: 8, K: 5, L: 1, M: 3, N: 1, O: 1, P: 3, Q: 10, R: 1, S: 1, T: 1, U: 1, V: 4, W: 4, X: 8, Y: 4, Z: 10 };
 
     //Set scoring counter
     let score = 0 
     
     //Handle extra points for certain word lengths
     if (word.length > 6 && word.length < 11) {
-      score +== 8;
+      score += 8;
     }
 
     // Create array of characters from word 
-    const wordArray = wordArray.from(word);
+    const wordArray = Array.from(word);
 
     //Iterate through wordArray to sum points of a given word
     for (const item of wordArray) {
-      if(!points.includes(item) {
+      if(points[item] === undefined) {
         return false;
-    } else if {
-        score +== points(value);
+    } else {
+        score += points[item];
       }
     }
     return score
-  }
+  },
 
   //Start of Wave 4 pseudocode
-  function highestScoreFrom(words) {
-    
-    //Create players with Map syntax
-    const players = new Map(); 
-    players.set('word', word);
-    players.set('score', score);
-
-    // Or maybe this Map syntax?
-    const players = new Map(arr.map(word => [i.word, i.score]));
-
+  highestScoreFrom(words) {
     // Set variable for highest-scoring word 
-    let highestScore = {}
+    let highestScore = {word: '', score: 0}
 
     // Iterate through players to find the highest scored word and solve for ties + special instructions
-    for (const p of players) {
-      if (score > highestScore[:score]) {
-        highestScore = ... ;
+    // TODO: Come back to finish this.
+    for (const w of words) {
+      const score = scoreWord(w);
+      if (score > highestScore.score) {
+      highestScore = {word: w, score: score};
       } else if (score === highestScore) {
       }
     }
