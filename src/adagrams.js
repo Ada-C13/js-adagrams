@@ -28,20 +28,17 @@ const Adagrams = {
     'Z': {num: 1, val: 10},
   },
   drawLetters() {
-    // ensure a more weighted distribution
-    const letterPool = [];
+    const letterPool = []; 
     for (const char in this.LETTERS) {
       for (let i=0; i<this.LETTERS[char]['num']; i++) letterPool.push(char);
-    };
+    }; // ensure a more weighted distribution
 
     const drawn = [];
     for (let i=0; i<10; i++) {
-      let char = letterPool[Math.floor(Math.random()*letterPool.length)];
+      let char = letterPool[Math.floor(Math.random()*letterPool.length)]; // see Paul J.'s answer: https://stackoverflow.com/questions/2532218/pick-random-property-from-a-javascript-object
 
-      // if the letter is unavailable, assign a new random letter
       while (this.LETTERS[char]['num'] < 1) char = letterPool[Math.floor(Math.random()*letterPool.length)];
 
-      // if the letter is available, add it to the hand and decrement the number available in the pool
       drawn.push(char);
       this.LETTERS[char]['num']--;
     };
@@ -49,29 +46,26 @@ const Adagrams = {
     return drawn;
   },
   usesAvailableLetters(input, lettersInHand) {
-    // create hashmap for input
     const inputCharCount = {};
     for (let i=0; i<input.length; i++) {
       (inputCharCount[input[i]]) ? inputCharCount[input[i]]++ : inputCharCount[input[i]] = 1;  
-    };
+    }; // create hashmap for input
     
-    // create hashmap for lettersInHand
     const handCharCount = {};
     for (let i=0; i<lettersInHand.length; i++) {
       (handCharCount[lettersInHand[i]]) ? handCharCount[lettersInHand[i]]++ : handCharCount[lettersInHand[i]] = 1;    
-    };
+    }; // create hashmap for lettersInHand
 
-    // check if the letter is available in hand
     for (const char in inputCharCount) {
       if (!handCharCount[char] || handCharCount[char] < inputCharCount[char]) return false;
-    };
+    }; // check if the letter is available in hand
 
     return true;
   },
   scoreWord(word) {
     let score = 0;
     word = word.toUpperCase().split('');
-    word.forEach(char => score += this.LETTERS[char]['val']);
+    word.forEach(char => score += this.LETTERS[char]['val']); // increment score based on letter value
     if (word.length >= 7) score += 8;
 
     return score;
@@ -84,21 +78,19 @@ const Adagrams = {
       };
     };
 
-    // create an array of WordData objects
     const wordsWithScores = words.map(word => {
       return new WordData(word, this.scoreWord(word));
-    });
+    }); // create an array of WordData objects
 
-    const maxScore = Math.max.apply(null, wordsWithScores.map(wordData => wordData.score));
+    const maxScore = Math.max.apply(null, wordsWithScores.map(wordData => wordData.score)); // see Roatin Marth's answer, edited by Mr. Llama: https://stackoverflow.com/questions/1669190/find-the-min-max-element-of-an-array-in-javascript
 
-    // filter all WordData objects that contain the max score
     const winners = wordsWithScores.filter(wordData => {
       if (wordData.score === maxScore) return wordData;
     });
 
     // helper function that handles the tie-breaking logic: 1) 10-letter words, 2) shortest word, 3) first word in list
     const tieBreaker = (winners) => {
-      winners.sort((a, b) => b.word.length - a.word.length); // sort from longest to shortest; without this, the function will not prioritize 10-letter words
+      winners.sort((a, b) => b.word.length - a.word.length); // sort from longest to shortest; without this line, the function will not prioritize 10-letter words
       const shortestLength = winners[winners.length-1].word.length;
 
       const tieWinner = winners.filter(wordData => {
