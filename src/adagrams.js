@@ -70,6 +70,40 @@ const Adagrams = {
       score += 8;
     }
     return score;
+  },
+  tiebreaker(winningWord, word) {
+    if (word.length === 10 && winningWord.length === 10) {
+      return word;
+    } else if (winningWord.length === 10 && word.length !== 10) {
+      return winningWord;
+    } else if (word.length === 10 && winningWord.length === 10) {
+      return winningWord;
+    } else if (word.length < winningWord.length) {
+      return word;
+    }
+  },
+  highestScoreFrom(words) {
+    let winningWord = '';
+    let winningScore = 0;
+
+    //dictionary that calcs and stores words and their scores
+    const scoredWordsDictionary = {};
+
+    words.forEach(word => {
+      scoredWordsDictionary[word] = this.scoreWord(word);
+    });
+
+    Object.keys(scoredWordsDictionary).forEach(word => {
+      if (scoredWordsDictionary[word] > winningScore) {
+        winningScore = scoredWordsDictionary[word];
+        winningWord = word;
+      } else if (scoredWordsDictionary[word] === winningScore
+        ) {
+        winningWord = this.tiebreaker(winningWord, word)
+      }
+    });
+
+    return { word: winningWord, score: winningScore };
   }
 };
 
