@@ -1,20 +1,4 @@
-// Our first job is to build a hand of 10 letters. To do so, add a function called `drawLetters` inside of the `Adagrams` object in `src/adagrams.js`. This method should have the following properties:
-
-// - No parameters
-// - Returns an array of ten strings
-//   - Each string should contain exactly one letter
-//   - These represent the hand of letters that the player has drawn
-// - The letters should be randomly drawn from a pool of letters
-//   - This letter pool should reflect the distribution of letters as described in the table below
-// - Invoking this function should **not** change the pool of letters
-//   - Imagine that the user returns their hand to the pool before drawing new letters
-
-
 const Adagrams = {
-  
-
-  
-
 
   drawLetters() {
     const letterCounts = {
@@ -64,10 +48,6 @@ const Adagrams = {
     return lettersInHand;
   },
 
-  // Check if a word a player submits only uses characters that are contained within a hand of drawn letters
-
-  
-
   usesAvailableLetters(input, lettersInHand) {
     input = input.toUpperCase();
     let charsArray = input.split('');
@@ -95,11 +75,6 @@ const Adagrams = {
 
     return true;
   },
-  // - Returns either `true` or `false`
-  // - Returns `true` if every letter in the `input` word is available (in the right quantities) in the `lettersInHand`
-  // - Returns `false` if not; if there is a letter in `input` that is not present in the `lettersInHand` or has too much of compared to the `lettersInHand`
-
-  //   We want a function that returns the score of a given word as defined by the Adagrams game.
 
   scoreWord(word) {
     const letterScores = {
@@ -144,26 +119,40 @@ const Adagrams = {
 
     return score;
 
-  }
+  },
 
-  // Make a function named `scoreWord` in the `Adagrams` object in `src/adagrams.js`. This method should have the following properties:
+  highestScoreFrom (words) {
+    let wordHash = {}; // make an empty hash
 
-  // - Has one parameter: `word`, which is a string of characters
-  // - Returns an integer representing the number of points
-  // - Each letter within `word` has a point value. The number of points of each letter is summed up to represent the total score of `word`
-  // - Each letter's point value is described in the table below
-  // - If the length of the word is 7, 8, 9, or 10, then the word gets an additional 8 points
-
-  // #### Score chart
-  // |Letter                        | Value|
-  // |:----------------------------:|:----:|
-  // |A, E, I, O, U, L, N, R, S, T  |   1  |
-  // |D, G                          |   2  |
-  // |B, C, M, P                    |   3  |
-  // |F, H, V, W, Y                 |   4  |
-  // |K                             |   5  |
-  // |J, X                          |   8  |
-  // |Q, Z                          |   10 |
+    let highScore = 0; // create highScore
+    let highScoreWord = ''; // create highScoreWord
+  
+    let i = 0;
+    while(i < words.length) { // loop through words by each word
+      let word = words[i]
+      let wordScore = Adagrams.scoreWord(word); // wordScore = scoreWord(word)
+      if (wordScore > highScore) { // if the score is larger than the highScore then...
+        highScore = wordScore; // highScore = wordScore
+        highScoreWord =  word; // highScoreWord = word
+      } else if (wordScore === highScore) { // else if wordScore === highScore
+          if (highScoreWord.length !== 10) { // if highScoreWord.length !== 10
+            if (word.length === 10) { // if word.length === 10
+              highScoreWord = word // highScoreWord = word
+            } else if (word.length < highScoreWord.length) { // else if word.length < highScoreWord.length
+              highScoreWord = word // highScoreWord = word
+            };
+          };
+      };
+  
+      i++;
+    }; 
+    wordHash = {
+      word: highScoreWord, 
+      score: highScore
+    }; // wordHash = {word: highScoreWord, score: highScore}
+  
+    return wordHash; //return wordHash
+  },
 
 };
 
