@@ -67,7 +67,6 @@ class Adagrams {
     }
   }
 
-
   // Wave 1
   static drawLetters() {
     let pool = [];
