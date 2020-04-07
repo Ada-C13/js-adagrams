@@ -28,7 +28,7 @@ const Adagrams = {
     'Z': {num: 1, val: 10},
   },
   drawLetters() {
-    // this ensures a more weighted distribution
+    // ensure a more weighted distribution
     const letterPool = [];
     for (const char in this.LETTERS) {
       for (let i=0; i<this.LETTERS[char]['num']; i++) letterPool.push(char);
@@ -37,9 +37,11 @@ const Adagrams = {
     const drawn = [];
     for (let i=0; i<10; i++) {
       let char = letterPool[Math.floor(Math.random()*letterPool.length)];
+
       // if the letter is unavailable, assign a new random letter
       while (this.LETTERS[char]['num'] < 1) char = letterPool[Math.floor(Math.random()*letterPool.length)];
-      // if the letter is available, add it to the hand and decrement the number available 
+      
+      // if the letter is available, add it to the hand and decrement the number available in the pool
       drawn[i] = char;
       this.LETTERS[char]['num']--;
     };
@@ -59,7 +61,7 @@ const Adagrams = {
       (handCharCount[lettersInHand[i]]) ? handCharCount[lettersInHand[i]]++ : handCharCount[lettersInHand[i]] = 1;    
     };
 
-    // checks if the letter is available in hand
+    // check if the letter is available in hand
     for (const char in inputCharCount) {
       if (!handCharCount[char] || handCharCount[char] < inputCharCount[char]) return false;
     };
@@ -82,37 +84,36 @@ const Adagrams = {
       };
     };
 
-    const wordsWithScores = [];
-    words.forEach(word => wordsWithScores.push(new WordData(word, this.scoreWord(word))));
+    // create an array of WordData objects
+    const wordsWithScores = words.map(word => {
+      return new WordData(word, this.scoreWord(word));
+    });
 
-    let max = Math.max.apply(null, wordsWithScores.map(wordData => wordData.score));
+    const max = Math.max.apply(null, wordsWithScores.map(wordData => wordData.score));
 
+    // filter all WordData objects that contain the max score
     const winners = wordsWithScores.filter(wordData => {
       if (wordData.score === max) return wordData;
     });
 
-    // in the case of a tie: 1) word with 10 letters, 2) word with the fewest letters, 3) first word in the list; return only broke out of one loop, not the whole next, so forEach wasn't working! I needed to wrap the tiebreaking logic into a function, pull out the object into an array and return the first element of the array out of the function
-    const tieBreaker = (arr) => {
-      arr.sort((a, b) => b.word.length - a.word.length);
-      const shortestLength = arr[arr.length-1].word.length;
+    // helper function that handles the tie-breaking logic: 1) words with length of 10, 2) words with the shortest length, 3) first word in list
+    const tieBreaker = (winners) => {
+      winners.sort((a, b) => b.word.length - a.word.length);
+      const shortestLength = winners[winners.length-1].word.length;
 
-      const tieWinner = arr.filter(object => {
-        switch (object.word.length) {
+      const tieWinner = winners.filter(wordData => {
+        switch (wordData.word.length) {
           case 10:
-            return object;
+            return wordData;
           case shortestLength:
-            return object;
-        }
+            return wordData;
+        };
       });
 
       return tieWinner[0];
     };
 
-    if (winners.length === 1) {
-      return winners[0];
-    } else {
-    return tieBreaker(winners);
-    };
+    return (winners.length === 1) ? winners[0] : tieBreaker(winners); // if there's only one winner, tieBreaker() is not needed
   },
 };
 
