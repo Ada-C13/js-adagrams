@@ -30,102 +30,65 @@ const Adagrams = {
   drawLetters() {
     // this ensures a more weighted distribution
     const letterPool = [];
-    for (const letter in this.LETTERS) {
-      for (let i=0; i<this.LETTERS[letter]['num']; i++) {
-        letterPool.push(letter);
-      };
+    for (const char in this.LETTERS) {
+      for (let i=0; i<this.LETTERS[char]['num']; i++) letterPool.push(char);
     };
 
     const drawn = [];
     for (let i=0; i<10; i++) {
-      let letter = letterPool[Math.floor(Math.random()*letterPool.length)];
-
-      // if the number available in the pool is less than 1, a new random value is assigned to letter
-      while (this.LETTERS[letter]['num'] < 1) {
-        letter = letterPool[Math.floor(Math.random()*letterPool.length)];
-      };
-
-      // if the letter is available, it is added to the hand and the number available in the pool is decremented 
-      drawn[i] = letter;
-      this.LETTERS[letter]['num'] -= 1;
+      let char = letterPool[Math.floor(Math.random()*letterPool.length)];
+      // if the letter is unavailable, assign a new random letter
+      while (this.LETTERS[char]['num'] < 1) char = letterPool[Math.floor(Math.random()*letterPool.length)];
+      // if the letter is available, add it to the hand and decrement the number available 
+      drawn[i] = char;
+      this.LETTERS[char]['num']--;
     };
 
     return drawn;
   },
   usesAvailableLetters(input, lettersInHand) {
-    // convert input string to object, use hashmap function to lookup if input is included in lettersInHand at expected quantities
-    const inputLetterCount = {};
+    // create hashmap for input
+    const inputCharCount = {};
     for (let i=0; i<input.length; i++) {
-      if (inputLetterCount[input[i]]) {
-        inputLetterCount[input[i]] += 1;
-      } else {
-        inputLetterCount[input[i]] = 1;
-      };
+      (inputCharCount[input[i]]) ? inputCharCount[input[i]]++ : inputCharCount[input[i]] = 1;  
     };
-
-    const handLetterCount = {};
+    
+    // create hashmap for lettersInHand
+    const handCharCount = {};
     for (let i=0; i<lettersInHand.length; i++) {
-      if (handLetterCount[lettersInHand[i]]) {
-        handLetterCount[lettersInHand[i]] += 1;
-      } else {
-        handLetterCount[lettersInHand[i]] = 1;
-      };
+      (handCharCount[lettersInHand[i]]) ? handCharCount[lettersInHand[i]]++ : handCharCount[lettersInHand[i]] = 1;    
     };
 
-    // returns false if input is not included in lettersInHand (null or 0?)
-    // returns false when input contains letters repeated more than in lettersInHand
-    // otherwise, returns true
-    for (const key in inputLetterCount) {
-      if (!handLetterCount[key] || handLetterCount[key] < inputLetterCount[key]) { 
-        return false;
-      };
+    // checks if the letter is available in hand
+    for (const char in inputCharCount) {
+      if (!handCharCount[char] || handCharCount[char] < inputCharCount[char]) return false;
     };
 
     return true;
   },
   scoreWord(word) {
-    // change word to uppercase
-    // split word into array of letters
-    // if word length is 7, 8, 9, 10, add 8 points
-    // else loop thru letters array, lookup value in LETTERS pool and add to score
     let score = 0;
     word = word.toUpperCase().split('');
-    word.forEach(letter => score += this.LETTERS[letter]['val']);
-
-    if (word.length >= 7) {
-      score += 8;
-    };
+    word.forEach(char => score += this.LETTERS[char]['val']);
+    if (word.length >= 7) score += 8;
 
     return score;
   },
   highestScoreFrom(words) {
-    // words is an array of strings
-    // create an object for each element in words: {word: string of a word, score: score of that word}
     class WordData {
       constructor(word, score) {
         this.word = word;
         this.score = score;
-      }
-    }
+      };
+    };
 
     const wordsWithScores = [];
-    words.forEach(word => {
-      const score = this.scoreWord(word);
-      wordsWithScores.push(new WordData(word, score));
-    });
+    words.forEach(word => wordsWithScores.push(new WordData(word, this.scoreWord(word))));
 
-    let highest = 0;
-    wordsWithScores.forEach(wordData => {
-      if (wordData.score > highest) {
-        highest = wordData.score;
-      };
-    });
+    let max = Math.max.apply(null, wordsWithScores.map(wordData => wordData.score));
 
-    const winners = [];
-    wordsWithScores.forEach(wordData => {
-      if (wordData.score === highest) {
-        winners.push(wordData);
-      };
+    const winners = wordsWithScores.filter(wordData => {
+      if (wordData.score === max) return wordData;
     });
 
     // in the case of a tie: 1) word with 10 letters, 2) word with the fewest letters, 3) first word in the list; return only broke out of one loop, not the whole next, so forEach wasn't working! I needed to wrap the tiebreaking logic into a function, pull out the object into an array and return the first element of the array out of the function
