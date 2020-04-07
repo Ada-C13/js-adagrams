@@ -169,14 +169,53 @@ const Adagrams = {
       total += 8 
     }
     return total 
+  },
+
+  highestScoreFrom(words) {
+    let bestScore = 0 
+    let bestWords = []
+    let shortestWordLength = 10
+    let shortestWord = []
+
+    for(let i = 0; i < words.length; i++){
+      if(Adagrams.scoreWord(words[i]) > bestScore){
+        bestScore = Adagrams.scoreWord(words[i]);
+        bestWords = [words[i]];
+      } else if (Adagrams.scoreWord(words[i]) === bestScore){
+        bestWords.push(words[i]);
+      } 
+    }
+
+    if (bestWords.length === 1){
+      const winner = {
+        word: bestWords[0], 
+        score: Adagrams.scoreWord(bestWords[0])
+      };
+      return winner;
+    } else {
+      for( let i = 0; i < bestWords.length; i++){ 
+        if(bestWords[i].length === 10){ 
+          return {
+            word: bestWords[i],
+            score: Adagrams.scoreWord(bestWords[0])
+          }
+        } else { 
+          if(bestWords[i].length < shortestWordLength){
+            shortestWordLength = bestWords[i].length;
+            shortestWord = [(bestWords[i])];
+          } else if(bestWords[i].length === shortestWordLength){
+            shortestWord.push(bestWords[i]);
+          }
+        }
+      }
+      const tieWinner = {
+        word: shortestWord[0],
+        score: Adagrams.scoreWord(shortestWord[0])
+      }
+      return tieWinner
+    }
   }
 };
 
-// console.log(Adagrams.makePool());
-// console.log(Adagrams.drawLetters());
-// console.log(Adagrams.usesAvailableLetters('hello', ['a', 'b', 'e', 'h', 'e', 'l', 'l', 'o']));
-// console.log(Adagrams.usesAvailableLetters('hello', ['a', 'b', 'e', 'e', 'l', 'l', 'o']));
-// console.log(Adagrams.scoreWord('abc'));
-
 // Do not remove this line or your tests will break!
-// export default Adagrams;
+export default Adagrams;
