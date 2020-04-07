@@ -120,53 +120,7 @@ class Adagrams {
     return score;
   }
 
-  /*
-  static scoreWord(word) {
-    let score = 0;
-    const wordArray = word.toUpperCase().split('');
-    wordArray.forEach((charScore) => {
-      switch (charScore) {
-        case "Q":
-        case "Z":
-          score += 10;
-          break;
-        case "J":
-        case "X":
-          score += 8;
-          break;
-        case "K":
-          score += 5;
-          break;
-        case "F":
-        case "H":
-        case "V":
-        case "W":
-        case "Y":
-          score += 4 ;
-          break;
-        case "B":
-        case "C":
-        case "M":
-        case "P":
-          score += 3;
-          break;
-        case "D":
-        case "G":
-          score += 2
-          break;
-        default:
-          score += 1;
-      }
-    });
-
-    if(wordArray.length >= 7){
-      score += 8;
-    };
-    return score;
-  }
-  */
-
-
+  
   static highestScoreFrom(words) {
     let highestScore = { word: "", score: 0 };
     words.forEach((word) => {
@@ -185,12 +139,14 @@ class Adagrams {
   }
 }
 
-//console.log(Adagrams.scoreWord('WHIMSY'))
+
 
 // Do not remove this line or your tests will break!
 export default Adagrams;
 
-    /* 
+
+
+    /*  first draft of wave 1
     // working draw letters function - but time complexity is too high?
     let letterArray = [];    
     for(let key in this.letters){
