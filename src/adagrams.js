@@ -56,7 +56,35 @@ const Adagrams = {
 
     // Implement this method for wave 1
   },
-  
+  //wave2 
+  //function uses ava. letters, takes a string & array of letters.
+  // to determine if the string can be made from the array of letters
+      //return true if the string is valid(can be made from array of letters)
+      // false if the string is invalid (can't be made from array of letters)
+
+      usesAvailableLetters(input, lettersInHand) {
+        // if (input.length > 10 || input.length < 1 || lettersInHand.length !== 10){
+        //   return false;
+        // }
+        const inputLetters = input.split('')
+        let result = true
+        inputLetters.forEach(letter => {
+          // find indexOfLetter in lettersInHand array. //from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf
+          let indexOfLetter = lettersInHand.indexOf(letter)
+          // console.log(letter);
+          // console.log(indexOfLetter)
+          // indexOf returns -1 if letter is not found
+          if (indexOfLetter === -1 ){
+           
+            result = false
+            // return false
+          } else {
+            //slice makes if letter is found, delete a letter from lettersInHand
+            lettersInHand.splice(indexOfLetter, 1)
+          }
+        })
+        return result;
+      }
 }
 // console.log(Adagrams.usesAvailableLetters('cata', ['a', 'c', 't']));
 
