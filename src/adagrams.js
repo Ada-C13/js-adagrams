@@ -1,4 +1,3 @@
-
 const Adagrams = {
   drawLetters() {
     const allLetters = {
@@ -32,26 +31,22 @@ const Adagrams = {
     };
     
     //wave 1
-  //   const createTiles = function(letterUsed) {
-  //     let tileArray = [];
-  //     for (let key in letterUsed) {
-  //       const letters = key.repeat(letterUsed[key]).split("");
-  //         tileArray = tileArray.concat(letters);
-  //     }
-  //     return tileArray
-  //   },
-
-    hand = [];
-    let letters = allLetters
-    for (let i = 0; i < 10; i ++) {
-      let index = Math.floor(Math.random() * letters.length -1);
-      let rand = letters[index];
-      hand.push(rand);
-      // letters.splice(index, 1);
+    const letters = new Array();
+    for (let char in allLetters) {
+      for(let i = 0; i < allLetters[char]; i += 1) {
+        letters.push(char);
+      }
     }
-    return hand;
-  },
 
+    let hands = new Array();
+    for(let i = 0; i < 10; i += 1) {
+      const index = Math.floor(Math.random() * (letters.length));
+      hands.push(letters[index]);
+      letters.splice(index, 1);
+    }
+    return hands;
+    },
+  
     //wave 2
     usesAvailableLetters(input, lettersInHand) {  
       let result = true;
@@ -121,19 +116,34 @@ const Adagrams = {
     if (playedWord.length >= 7 && playedWord.length <= 10) {
       score += 8;
     }
-    return score;
+    return score
   },
   
   //wave 4
-  highestScoreFrom(words){
-    //hash that stores winning word and score
-    //empty string = 0
-    //fewest letters win
-    //unless there are 10 letters; tie goes to 10 >
-    //multiple wiining word === score && length; FIFO
-  }
+  highestScoreFrom(words) {
+    let highScore = 0;
+    let winningWord = "";
 
-}
+    for (let word of words) {
+      if (this.scoreWord(word) > highScore) {
+        highScore = this.scoreWord(word);
+        winningWord = word; 
+      }
+
+      if (highScore == this.scoreWord(word)) {
+        if ((word.length == 10 && winningWord.length != 10 ) || (word.length < winningWord.length && winningWord.length != 10)) {
+          winningWord = word;
+        } 
+      }
+    }
+
+    let winningHand = {
+      word: winningWord, 
+      score: highScore
+    };
+    return winningHand
+  },
+};
 
 // Do not remove this line or your tests will break!
 export default Adagrams;
