@@ -139,6 +139,25 @@ describe('Adagrams', () => {
         expect(adagrams.highestScoreFrom(words)).toEqual(first);
         expect(adagrams.highestScoreFrom(words.reverse())).toEqual(second);
       });
+
+      it('selects the first word when both have same length', () => {
+        const words = ['JJJ', 'XXX'];
+        const first = { word: 'JJJ', score: adagrams.scoreWord('JJJ') };
+        const second = { word: 'XXX', score: adagrams.scoreWord('XXX') };
+        expectTie(words);
+
+        expect(adagrams.highestScoreFrom(words)).toEqual(first);
+        expect(adagrams.highestScoreFrom(words.reverse())).toEqual(second);
+      });
+
+      it('selects the shorter word when all of them have the same scores', () => {
+        const words = ['HHHHH', 'KKKK', 'VVVVV'];
+        const second = { word: 'KKKK', score: adagrams.scoreWord('KKKK') };
+        expectTie(words);
+
+        expect(adagrams.highestScoreFrom(words)).toEqual(second);
+        expect(adagrams.highestScoreFrom(words.reverse())).toEqual(second);
+      })
     });
   });
 });
