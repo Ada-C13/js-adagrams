@@ -52,7 +52,7 @@ describe('Adagrams', () => {
       });
     };
 
-    it('returns an accurate numerical score according to the score chart', () => {
+    it.only('returns an accurate numerical score according to the score chart', () => {
       expectScores({
         A: 1,
         DOG: 5,
@@ -60,7 +60,7 @@ describe('Adagrams', () => {
       });
     });
 
-    it('returns a score regardless of the input case', () => {
+    it.only('returns a score regardless of the input case', () => {
       expectScores({
         a: 1,
         dog: 5,
@@ -68,13 +68,13 @@ describe('Adagrams', () => {
       });
     });
 
-    it('returns a score of 0 if given an empty input', () => {
+    it.only('returns a score of 0 if given an empty input', () => {
       expectScores({
         '': 0
       });
     });
 
-    it('adds an extra 8 points if word is 7 or more characters long', () => {
+    it.only('adds an extra 8 points if word is 7 or more characters long', () => {
       expectScores({
         XXXXXXX: 64,
         XXXXXXXX: 72,
