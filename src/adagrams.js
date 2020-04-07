@@ -106,6 +106,18 @@ const Adagrams = {
         'score': 10
       },
     };
+
+    let letters_deck = []
+
+    for (let key in letters_info) {
+      while (letters_info[key]['quantity'] > 0) {
+        letters_deck.push(key);
+        letters_info[key] -= 1;
+      };
+    };
+
+    letters_deck.sort(() => Math.random() - 0.5);
+    return letters.slice(0, 10);
   },
 };
 
