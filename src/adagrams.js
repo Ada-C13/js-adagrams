@@ -1,107 +1,107 @@
 const letterBank = {
-  'A': {
-    'quantity': 9,
-    'score': 1
+  A: {
+    quantity: 9,
+    score: 1
   },
-  'B': {
-    'quantity': 2,
-    'score': 3
+  B: {
+    quantity: 2,
+    score: 3
   },
-  'C': {
-    'quantity': 2,
-    'score': 3
+  C: {
+    quantity: 2,
+    score: 3
   },
-  'D': {
-    'quantity': 4,
-    'score': 2
+  D: {
+    quantity: 4,
+    score: 2
   }, 
-  'E': {
-    'quantity': 12,
-    'score': 1
+  E: {
+    quantity: 12,
+    score: 1
   },
-  'F': {
-    'quantity': 2,
-    'score': 3
+  F: {
+    quantity: 2,
+    score: 3
   },
-  'G': {
-    'quantity': 3,
-    'score': 2
+  G: {
+    quantity: 3,
+    score: 2
   },
-  'H': {
-    'quantity': 2,
-    'score': 4
+  H: {
+    quantity: 2,
+    score: 4
   },
-  'I': {
-    'quantity': 9,
-    'score': 1
+  I: {
+    quantity: 9,
+    score: 1
   },
-  'J': {
-    'quantity': 1,
-    'score': 8
+  J: {
+    quantity: 1,
+    score: 8
   },
-  'K': {
-    'quantity': 1,
-    'score': 5
+  K: {
+    quantity: 1,
+    score: 5
   },
-  'L': {
-    'quantity': 4,
-    'score': 1
+  L: {
+    quantity: 4,
+    score: 1
   },
-  'M': {
-    'quantity': 2,
-    'score': 3
+  M: {
+    quantity: 2,
+    score: 3
   },
-  'N': {
-    'quantity': 6,
-    'score': 1
+  N: {
+    quantity: 6,
+    score: 1
   },
-  'O': {
-    'quantity': 8,
-    'score': 1
+  O: {
+    quantity: 8,
+    score: 1
   },
-  'P': {
-    'quantity': 2,
-    'score': 3
+  P: {
+    quantity: 2,
+    score: 3
   },
-  'Q': {
-    'quantity': 1,
-    'score': 10
+  Q: {
+    quantity: 1,
+    score: 10
   },
-  'R': {
-    'quantity': 6,
-    'score': 1
+  R: {
+    quantity: 6,
+    score: 1
   },
-  'S': {
-    'quantity': 4,
-    'score': 1
+  S: {
+    quantity: 4,
+    score: 1
   },
-  'T': {
-    'quantity': 6,
-    'score': 1
+  T: {
+    quantity: 6,
+    score: 1
   },
-  'U': {
-    'quantity': 4,
-    'score': 1
+  U: {
+    quantity: 4,
+    score: 1
   },
-  'V': {
-    'quantity': 2,
-    'score': 4
+  V: {
+    quantity: 2,
+    score: 4
   },
-  'W': {
-    'quantity': 2,
-    'score': 4
+  W: {
+    quantity: 2,
+    score: 4
   },
-  'X': {
-    'quantity': 1,
-    'score': 8
+  X: {
+    quantity: 1,
+    score: 8
   },
-  'Y': {
-    'quantity': 2,
-    'score': 4
+  Y: {
+    quantity: 2,
+    score: 4
   },
-  'Z': {
-    'quantity': 1,
-    'score': 10
+  Z: {
+    quantity: 1,
+    score : 10
   },
 };
 
@@ -157,6 +157,13 @@ const Adagrams = {
     return score
   },
 
+  highestScoreFrom (words) {
+    let highScore = {
+      word: '',
+      score: 0
+    }
+    const all_score = this.scoreWord(word)
+  }
 
 };
 
