@@ -102,7 +102,7 @@ const Adagrams = {
         winningWord = this.tiebreaker(winningWord, word)
       }
     });
-
+ 
     return { word: winningWord, score: winningScore };
   }
 };
