@@ -1,35 +1,36 @@
-const Adagrams = {
-  letters: {
-    A: 9,
-    B: 2,
-    C: 2,
-    D: 4,
-    E: 12,
-    F: 2,
-    G: 3,
-    H: 2,
-    I: 9,
-    J: 1,
-    K: 1,
-    L: 4,
-    M: 2,
-    N: 6,
-    O: 8,
-    P: 2,
-    Q: 1,
-    R: 6,
-    S: 4,
-    T: 6,
-    U: 4,
-    V: 2,
-    W: 2,
-    X: 1,
-    Y: 2,
-    Z: 1,
-  },
-
-  drawLetters() {
+class Adagrams {
+  
+  static drawLetters() {
     // Implement this method for wave 1
+    const letters = {
+      A: 9,
+      B: 2,
+      C: 2,
+      D: 4,
+      E: 12,
+      F: 2,
+      G: 3,
+      H: 2,
+      I: 9,
+      J: 1,
+      K: 1,
+      L: 4,
+      M: 2,
+      N: 6,
+      O: 8,
+      P: 2,
+      Q: 1,
+      R: 6,
+      S: 4,
+      T: 6,
+      U: 4,
+      V: 2,
+      W: 2,
+      X: 1,
+      Y: 2,
+      Z: 1,
+    }
+
     let chosen = {};
     let drawn = [];
     //ASCII for A-Z, using ASCII to draw letters to reduce time complexity for having loop inside loop
@@ -42,7 +43,7 @@ const Adagrams = {
       let num = min + Math.floor(Math.random() * range);
       let letter = String.fromCharCode(num);
       if (chosen[letter]) {
-        if (chosen[letter] < this.letters[letter]){
+        if (chosen[letter] < letters[letter]) {
         chosen[letter] += 1;
         drawn.push(letter);
         numOfWords += 1;
@@ -54,9 +55,9 @@ const Adagrams = {
       }
     }
       return drawn;
-    },
+    }
   
-  usesAvailableLetters(input, lettersInhand) {
+  static usesAvailableLetters(input, lettersInhand) {
     let letterCount = {};
     lettersInhand.forEach((char) => { if (letterCount[char]){
       letterCount[char] += 1 ;
@@ -69,16 +70,17 @@ const Adagrams = {
     for( let i = 0; i < checkLetter.length ; i++ ) {
       if (letterCount[checkLetter[i]] >= 1 ) {
         letterCount[checkLetter[i]] -= 1;
+
       } else {
         return false;
       }
     };
 
     return true;
-  },
+  }
     
 
-  scoreWord(word) {
+  static scoreWord(word) {
     let score = 0;
     const wordArray = word.toUpperCase().split('');
     wordArray.forEach((charScore) => {
@@ -120,9 +122,9 @@ const Adagrams = {
       score += 8;
     };
     return score;
-  },
+  }
 
-  highestScoreFrom(words) {
+  static highestScoreFrom(words) {
     let highestScore = { word: "", score: 0 };
     words.forEach((word) => {
       let currScore = this.scoreWord(word);
@@ -137,21 +139,11 @@ const Adagrams = {
       };
     })
     return highestScore;
-  },
+  }
 }
-
-//console.log(Adagrams.drawLetters());
-//console.log(Adagrams.usesAvailableLetters("Dog", ['D', 'O', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X']));
-//console.log(Adagrams.scoreWord("hello"));
-//console.log(Adagrams.scoreWord("dog"));
-//console.log(Adagrams.highestScoreFrom(['AAAAAAAAAA', 'BBBBBB']));
-
-
 
 // Do not remove this line or your tests will break!
 export default Adagrams;
-
-
 
     /* 
     // working draw letters function - but time complexity is too high?
