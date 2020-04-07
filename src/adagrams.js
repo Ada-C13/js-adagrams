@@ -1,88 +1,90 @@
-const letters = {
-  "A": 9,
-  "B": 2,
-  "C": 2,
-  "D": 4,
-  "E": 12,	
-  "F": 2,
-  "G": 3,
-  "H": 2,
-  "I": 9,
-  "J": 1,
-  "K": 1,
-  "L": 4,
-  "M": 2,
-  "N": 6,
-  "O": 8,
-  "P": 2,
-  "Q": 1,
-  "R": 6,
-  "S": 4,
-  "T": 6,
-  "U": 4,
-  "V": 2,
-  "W": 2,
-  "X": 1,
-  "Y": 2,
-  "Z": 1
-};
-
-const letterValues = {
-  "A": 1,	
-  "B": 3,	
-  "C": 3,	
-  "D": 2,	
-  "E": 1,	
-  "F": 4,
-  "G": 2,	
-  "H": 4,	
-  "I": 1,	
-  "J": 8,	
-  "K": 5,	
-  "L": 1,	
-  "M": 3,	
-  "N": 1,
-  "O": 1,
-  "P": 3,
-  "Q": 10,
-  "R": 1,
-  "S": 1,
-  "T": 1,
-  "U": 1,
-  "V": 4,
-  "W": 4,
-  "X": 8,
-  "Y": 4,
-  "Z": 10
-};
-
-// Credit for shuffling function described at
-// https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
-const shuffle = function(array) {
-  for (let r = array.length - 1; r > 0; r--) {
-    const s = Math.floor(Math.random() * (r + 1));
-    [array[r], array[s]] = [array[s], array[r]];
+class Adagrams {
+  static letters = {
+    "A": 9,
+    "B": 2,
+    "C": 2,
+    "D": 4,
+    "E": 12,	
+    "F": 2,
+    "G": 3,
+    "H": 2,
+    "I": 9,
+    "J": 1,
+    "K": 1,
+    "L": 4,
+    "M": 2,
+    "N": 6,
+    "O": 8,
+    "P": 2,
+    "Q": 1,
+    "R": 6,
+    "S": 4,
+    "T": 6,
+    "U": 4,
+    "V": 2,
+    "W": 2,
+    "X": 1,
+    "Y": 2,
+    "Z": 1
   }
-};
 
-const Adagrams = {
+  static letterValues = {
+    "A": 1,	
+    "B": 3,	
+    "C": 3,	
+    "D": 2,	
+    "E": 1,	
+    "F": 4,
+    "G": 2,	
+    "H": 4,	
+    "I": 1,	
+    "J": 8,	
+    "K": 5,	
+    "L": 1,	
+    "M": 3,	
+    "N": 1,
+    "O": 1,
+    "P": 3,
+    "Q": 10,
+    "R": 1,
+    "S": 1,
+    "T": 1,
+    "U": 1,
+    "V": 4,
+    "W": 4,
+    "X": 8,
+    "Y": 4,
+    "Z": 10
+  }
+
+  // Credit for shuffling function described at
+  // https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+
+  static shuffle(array) {
+    for (let r = array.length - 1; r > 0; r--) {
+      const s = Math.floor(Math.random() * (r + 1));
+      [array[r], array[s]] = [array[s], array[r]];
+    }
+  }
+
+
   // Wave 1
-  drawLetters() {
+  static drawLetters() {
     let pool = [];
-    for (let i in letters) {
-      for (let j = letters[i]; j > 0; j--) {
+    for (let i in this.letters) {
+      for (let j = this.letters[i]; j > 0; j--) {
         pool.push(i);
       }
     }
   
-    shuffle(pool);
+    this.shuffle(pool);
 
     //discards extra tiles so only 10 remain in pool array
     return pool.splice(88);
-  },
+  }
 
   // Wave 2
-  usesAvailableLetters(input, drawn) {
+  static usesAvailableLetters(input, drawn) {
     for (let i = 0; i < input.length; i++) {
       let currentLetter = input.charAt(i);
       if (!drawn.includes(currentLetter)) {
@@ -95,10 +97,10 @@ const Adagrams = {
       }
     }
     return true;
-  },
+  }
 
   // Wave 3
-  scoreWord(word) {
+  static scoreWord(word) {
     let totalPoints = 0;
     const lettersToScore = word.toUpperCase().split('');
     if (lettersToScore.length >= 7) {
@@ -106,21 +108,21 @@ const Adagrams = {
     }
 
     lettersToScore.forEach((letter) => {
-       totalPoints += letterValues[letter];
+        totalPoints += this.letterValues[letter];
     });
   
     return totalPoints;
-  },
+  }
 
   // Wave 4
-  totalScoreWord(word) {
-    let score = Adagrams.scoreWord(word);
+  static totalScoreWord(word) {
+    let score = this.scoreWord(word);
     return { word: word, score: score };
-  },
+  }
 
-  highestScoreFrom(words) {
+  static highestScoreFrom(words) {
     let totalScores = words.map((word) => {
-      return Adagrams.totalScoreWord(word);
+      return this.totalScoreWord(word);
     });
 
     totalScores = totalScores.sort((a, b) => {
