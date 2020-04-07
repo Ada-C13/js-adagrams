@@ -142,6 +142,23 @@ const Adagrams = {
     return true;
   },
 
+  scoreWord(word) {
+    score = 0;
+
+    for (let key in lettersInfo) {
+      for (let i =0; i < word.length; i++) {
+        score += letterInfo[key]['score'];
+      };
+    };
+
+    if (word.length >= 7) {
+      score += 8;
+    };
+    
+    return score
+  },
+
+
 };
 
 export default Adagrams;
