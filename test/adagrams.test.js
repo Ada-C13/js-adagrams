@@ -2,13 +2,13 @@ import Adagrams from 'adagrams';
 
 describe('Adagrams', () => {
   describe('drawLetters', () => {
-    it.only('draws ten letters from the letter pool', () => {
+    it('draws ten letters from the letter pool', () => {
       const drawn = Adagrams.drawLetters();
 
       expect(drawn).toHaveLength(10);
     });
 
-    it.only('returns an array, and each item is a single-letter string', () => {
+    it('returns an array, and each item is a single-letter string', () => {
       const drawn = Adagrams.drawLetters();
 
       expect(Array.isArray(drawn)).toBe(true);
@@ -19,7 +19,7 @@ describe('Adagrams', () => {
   });
 
   describe('usesAvailableLetters', () => {
-    it.only('returns true if the submitted letters are valid against the drawn letters', () => {
+    it('returns true if the submitted letters are valid against the drawn letters', () => {
       const drawn = ['D', 'O', 'G', 'X', 'X', 'X', 'X', 'X', 'X', 'X'];
       const word = 'DOG';
 
@@ -27,7 +27,7 @@ describe('Adagrams', () => {
       expect(isValid).toBe(true);
     });
 
-    it.only('returns false when word contains letters not in the drawn letters', () => {
+    it('returns false when word contains letters not in the drawn letters', () => {
       const drawn = ['D', 'O', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'];
       const word = 'DOG';
 
@@ -35,7 +35,7 @@ describe('Adagrams', () => {
       expect(isValid).toBe(false);
     });
 
-    it.only('returns false when word contains repeated letters more than in the drawn letters', () => {
+    it('returns false when word contains repeated letters more than in the drawn letters', () => {
       const drawn = ['D', 'O', 'G', 'X', 'X', 'X', 'X', 'X', 'X', 'X'];
       const word = 'GOOD';
 
@@ -52,7 +52,7 @@ describe('Adagrams', () => {
       });
     };
 
-    it.only('returns an accurate numerical score according to the score chart', () => {
+    it('returns an accurate numerical score according to the score chart', () => {
       expectScores({
         A: 1,
         DOG: 5,
@@ -60,7 +60,7 @@ describe('Adagrams', () => {
       });
     });
 
-    it.only('returns a score regardless of the input case', () => {
+    it('returns a score regardless of the input case', () => {
       expectScores({
         a: 1,
         dog: 5,
@@ -68,13 +68,13 @@ describe('Adagrams', () => {
       });
     });
 
-    it.only('returns a score of 0 if given an empty input', () => {
+    it('returns a score of 0 if given an empty input', () => {
       expectScores({
         '': 0
       });
     });
 
-    it.only('adds an extra 8 points if word is 7 or more characters long', () => {
+    it('adds an extra 8 points if word is 7 or more characters long', () => {
       expectScores({
         XXXXXXX: 64,
         XXXXXXXX: 72,
@@ -84,7 +84,7 @@ describe('Adagrams', () => {
     });
   });
 
-  describe.skip('highestScoreFrom', () => {
+  describe('highestScoreFrom', () => {
     it('returns a hash that contains the word and score of best word in an array', () => {
       const words = ['X', 'XX', 'XXX', 'XXXX'];
       const correct = { word: 'XXXX', score: Adagrams.scoreWord('XXXX') };
