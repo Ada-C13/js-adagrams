@@ -109,10 +109,9 @@ const Adagrams = {
   drawLetters() {
     const lettersDeck = [];
 
-    for (let key in letterBank) {
-      while (letterBank[key]['quantity'] > 0) {
+    for (const key in letterBank) {
+      for(let i = 0; i < (letterBank[key]['quantity']); i++){
         lettersDeck.push(key);
-        letterBank[key]['quantity'] -= 1;
       }
     }
 
