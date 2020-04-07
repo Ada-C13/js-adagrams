@@ -1,35 +1,8 @@
 const Adagrams = {
   
   drawLetters() {
-    const compactBag = {
-          A: 9,
-          B: 2, 
-          C: 2, 
-          D: 4, 
-          E: 12, 
-          F: 2, 
-          G: 3, 
-          H: 2, 
-          I: 9,
-          J: 1, 
-          K: 1, 
-          L: 4,
-          M: 2,
-          N: 6,
-          O: 8,
-          P: 2, 
-          Q: 1, 
-          R: 6,
-          S: 4, 
-          T: 6,
-          U: 4,
-          V: 2,
-          W: 2,
-          X: 1, 
-          Y: 2, 
-          Z: 1
-        };
-      
+    const compactBag = {A: 9, B: 2, C: 2,D: 4, E: 12, F: 2, G: 3, H: 2, I: 9, J: 1, K: 1, L: 4, M: 2, N: 6, O: 8, P: 2, Q: 1, R: 6, S: 4, T: 6, U: 4, V: 2, W: 2, X: 1, Y: 2, Z: 1 };
+  
     console.log('Welcome to Adagrams!');
    
     let expandedBag = []
@@ -84,8 +57,25 @@ const Adagrams = {
           }
         })
         return result;
-      }
+      },
+  
+   // wave 3
+  //function that return scoreWord that takes in strings of charcters.
+  //returns an integer resprsending the number of points. 
+  scoreWord(word){
+    let score = 0;
+    const scoreChartOfLetter = {A: 1, N: 1, B: 3, O: 1, C: 3, P: 3, D: 2, Q: 10, E: 1, R: 1, F: 4, S: 1,G: 2, T: 1, H: 4, U: 1, I: 1, V: 4, J: 8, W: 4, K: 5, X: 8, L: 1, Y: 4, M: 3, Z: 10};
+  word.toUpperCase().split('').forEach(char => {
+    score += scoreChartOfLetter[char] 
+});
+if (word.length >= 7){
+  score += 8;
+  console.log(score)
 }
+return score
+}
+}
+// console.log(Adagrams.scoreWord('cat'))
 // console.log(Adagrams.usesAvailableLetters('cata', ['a', 'c', 't']));
 
 // Do not remove this line or your tests will break!
