@@ -42,7 +42,7 @@ const Adagrams = {
       while (this.LETTERS[char]['num'] < 1) char = letterPool[Math.floor(Math.random()*letterPool.length)];
 
       // if the letter is available, add it to the hand and decrement the number available in the pool
-      drawn[i] = char;
+      drawn.push(char);
       this.LETTERS[char]['num']--;
     };
 
