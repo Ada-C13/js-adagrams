@@ -61,7 +61,15 @@ const Adagrams = {
     return (letters.length === filteredLetters.length);
   },
   scoreWord(word) {
+    const letters = word.toUpperCase().split('');
+    let score = 0;
 
+    letters.forEach(letter => score += this.letterScores[letter]);
+    
+    if (letters.length >= 7 && letters.length <= 10) {
+      score += 8;
+    }
+    return score;
   }
 };
 
