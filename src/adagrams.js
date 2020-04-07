@@ -24,7 +24,6 @@ const Adagrams = {
       // remove letter from expanded array
       expandedBag.splice(randIndex, 1)
     }
-
     return hand;
 
     // Implement this method for wave 1
@@ -73,7 +72,33 @@ if (word.length >= 7){
   console.log(score)
 }
 return score
+},
+
+// wave 4
+// create a function highestScoreFrom & the function has one parameter(word) which is array of strings
+// returns object w/winner word & it's score
+// if score tied, using tie-breaking (choose word w/fewest letter unless word has 10 letters)
+// if many words have the same score, choose the 1st one you see
+highestScoreFrom(words) {
+  let winner = {
+    word: '',
+    score: 0
+  };
+  for (let word of words){
+    if(this.scoreWord(word) > winner.score){
+      winner = {word: word, score: this.scoreWord(word) };
+    }
+    else if(this.scoreWord(word) == winner.score){
+      if(((word.length < winner.word.length) || (word.length == 10)) && (winner.word.length !== 10)){
+          winner = {word: word, score: this.scoreWord(word)};
+        }
+      }
+      }  
+      // console.log(Adagrams.highestScoreFrom('hannah', 'cat', 'dog'))
+  return winner;
+
 }
+
 }
 // console.log(Adagrams.scoreWord('cat'))
 // console.log(Adagrams.usesAvailableLetters('cata', ['a', 'c', 't']));
