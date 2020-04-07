@@ -8,17 +8,17 @@ const Adagrams = {
     ];
 
     // Populate player's hand 
-    let lettersInHand = [];
+    const lettersInHand = [];
 
     // Create Sattolo Cycle implementation for shuffle
     function sattoloShuffle(pool) {
       for (let f = pool.length - 1; f >= 0; f--) {
-      let b = Math.floor(Math.random() * f)
-      let temp = pool[f];
+      const b = Math.floor(Math.random() * f)
+      const temp = pool[f];
       pool[f] = pool[b];
       pool[b] = temp;
     }
-  return pool;
+    return pool;
   };
 
   for (let c = 0; c < 10; c++) {
@@ -32,10 +32,10 @@ const Adagrams = {
   function usesAvailableLetters(input, lettersInHand) {
 
     //Create a copy of lettersInHand
-    let tempHand = [...lettersInHand];
+    const tempHand = [...lettersInHand];
 
     //Create an array of characters from input
-    let inputArray = inputArray.from(input);
+    const inputArray = inputArray.from(input);
 
     if (input.length > 10 || input.length < 1) {
       return false;
@@ -71,7 +71,7 @@ const Adagrams = {
     }
 
     // Create array of characters from word 
-    let wordArray = wordArray.from(word);
+    const wordArray = wordArray.from(word);
 
     //Iterate through wordArray to sum points of a given word
     for (const item of wordArray) {
@@ -83,6 +83,30 @@ const Adagrams = {
     }
     return score
   }
+
+  //Start of Wave 4 pseudocode
+  function highestScoreFrom(words) {
+    
+    //Create players with Map syntax
+    const players = new Map(); 
+    players.set('word', word);
+    players.set('score', score);
+
+    // Or maybe this Map syntax?
+    const players = new Map(arr.map(word => [i.word, i.score]));
+
+    // Set variable for highest-scoring word 
+    let highestScore = {}
+
+    // Iterate through players to find the highest scored word and solve for ties + special instructions
+    for (const p of players) {
+      if (score > highestScore[:score]) {
+        highestScore = ... ;
+      } else if (score === highestScore) {
+      }
+    }
+  }
+}
 
 // Do not remove this line or your tests will break!
 export default Adagrams;
