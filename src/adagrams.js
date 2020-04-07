@@ -133,8 +133,5 @@ class Adagrams {
   };
 };
 
-// let ne = new Adagrams
-// console.log(Adagrams.drawLetters())
-
 export default Adagrams;
 
