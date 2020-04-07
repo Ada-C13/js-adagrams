@@ -7,8 +7,8 @@ const Adagrams = {
       if (!hand.includes(tileNumber)) {
         hand.push(this.lettersPool[tileNumber]);
       }
-    }
-    return hand;
+    } 
+  return hand;
   },
 
   usesAvailableLetters(input, drawnHand) {
@@ -61,6 +61,32 @@ const Adagrams = {
     }
     if (word.length >= 7 && word.length <= 10) score += 8;
     return score;
+  },
+
+  breakTies(words) {
+    let bestWord = words[0];
+    for (let word of words) {
+      if (bestWord.length !== 10 && (word.length === 10 || word.length < bestWord.length)) bestWord = word;
+    }
+    return [bestWord];
+  },
+
+  highestScoreFrom(words) {
+    let highScore = this.scoreWord(words[0]);
+    let highWords = [words[0]];
+
+    for (let i=1; i < words.length; i++) {
+      let score = this.scoreWord(words[i]);
+      if (score === highScore) {
+        highWords.push(words[i]);
+      }
+      if (score > highScore) {
+        highScore = score;
+        highWords = [words[i]];
+      }
+    }
+    if (highWords.length > 1) highWords = this.breakTies(highWords);
+    return {word: highWords[0], score: highScore};
   }
 };
 
