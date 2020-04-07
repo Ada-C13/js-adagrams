@@ -162,6 +162,7 @@ const Adagrams = {
       word: '',
       score: 0
     }
+    
     const all_score = this.scoreWord(word)
   }
 
