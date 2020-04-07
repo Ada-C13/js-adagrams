@@ -25,9 +25,15 @@ const Adagrams = {
     //     arrayIntersection.push(letter);
     //   }
     // });
-
-    const filteredLetters = letters.filter(letter =>
-      lettersInHand.includes(letter));
+    const filteredLetters = [];
+    letters.forEach(letter => {
+      lettersInHand.forEach(handLetter => {
+        if (letter === handLetter) {
+          filteredLetters.push(letter);
+          lettersInHand.splice(lettersInHand.indexOf(handLetter), 1);
+        }
+      });
+    });
     return (letters.length === filteredLetters.length);
   }
 };
@@ -35,7 +41,6 @@ const Adagrams = {
 // Do not remove this line or your tests will break!
 export default Adagrams;
 
-  // const drawn = ['D', 'O', 'G', 'X', 'X', 'X', 'X', 'X', 'X', 'X'];
-  // const word = 'DOG';
-
-  // Adagrams.usesAvailableLetters(word, drawn);
+  const drawn = ['D', 'O', 'G', 'X', 'X', 'X', 'X', 'X', 'X', 'X'];
+  const word = 'DOG';
+  Adagrams.usesAvailableLetters(word, drawn);
