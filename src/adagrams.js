@@ -147,11 +147,11 @@ const Adagrams = {
     for (let i =0; i < word.length; i++) {
       let upcaseLetter = word.toUpperCase();
       wordScore += letterBank[upcaseLetter[i]]['letterValue'];
-    }
+    };
 
     if (word.length >= 7) {
       wordScore += 8;
-    }
+    };
   
     return wordScore;
   },
