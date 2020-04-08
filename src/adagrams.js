@@ -6,10 +6,10 @@ const Adagrams = {
     while (hand.length < 10) {
       let tileNumber = Math.round(Math.random() * 98);
       if (!hand.includes(tileNumber)) {
-        hand.push(this.lettersPool[tileNumber]);
+        hand.push(tileNumber);
       }
     } 
-  return hand;
+  return hand.map(x => this.lettersPool[x]);
   },
 
   usesAvailableLetters(input, drawnHand) {
