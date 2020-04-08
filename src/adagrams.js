@@ -66,8 +66,9 @@ const Adagrams = {
 
   _breakTies(words) {
     let bestWord = words[0];
-    for (const word of words) {
-      if (bestWord.length !== 10 && (word.length === 10 || word.length < bestWord.length)) bestWord = word;
+    for (let x = 1; x < words.length; x++) {
+      if (words[x].length === 10) return [words[x]];
+      if (words[x].length < bestWord.length) bestWord = words[x];
     }
     return [bestWord];
   },
