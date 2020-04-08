@@ -116,13 +116,12 @@ const Adagrams = {
       return newWord;
     });
         
-    // this section was VERY confusing to me. Not sure how all Wave 4 tests pass?? Yikes! 
     // set winningWord to the first object in array as a starting point
      let winningWord = wordScores[0];
 
      for (let i in wordScores) {
        // using dot notation to access the object's properties/values
-      // check if word that is NOT already set to winningWord has a greater score, 
+      //  check to see if word score is greater and
       // if so, then assign this new word to winningWord.
        if (wordScores[i].score > winningWord.score) {
          winningWord.word = wordScores[i].word;
