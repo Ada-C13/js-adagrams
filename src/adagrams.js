@@ -21,7 +21,7 @@ class Adagrams {
   drawLetters() {
     const hand = [];
     const lettersPool = this.lettersPool;
- 
+
     for (const letter in lettersPool) {
       for (let i = 0; i < lettersPool[letter]; i++) {
         hand.push(letter);
@@ -40,7 +40,7 @@ class Adagrams {
 
 
   // Helper funciton for wave 1
-   sample(letters) {
+  sample(letters) {
     const sample = [];
 
     for(let i = 0; i < 10; i++) { 
