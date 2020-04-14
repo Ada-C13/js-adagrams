@@ -74,44 +74,33 @@ const Adagrams = {
     return points;
   },
 
-  // It's late, I give up!!!
+  // I gave up on this implementation, I was able to create the tiebreaker logic correctly, but struggled to
+  // figure out a good way to arrange the words in the winning word(s) variable in an amount of time worth spending on the issue.
+  // If I were to continue this implementation, I would likely make an array of objects.
   
   // highestScoreFrom (words) {
-  //   let results  = {};
-  //   let wordScores = {};
-  //   let longestWord = '';
-  //   let shortestWord = '';
-  //   let tiedWords = {};
+  //   let winner = {}
+  //   winner.push(words[0])
 
-  //   for (i = 0; i < words.length; i++) {
-  //     wordScores.words[i] = scoreWord(words[i]);
-  //     if (words[i] > longestWord.length) {
-  //       longestWord = '${words[i]}';
-  //     } else if (words[i] < shortestWord.length) {
-  //       shortestWord = '${words[i]}';
+  //   for (let i = 0; i < words.length; i++) {
+  //     if (Adagrams.scoreWord(words[i]) > ) {
+
   //     };
   //   };
-    
-  //   for (let comparisonWord in wordScores) {
-  //     for (let comparetoWord in wordScores) {
-  //       if (comparisonWord === comparetoWord) {
-  //         tiedWords.comparisonWord = wordScores[comparisonWord]
-  //         tiedWords.comparetoWord = wordScores[comparetoWord]
+
+  //   if (winner.keys.length > 1) {
+  //     for (let i = 0; i < winner.length; i++) {
+  //       if (words[i].length === 10) {
+  //         winner = words[i];
+  //         break;
+  //       } else if (words[i].length < winner.length) {
+  //         winner = words[i];
   //       };
   //     };
-  //   };
-
-  //   let shortestTied = ''
-  //   const tiedWordsText = tiedWords.keys
-
-  //   for (let i = 0; i < tiedWordsText.length; i++) {
-  //     if (tiedWordsText[i].length < shortestTied) {
-  //       shortestTied = '${tiedWordsText[i].length}'
-  //     };
-  //   };
-
-  //   if 
-  // }
+  //   }
+  //   const winnerScore = Adagrams.scoreWord(winner)
+  //   return {word:winner[0], score:winnerScore};
+  // },
 
 };
 
